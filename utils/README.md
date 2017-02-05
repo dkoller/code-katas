@@ -22,3 +22,23 @@ mvn archetype:generate
 ```
 mvn eclipse:eclipse
 ```
+
+## NOTE
+
+If you want to create a project through something like this:
+
+```
+rachel@repera:~$ codekata
+```
+
+create an alias in your `~/.bashrc` file:
+
+```
+alias codekata=~/path/create-kata-project.sh
+```
+
+and reload `~/.bashrc` (in order to avoid close and open a new terminal):
+
+```
+source ~/.bashrc
+```
