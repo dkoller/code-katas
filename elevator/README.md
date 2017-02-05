@@ -8,7 +8,7 @@ My implementation consists of:
 
 In this way, buttons can be pressed while elevator is going up or going down.
 
-![execution](src/execution.gif)
+![execution](img/execution.gif)
 
 NOTES for thinking in the future:
 * You have a building with three elevators.
