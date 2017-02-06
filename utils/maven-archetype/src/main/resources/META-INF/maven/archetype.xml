@@ -5,9 +5,9 @@
     <resource>README.md</resource>
   </resources>
   <sources>
-    <source>src/main/java/es/rachelcarmena/App.java</source>
+    <source>src/main/java/App.java</source>
   </sources>
   <testSources>
-    <source>src/test/java/es/rachelcarmena/AppTest.java</source>
+    <source>src/test/java/AppTest.java</source>
   </testSources>
 </archetype>
