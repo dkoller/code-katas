@@ -45,7 +45,7 @@ public class Diamond {
 		return sb.toString();
 	}
 
-	public String[] getDiamond() {
+	public String[] getRepresentation() {
 		if (letter == INITIAL_LETTER) {
 			return new String[] { String.valueOf(INITIAL_LETTER) };
 		}

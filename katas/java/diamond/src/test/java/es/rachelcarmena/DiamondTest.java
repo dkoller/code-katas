@@ -7,13 +7,13 @@ public class DiamondTest {
 
 	@Test
 	public void getDiamondFromA() {
-		String[] diamond = new Diamond('A').getDiamond();
+		String[] diamond = new Diamond('A').getRepresentation();
 		assertEquals("A", diamond[0]);
 	}
 
 	@Test
 	public void getDiamondFromB() {
-		String[] diamond = new Diamond('B').getDiamond();
+		String[] diamond = new Diamond('B').getRepresentation();
 		assertEquals(" A ", diamond[0]);
 		assertEquals("B B", diamond[1]);
 		assertEquals(" A ", diamond[2]);
@@ -21,7 +21,7 @@ public class DiamondTest {
 
 	@Test
 	public void getDiamondFromC() {
-		String[] diamond = new Diamond('C').getDiamond();
+		String[] diamond = new Diamond('C').getRepresentation();
 		assertEquals("  A  ", diamond[0]);
 		assertEquals(" B B ", diamond[1]);
 		assertEquals("C   C", diamond[2]);
@@ -31,7 +31,7 @@ public class DiamondTest {
 
 	@Test
 	public void getDiamondFromD() {
-		String[] diamond = new Diamond('D').getDiamond();
+		String[] diamond = new Diamond('D').getRepresentation();
 		assertEquals("   A   ", diamond[0]);
 		assertEquals("  B B  ", diamond[1]);
 		assertEquals(" C   C ", diamond[2]);
