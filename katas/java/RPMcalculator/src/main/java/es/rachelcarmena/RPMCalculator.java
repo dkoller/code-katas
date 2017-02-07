@@ -1,72 +1,77 @@
 package es.rachelcarmena;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class RPMCalculator {
 
-	public static String operate(int left, int right, char operator) {
-		switch (operator) {
-		case '+':
-			return String.valueOf(left + right);
-		case '-':
-			return String.valueOf(left - right);
-		case '*':
-			return String.valueOf(left * right);
-		case '/':
-			return String.valueOf(left / right);
-		}
-		return "";
-	}
-
-	public static String formatStringFromIndex(String[] parts, int index) {
-		return String.join(" ", Arrays.copyOfRange(parts, index, parts.length));
-	}
-
-	public static String formatStringToIndex(String[] parts, int index) {
-		if (index == 0)
-			return parts[0];
-		return String.join(" ", Arrays.copyOfRange(parts, 0, index));
-	}
-
-	public static boolean areDigits(String expression) {
+	private boolean areDigits(String expression) {
 		return Pattern.matches("\\d+(\\s\\d+)*", expression);
 	}
 
-	public static boolean isOperator(String part) {
-		return Pattern.matches("[\\+\\-\\*\\/]", part);
-	}
-
-	public static String[] getParts(String expression) {
+	private String[] getComponents(String expression) {
 		return expression.split("\\s");
 	}
 
-	public static String evaluate(String expression) throws IllegalArgumentException {
+	private boolean isOperator(String component) {
+		return Pattern.matches("[\\+\\-\\*\\/]", component);
+	}
+
+	private int operate(int left, int right, char operator) {
+		switch (operator) {
+		case '+':
+			return left + right;
+		case '-':
+			return left - right;
+		case '*':
+			return left * right;
+		case '/':
+			return left / right;
+		}
+		return 0;
+	}
+
+	private int getIndexOfFirstOperator(String[] components) {
+		int index = 0;
+		for (String component : components) {
+			if (isOperator(component))
+				break;
+			index++;
+		}
+		return index;
+	}
+
+	private String operateToIndexOfOperator(String[] components, int indexOfOperator) {
+		char operator = components[indexOfOperator].charAt(0);
+		int rightOperand = Integer.valueOf(components[indexOfOperator - 1]);
+		int leftOperand = Integer.valueOf(components[indexOfOperator - 2]);
+
+		return String.valueOf(operate(leftOperand, rightOperand, operator));
+	}
+
+	private String getNewExpression(String[] components, int indexOfOperator, String partialResult) {
+		List<String> newListOfComponents = new ArrayList<String>(Arrays.asList(components));
+		newListOfComponents.subList(indexOfOperator - 2, indexOfOperator + 1).clear();
+		newListOfComponents.add(indexOfOperator - 2, partialResult);
+		return newListOfComponents.stream().collect(Collectors.joining(" "));
+	}
+
+	public String evaluate(String expression) throws IllegalArgumentException {
 		if (areDigits(expression))
 			return expression;
 
-		int index = 0;
-		char operator = ' ';
-		String[] parts = getParts(expression);
-		for (String part : parts) {
-			if (isOperator(part)) {
-				operator = part.charAt(0);
-				break;
-			}
-			index++;
-		}
-		if (index < 2)
+		String[] components = getComponents(expression);
+		int indexOfFirstOperator = getIndexOfFirstOperator(components);
+		if (indexOfFirstOperator < 2)
 			throw new IllegalArgumentException();
-		int leftOperand = Integer.valueOf(parts[index - 2]);
-		int rightOperand = Integer.valueOf(parts[index - 1]);
-		String result = operate(leftOperand, rightOperand, operator);
 
-		if (parts.length == 3)
-			return result;
-		if (index == 2)
-			return evaluate(String.format("%s %s", result, formatStringFromIndex(parts, index + 1)));
-		return evaluate(String.format("%s %s %s", formatStringToIndex(parts, index - 3), result,
-				formatStringFromIndex(parts, index + 1)));
+		String partialResult = operateToIndexOfOperator(components, indexOfFirstOperator);
 
+		if (components.length == 3)
+			return partialResult;
+		return evaluate(getNewExpression(components, indexOfFirstOperator, partialResult));
 	}
 }
