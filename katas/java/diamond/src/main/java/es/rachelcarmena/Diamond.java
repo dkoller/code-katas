@@ -45,7 +45,7 @@ public class Diamond {
 		return sb.toString();
 	}
 
-	public Object[] getDiamond() {
+	public String[] getDiamond() {
 		if (letter == INITIAL_LETTER) {
 			return new String[] { String.valueOf(INITIAL_LETTER) };
 		}
@@ -56,6 +56,6 @@ public class Diamond {
 			diamond.add(getIntermediateString(row));
 		}
 		diamond.add(getMiddleString());
-		return ListUtils.addReverse(diamond).toArray();
+		return ListUtils.addReverse(diamond).toArray(new String[0]);
 	}
 }
