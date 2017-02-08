@@ -8,12 +8,8 @@ import java.util.stream.Collectors;
 
 public class RPMCalculator {
 
-	private boolean areDigits(String expression) {
-		return Pattern.matches("\\d+(\\s\\d+)*", expression);
-	}
-
 	private boolean areDigits(List<String> components) {
-		return (components.stream().allMatch(e -> areDigits(e)));
+		return (components.stream().allMatch(e -> Pattern.matches("\\d+(\\s\\d+)*", e)));
 	}
 
 	private List<String> getComponents(String expression) {
@@ -56,7 +52,9 @@ public class RPMCalculator {
 		return String.valueOf(operate(leftOperand, rightOperand, operator));
 	}
 
-	private List<String> reduceComponents(List<String> components, int indexOfOperator, String partialResult) {
+	private List<String> reduceComponents(List<String> components, int indexOfOperator) {
+		String partialResult = operateToIndexOfOperator(components, indexOfOperator);
+
 		List<String> newListOfComponents = new ArrayList<String>(components);
 		newListOfComponents.subList(indexOfOperator - 2, indexOfOperator + 1).clear();
 		newListOfComponents.add(indexOfOperator - 2, partialResult);
@@ -64,23 +62,20 @@ public class RPMCalculator {
 	}
 
 	private List<String> evaluateComponents(List<String> components) {
+		if (areDigits(components))
+			return components;
+
 		int indexOfFirstOperator = getIndexOfFirstOperator(components);
 		if (indexOfFirstOperator < 2)
 			throw new IllegalArgumentException();
 
-		String partialResult = operateToIndexOfOperator(components, indexOfFirstOperator);
-		List<String> newComponents = reduceComponents(components, indexOfFirstOperator, partialResult);
-		if (areDigits(newComponents))
-			return newComponents;
-
+		List<String> newComponents = reduceComponents(components, indexOfFirstOperator);
 		return evaluateComponents(newComponents);
 	}
 
 	public String evaluate(String expression) throws IllegalArgumentException {
-		if (areDigits(expression))
-			return expression;
-
 		List<String> components = getComponents(expression);
-		return evaluateComponents(components).stream().collect(Collectors.joining(" "));
+		List<String> newComponents = evaluateComponents(components);
+		return newComponents.stream().collect(Collectors.joining(" "));
 	}
 }
