@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 //@RunWith(JUnitParamsRunner.class)
 public class AppTest {
 
-	//@Before
+	//@BeforeClass
 	//public static void beforeClass() {
 	//}
 
