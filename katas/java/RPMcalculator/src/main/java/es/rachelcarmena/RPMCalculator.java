@@ -8,16 +8,16 @@ import java.util.stream.Collectors;
 
 public class RPMCalculator {
 
+	private boolean isOperator(String component) {
+		return Pattern.matches("[\\+\\-\\*\\/]", component);
+	}
+
 	private boolean areDigits(List<String> components) {
-		return (components.stream().allMatch(e -> Pattern.matches("\\d+(\\s\\d+)*", e)));
+		return !components.stream().anyMatch(e -> isOperator(e));
 	}
 
 	private List<String> getComponents(String expression) {
 		return Arrays.asList(expression.split("\\s"));
-	}
-
-	private boolean isOperator(String component) {
-		return Pattern.matches("[\\+\\-\\*\\/]", component);
 	}
 
 	private int operate(int left, int right, char operator) {
