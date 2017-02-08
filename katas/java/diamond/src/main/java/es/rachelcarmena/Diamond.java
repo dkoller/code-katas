@@ -6,56 +6,72 @@ import java.util.List;
 public class Diamond {
 
 	private final char INITIAL_LETTER = 'A';
-	private char letter;
-	private int letterIndex;
 
-	Diamond(char diamondLetter) {
-		letter = diamondLetter;
-		letterIndex = letter - INITIAL_LETTER;
+	private char diamondLetter;
+	private int diamondLetterIndex;
+
+	Diamond(char letter) {
+		diamondLetter = letter;
+		diamondLetterIndex = diamondLetter - INITIAL_LETTER;
 	}
 
-	private String getFirstString() {
-		String edgeSpaces = StringUtils.getWhitespacesString(letterIndex);
+	private String getFirstLine() {
+		String edgeSpaces = getWhitespacesString(diamondLetterIndex);
 
-		StringBuilder sb = new StringBuilder();
-		sb.append(edgeSpaces);
-		sb.append(INITIAL_LETTER);
-		sb.append(edgeSpaces);
-		return sb.toString();
+		StringBuilder line = new StringBuilder();
+		line.append(edgeSpaces);
+		line.append(INITIAL_LETTER);
+		line.append(edgeSpaces);
+		return line.toString();
 	}
 
-	private String getMiddleString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(letter);
-		sb.append(StringUtils.getWhitespacesString(2 * letterIndex - 1));
-		sb.append(letter);
-		return sb.toString();
-	}
-
-	private String getIntermediateString(int row) {
-		String edgeSpaces = StringUtils.getWhitespacesString(letterIndex - row);
+	private String getIntermediateLine(int row) {
+		String edgeSpaces = getWhitespacesString(diamondLetterIndex - row);
 		char letter = (char) (INITIAL_LETTER + row);
 
-		StringBuilder sb = new StringBuilder();
-		sb.append(edgeSpaces);
-		sb.append(letter);
-		sb.append(StringUtils.getWhitespacesString((2 * row - 1)));
-		sb.append(letter);
-		sb.append(edgeSpaces);
-		return sb.toString();
+		StringBuilder line = new StringBuilder();
+		line.append(edgeSpaces);
+		line.append(letter);
+		line.append(getWhitespacesString((2 * row - 1)));
+		line.append(letter);
+		line.append(edgeSpaces);
+		return line.toString();
+	}
+
+	private String getMiddleLine() {
+		StringBuilder line = new StringBuilder();
+		line.append(diamondLetter);
+		line.append(getWhitespacesString(2 * diamondLetterIndex - 1));
+		line.append(diamondLetter);
+		return line.toString();
+	}
+
+	private List<String> addReverseMinusMiddle(List<String> initialList) {
+		List<String> newList = new ArrayList<>(initialList);
+		for (int i = initialList.size() - 2; i >= 0; i--) {
+			newList.add(initialList.get(i));
+		}
+		return newList;
+	}
+
+	public static String getWhitespacesString(int numberOfSpaces) {
+		StringBuilder format = new StringBuilder("%");
+		format.append(numberOfSpaces);
+		format.append("s");
+		return String.format(format.toString(), "");
 	}
 
 	public String[] getRepresentation() {
-		if (letter == INITIAL_LETTER) {
+		if (diamondLetter == INITIAL_LETTER) {
 			return new String[] { String.valueOf(INITIAL_LETTER) };
 		}
 
 		List<String> diamond = new ArrayList<>();
-		diamond.add(getFirstString());
-		for (int row = 1; row < letterIndex; row++) {
-			diamond.add(getIntermediateString(row));
+		diamond.add(getFirstLine());
+		for (int row = 1; row < diamondLetterIndex; row++) {
+			diamond.add(getIntermediateLine(row));
 		}
-		diamond.add(getMiddleString());
-		return ListUtils.addReverse(diamond).toArray(new String[0]);
+		diamond.add(getMiddleLine());
+		return addReverseMinusMiddle(diamond).toArray(new String[0]);
 	}
 }
