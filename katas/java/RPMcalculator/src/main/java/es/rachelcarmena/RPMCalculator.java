@@ -73,7 +73,7 @@ public class RPMCalculator {
 		return evaluateComponents(newComponents);
 	}
 
-	public String evaluate(String expression) throws IllegalArgumentException {
+	public String evaluateExpression(String expression) throws IllegalArgumentException {
 		List<String> components = getComponents(expression);
 		List<String> newComponents = evaluateComponents(components);
 		return newComponents.stream().collect(Collectors.joining(" "));
