@@ -1,12 +1,12 @@
 # Maven archetype
 
-## Install
+## Installation
 
 ```
 mvn install
 ```
 
-## Create project from archetype
+## Project creation from archetype
 
 ```
 mvn archetype:generate 
@@ -17,7 +17,7 @@ mvn archetype:generate
   -DartifactId=example
 ```
 
-## Create Eclipse files
+## Eclipse files creation
 
 ```
 mvn eclipse:eclipse
@@ -37,7 +37,7 @@ create an alias in your `~/.bashrc` file:
 alias codekata=~/path/create-kata-project.sh
 ```
 
-and reload `~/.bashrc` (in order to avoid close and open a new terminal):
+and reload `~/.bashrc` (in order to avoid closing and opening a new terminal):
 
 ```
 source ~/.bashrc
