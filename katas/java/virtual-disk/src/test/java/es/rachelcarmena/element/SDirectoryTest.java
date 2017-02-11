@@ -7,10 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import es.rachelcarmena.element.SDirectory;
-import es.rachelcarmena.element.SStandardFile;
-import es.rachelcarmena.element.SZipFile;
-
 public class SDirectoryTest {
 
 	private SDirectory directory;
@@ -108,5 +104,12 @@ public class SDirectoryTest {
 		directory.addResource(newDirectory);
 
 		assertEquals(4, directory.totalMP3());
+	}
+
+	@Test
+	public void insertingResourcesWithTheSameName() {
+		SStandardFile file = new SStandardFile("file.mp3", 20);
+		assertTrue(directory.addResource(file));
+		assertFalse(directory.addResource(file));
 	}
 }

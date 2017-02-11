@@ -15,4 +15,14 @@ public abstract class SResource implements Visitable {
 	}
 
 	public abstract int getSize();
+
+	@Override
+	public boolean equals(Object obj) {
+		return name.equals(((SResource) obj).getName());
+	}
+
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
 }

@@ -1,35 +1,32 @@
 package es.rachelcarmena.element;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class SContainer extends SResource {
 
-	private List<SResource> resources;
+	private Set<SResource> resources;
 
 	public SContainer(String name) {
 		super(name);
-		this.resources = new ArrayList<>();
+		this.resources = new HashSet<SResource>();
 	}
 
-	public void addResource(SResource resource) {
-		resources.add(resource);
+	public boolean addResource(SResource resource) {
+		return resources.add(resource);
 	}
 
-	public List<SResource> getResources() {
+	public Set<SResource> getResources() {
 		return resources;
 	}
 
+	// In order not to lose abstraction in SResource
+	private SResource getAnyResource(String name) {
+		return new SStandardFile(name, -1);
+	}
+
 	public boolean deleteResource(String resourceName) {
-		for (ListIterator<SResource> iterator = resources.listIterator(); iterator.hasNext();) {
-			SResource resource = (SResource) iterator.next();
-			if (resource.getName().equals(resourceName)) {
-				resources.remove(iterator.previousIndex());
-				return true;
-			}
-		}
-		return false;
+		return resources.remove(getAnyResource(resourceName));
 	}
 
 }
