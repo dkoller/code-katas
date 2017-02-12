@@ -3,7 +3,6 @@ package es.rachelcarmena;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Kata {
@@ -18,7 +17,7 @@ public class Kata {
 	}
 
 	public static int getNumberFromWord(String word) {
-		if (!Pattern.matches("\\D*\\d\\D*", word))
+		if (!word.matches("\\D*\\d\\D*"))
 			return -1;
 		return Integer.valueOf(word.replaceAll("\\D", ""));
 	}

@@ -3,13 +3,12 @@ package es.rachelcarmena;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class RPMCalculator {
 
 	private boolean isOperator(String component) {
-		return Pattern.matches("[\\+\\-\\*\\/]", component);
+		return component.matches("[\\+\\-\\*\\/]");
 	}
 
 	private boolean areDigits(List<String> components) {
