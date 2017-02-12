@@ -7,8 +7,7 @@ public class AddDays {
     public static void main(String argv[]) throws Exception {
 
         if (argv.length < 4) {
-            System.out.println("\nOooops! Use:\n");
-            System.out.println("\tjava -jar AddDays.jar [year] [month] [dayOfMonth] [daysToAdd]\n");
+            System.out.format("%n%s%n%s%n", "Oooops! Use:", "java -jar AddDays.jar [year] [month] [dayOfMonth] [daysToAdd]");
             System.exit(0);
         }
         
@@ -18,7 +17,7 @@ public class AddDays {
         int daysToAdd = Integer.valueOf(argv[3]);
 
         if ((month > 12) || (dayOfMonth > DateUtils.daysOfAMonthInAYear(month, year))) {
-            System.out.println("\nOooops! Check parameters\n");
+            System.out.format("%n%s%n", "Oooops! Check parameters");
             System.exit(0);
         }
 

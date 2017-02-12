@@ -37,6 +37,6 @@ public class Date {
     }
 
     public String toString() {
-        return String.format("Result: year %d - month %d - dayOfMonth %d\n", this.year, this.month, this.dayOfMonth);
+        return String.format("Result: year %d - month %d - dayOfMonth %d%n", this.year, this.month, this.dayOfMonth);
     }
 }

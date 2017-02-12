@@ -113,7 +113,7 @@ public class GameBoard {
 			for (int x = 0; x < size; x++) {
 				result.append(String.format(" %s ", board[x][y]));
 			}
-			result.append('\n');
+			result.append("%n");
 		}
 		return result.toString();
 	}

@@ -17,14 +17,14 @@ public class GameBoardEvenSizeTest {
 
 	@Test
 	public void printGameBoard() {
-		assertEquals(" -  -  -  - \n -  -  -  - \n -  -  -  - \n -  -  -  - \n", gameBoard.toString());
+		assertEquals(" -  -  -  - %n -  -  -  - %n -  -  -  - %n -  -  -  - %n", gameBoard.toString());
 	}
 
 	@Test
 	public void printWithPlay() {
 		gameBoard.play(2, 1);
 		gameBoard.play(1, 0);
-		assertEquals(" -  O  -  - \n -  -  X  - \n -  -  -  - \n -  -  -  - \n", gameBoard.toString());
+		assertEquals(" -  O  -  - %n -  -  X  - %n -  -  -  - %n -  -  -  - %n", gameBoard.toString());
 	}
 
 	@Test
