@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GameBoard4Test {
+public class GameBoardEvenSizeTest {
 	private GameBoard gameBoard;
 
 	@Before
@@ -28,7 +28,7 @@ public class GameBoard4Test {
 	}
 
 	@Test
-	public void isWinnerInVertical() throws Exception {
+	public void isWinnerInVertical() {
 		assertFalse(gameBoard.play(0, 0));
 		assertFalse(gameBoard.play(1, 0));
 		assertFalse(gameBoard.play(0, 1));
@@ -39,7 +39,7 @@ public class GameBoard4Test {
 	}
 
 	@Test
-	public void isWinnerInHorizontal() throws Exception {
+	public void isWinnerInHorizontal() {
 		assertFalse(gameBoard.play(0, 0));
 		assertFalse(gameBoard.play(0, 1));
 		assertFalse(gameBoard.play(1, 0));
@@ -50,7 +50,7 @@ public class GameBoard4Test {
 	}
 
 	@Test
-	public void isWinnerInUpDownDiagonal() throws Exception {
+	public void isWinnerInUpDownDiagonal() {
 		assertFalse(gameBoard.play(0, 0));
 		assertFalse(gameBoard.play(0, 2));
 		assertFalse(gameBoard.play(1, 1));
@@ -61,7 +61,7 @@ public class GameBoard4Test {
 	}
 
 	@Test
-	public void isWinnerInDownUpDiagonal() throws Exception {
+	public void isWinnerInDownUpDiagonal() {
 		assertFalse(gameBoard.play(0, 3));
 		assertFalse(gameBoard.play(0, 0));
 		assertFalse(gameBoard.play(1, 2));
@@ -72,7 +72,7 @@ public class GameBoard4Test {
 	}
 
 	@Test
-	public void notWinnerInDownUpDiagonalCenterAtTheEnd() throws Exception {
+	public void notWinnerInDownUpDiagonalCenterAtTheEnd() {
 		assertFalse(gameBoard.play(2, 2));
 		assertFalse(gameBoard.play(0, 0));
 		assertFalse(gameBoard.play(0, 1));

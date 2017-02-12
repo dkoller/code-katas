@@ -17,7 +17,7 @@ public class App {
 		}
 		board = new GameBoard(size);
 		System.out.println(board.toString());
-		while (!winner) {
+		while (!winner && board.isNotFull()) {
 			System.out.print("Play (x): ");
 			if (scanner.hasNextInt()) {
 				x = scanner.nextInt();
@@ -29,7 +29,7 @@ public class App {
 			winner = board.play(x, y);
 			System.out.println(board.toString());
 		}
-		System.out.println("Win!!");
+		System.out.println((winner) ? "Win!!" : "Game over!!");
 		scanner.close();
 	}
 }

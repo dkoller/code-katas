@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GameBoard3Test {
+public class GameBoardOddSizeTest {
 
 	private GameBoard gameBoard;
 
@@ -29,7 +29,7 @@ public class GameBoard3Test {
 	}
 
 	@Test
-	public void isWinnerInVertical() throws Exception {
+	public void isWinnerInVertical() {
 		assertFalse(gameBoard.play(0, 0));
 		assertFalse(gameBoard.play(1, 0));
 		assertFalse(gameBoard.play(0, 1));
@@ -38,7 +38,7 @@ public class GameBoard3Test {
 	}
 
 	@Test
-	public void isWinnerInHorizontal() throws Exception {
+	public void isWinnerInHorizontal() {
 		assertFalse(gameBoard.play(0, 0));
 		assertFalse(gameBoard.play(0, 2));
 		assertFalse(gameBoard.play(1, 0));
@@ -47,7 +47,7 @@ public class GameBoard3Test {
 	}
 
 	@Test
-	public void isWinnerInUpDownDiagonal() throws Exception {
+	public void isWinnerInUpDownDiagonal() {
 		assertFalse(gameBoard.play(0, 0));
 		assertFalse(gameBoard.play(0, 2));
 		assertFalse(gameBoard.play(1, 1));
@@ -56,7 +56,7 @@ public class GameBoard3Test {
 	}
 
 	@Test
-	public void isWinnerInDownUpDiagonal() throws Exception {
+	public void isWinnerInDownUpDiagonal() {
 		assertFalse(gameBoard.play(0, 2));
 		assertFalse(gameBoard.play(0, 0));
 		assertFalse(gameBoard.play(1, 1));
@@ -65,7 +65,7 @@ public class GameBoard3Test {
 	}
 
 	@Test
-	public void isWinnerInDownUpDiagonalCenterAtTheEnd() throws Exception {
+	public void isWinnerInDownUpDiagonalCenterAtTheEnd() {
 		assertFalse(gameBoard.play(0, 2));
 		assertFalse(gameBoard.play(0, 0));
 		assertFalse(gameBoard.play(2, 0));
@@ -73,4 +73,48 @@ public class GameBoard3Test {
 		assertTrue(gameBoard.play(1, 1));
 	}
 
+	@Test
+	public void playerChangedIfAnotherPlay() {
+		char player = gameBoard.getPlayer();
+
+		gameBoard.play(0, 2);
+		assertTrue(player != gameBoard.getPlayer());
+		gameBoard.play(1, 2);
+		assertEquals(player, gameBoard.getPlayer());
+	}
+
+	@Test
+	public void notPlayerChangedIfTheSamePlay() {
+		char player = gameBoard.getPlayer();
+
+		gameBoard.play(0, 2);
+		assertTrue(player != gameBoard.getPlayer());
+		gameBoard.play(0, 2);
+		assertTrue(player != gameBoard.getPlayer());
+	}
+
+	@Test
+	public void notPlayerChangedIfWrongPlay() {
+		char player = gameBoard.getPlayer();
+
+		gameBoard.play(0, 2);
+		assertTrue(player != gameBoard.getPlayer());
+		gameBoard.play(0, 5);
+		assertTrue(player != gameBoard.getPlayer());
+	}
+
+	@Test
+	public void isNotFull() {
+		assertTrue(gameBoard.isNotFull());
+	}
+
+	@Test
+	public void isFull() {
+		int size = gameBoard.getSize();
+		for (int y = 0; y < size; y++)
+			for (int x = 0; x < size; x++)
+				gameBoard.play(x, y);
+
+		assertFalse(gameBoard.isNotFull());
+	}
 }
