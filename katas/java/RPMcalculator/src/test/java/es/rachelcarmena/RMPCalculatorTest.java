@@ -1,6 +1,6 @@
 package es.rachelcarmena;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import junitparams.Parameters;
 public class RMPCalculatorTest {
 
 	private static RPMCalculator calculator;
-	
+
 	@BeforeClass
 	public static void beforeClass() {
 		calculator = new RPMCalculator();

@@ -12,7 +12,7 @@ public class RPMCalculator {
 	}
 
 	private boolean areDigits(List<String> components) {
-		return !components.stream().anyMatch(e -> isOperator(e));
+		return !components.stream().anyMatch(this::isOperator);
 	}
 
 	private List<String> getComponents(String expression) {
@@ -29,8 +29,9 @@ public class RPMCalculator {
 			return left * right;
 		case '/':
 			return left / right;
+		default:
+			return 0;
 		}
-		return 0;
 	}
 
 	private int getIndexOfFirstOperator(List<String> components) {
@@ -45,8 +46,8 @@ public class RPMCalculator {
 
 	private String operateToIndexOfOperator(List<String> components, int indexOfOperator) {
 		char operator = components.get(indexOfOperator).charAt(0);
-		int rightOperand = Integer.valueOf(components.get(indexOfOperator - 1));
-		int leftOperand = Integer.valueOf(components.get(indexOfOperator - 2));
+		int rightOperand = Integer.parseInt(components.get(indexOfOperator - 1));
+		int leftOperand = Integer.parseInt(components.get(indexOfOperator - 2));
 
 		return String.valueOf(operate(leftOperand, rightOperand, operator));
 	}
@@ -54,7 +55,7 @@ public class RPMCalculator {
 	private List<String> reduceComponents(List<String> components, int indexOfOperator) {
 		String partialResult = operateToIndexOfOperator(components, indexOfOperator);
 
-		List<String> newListOfComponents = new ArrayList<String>(components);
+		List<String> newListOfComponents = new ArrayList<>(components);
 		newListOfComponents.subList(indexOfOperator - 2, indexOfOperator + 1).clear();
 		newListOfComponents.add(indexOfOperator - 2, partialResult);
 		return newListOfComponents;
@@ -72,7 +73,7 @@ public class RPMCalculator {
 		return evaluateComponents(newComponents);
 	}
 
-	public String evaluateExpression(String expression) throws IllegalArgumentException {
+	public String evaluateExpression(String expression) {
 		List<String> components = getComponents(expression);
 		List<String> newComponents = evaluateComponents(components);
 		return newComponents.stream().collect(Collectors.joining(" "));
