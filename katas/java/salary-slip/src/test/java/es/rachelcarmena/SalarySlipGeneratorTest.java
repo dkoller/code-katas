@@ -2,10 +2,14 @@ package es.rachelcarmena;
 
 import static org.junit.Assert.assertEquals;
 
-import java.math.BigDecimal;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import es.rachelcarmena.generator.SalarySlipGenerator;
+import es.rachelcarmena.model.Employee;
+import es.rachelcarmena.model.SalarySlip;
+import es.rachelcarmena.type.AnnualGrossSalary;
+import es.rachelcarmena.type.CustomCurrency;
 
 public class SalarySlipGeneratorTest {
 
@@ -21,9 +25,9 @@ public class SalarySlipGeneratorTest {
 		Employee employee = createEmployeeFor("5000.00");
 		SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
 
-		assertEquals(new BigDecimal("0.00"), salarySlip.getNationalContributions());
-		assertEquals(salarySlip.getMonthlyGrossSalary().getValue(), salarySlip.getTaxFreeAllowance());
-		assertEquals(new BigDecimal("0.00"), salarySlip.getTaxableIncome());
+		assertEquals(new CustomCurrency("0.00"), salarySlip.getNationalContributions());
+		assertEquals(salarySlip.getMonthlyGrossSalary(), salarySlip.getTaxFreeAllowance());
+		assertEquals(new CustomCurrency("0.00"), salarySlip.getTaxableIncome());
 	}
 
 	@Test
@@ -31,9 +35,9 @@ public class SalarySlipGeneratorTest {
 		Employee employee = createEmployeeFor("9060.00");
 		SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
 
-		assertEquals(new BigDecimal("10.00"), salarySlip.getNationalContributions());
-		assertEquals(salarySlip.getMonthlyGrossSalary().getValue(), salarySlip.getTaxFreeAllowance());
-		assertEquals(new BigDecimal("0.00"), salarySlip.getTaxableIncome());
+		assertEquals(new CustomCurrency("10.00"), salarySlip.getNationalContributions());
+		assertEquals(salarySlip.getMonthlyGrossSalary(), salarySlip.getTaxFreeAllowance());
+		assertEquals(new CustomCurrency("0.00"), salarySlip.getTaxableIncome());
 	}
 
 	@Test
@@ -41,12 +45,12 @@ public class SalarySlipGeneratorTest {
 		Employee employee = createEmployeeFor("45000.00");
 		SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
 
-		assertEquals(new BigDecimal("352.73"), salarySlip.getNationalContributions());
-		assertEquals(new BigDecimal("916.67"), salarySlip.getTaxFreeAllowance());
-		assertEquals(new BigDecimal("2833.33"), salarySlip.getTaxableIncome());
+		assertEquals(new CustomCurrency("352.73"), salarySlip.getNationalContributions());
+		assertEquals(new CustomCurrency("916.67"), salarySlip.getTaxFreeAllowance());
+		assertEquals(new CustomCurrency("2833.33"), salarySlip.getTaxableIncome());
 	}
 
 	private Employee createEmployeeFor(String annualGrossSalary) {
-		return new Employee(1, "Guillem", new AnnualGrossSalary(new BigDecimal(annualGrossSalary)));
+		return new Employee(1, "Guillem", new AnnualGrossSalary(annualGrossSalary));
 	}
 }

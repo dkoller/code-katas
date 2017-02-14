@@ -1,4 +1,6 @@
-package es.rachelcarmena;
+package es.rachelcarmena.model;
+
+import es.rachelcarmena.type.AnnualGrossSalary;
 
 public class Employee {
 	private int id;
