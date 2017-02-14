@@ -8,7 +8,7 @@ import java.time.Month;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DepositTest {
+public class AccountTest {
 
 	private static Deposit deposit1;
 	private static Deposit deposit2;
