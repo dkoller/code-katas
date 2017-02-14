@@ -5,12 +5,12 @@ import java.util.Set;
 
 public class Request {
 
-	// Another option: 
-	//   Set s = Collections.synchronizedSet(new HashSet(...));
+	// Another option:
+	// Set s = Collections.synchronizedSet(new HashSet(...));
 	private Set<Integer> requestedFloors;
 
 	public Request() {
-		requestedFloors = new HashSet<Integer>();
+		requestedFloors = new HashSet<>();
 	}
 
 	public synchronized boolean isRequestedFloor(int floor) {

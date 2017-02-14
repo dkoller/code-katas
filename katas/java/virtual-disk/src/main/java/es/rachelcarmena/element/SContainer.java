@@ -9,7 +9,7 @@ public abstract class SContainer extends SResource {
 
 	public SContainer(String name) {
 		super(name);
-		this.resources = new HashSet<SResource>();
+		this.resources = new HashSet<>();
 	}
 
 	public boolean addResource(SResource resource) {
@@ -28,5 +28,4 @@ public abstract class SContainer extends SResource {
 	public boolean deleteResource(String resourceName) {
 		return resources.remove(getAnyResource(resourceName));
 	}
-
 }

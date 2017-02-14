@@ -57,7 +57,9 @@ public class CustomCurrency {
 
 	@Override
 	public boolean equals(Object obj) {
-		return value.equals(((CustomCurrency) obj).value);
+		if (obj != null && obj instanceof CustomCurrency)
+			return value.equals(((CustomCurrency) obj).value);
+		return super.equals(obj);
 	}
 
 	@Override

@@ -18,7 +18,9 @@ public abstract class SResource implements Visitable {
 
 	@Override
 	public boolean equals(Object obj) {
-		return name.equals(((SResource) obj).getName());
+		if (obj != null && obj instanceof SResource)
+			return name.equals(((SResource) obj).getName());
+		return false;
 	}
 
 	@Override

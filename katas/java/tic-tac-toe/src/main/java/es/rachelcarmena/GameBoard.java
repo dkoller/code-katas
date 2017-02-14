@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class GameBoard {
 
-	private final char EMPTY = '-';
-	private final char DAVID = 'X';
-	private final char GOLIATH = 'O';
+	private static final char EMPTY = '-';
+	private static final char DAVID = 'X';
+	private static final char GOLIATH = 'O';
 
 	private int size;
 	private char playerSymbol;
@@ -67,11 +67,11 @@ public class GameBoard {
 	}
 
 	private boolean coordinatesInUpDiagonal(int coordX, int coordY) {
-		return (coordX + coordY == size - 1);
+		return coordX + coordY == size - 1;
 	}
 
 	private boolean coordinatesInDownDiagonal(int coordX, int coordY) {
-		return (coordX == coordY);
+		return coordX == coordY;
 	}
 
 	private boolean checkVertical(int coordX) {

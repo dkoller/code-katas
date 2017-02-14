@@ -16,11 +16,13 @@ public class MP3Counter implements Visitor {
 		return counter;
 	}
 
+	@Override
 	public void visit(SStandardFile file) {
 		if (file.isMP3())
 			counter++;
 	}
 
+	@Override
 	public void visit(SContainer container) {
 		for (SResource resource : container.getResources()) {
 			resource.accept(this);

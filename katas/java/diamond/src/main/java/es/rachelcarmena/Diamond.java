@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Diamond {
 
-	private final char INITIAL_LETTER = 'A';
+	private static final char INITIAL_LETTER = 'A';
 
 	private char diamondLetter;
 	private int diamondLetterIndex;
@@ -32,7 +32,7 @@ public class Diamond {
 		StringBuilder line = new StringBuilder();
 		line.append(edgeSpaces);
 		line.append(letter);
-		line.append(getWhitespacesString((2 * row - 1)));
+		line.append(getWhitespacesString(2 * row - 1));
 		line.append(letter);
 		line.append(edgeSpaces);
 		return line.toString();

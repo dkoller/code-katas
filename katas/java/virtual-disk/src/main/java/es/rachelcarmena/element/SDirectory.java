@@ -11,10 +11,6 @@ public class SDirectory extends SContainer {
 		super(name);
 	}
 
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
-	}
-
 	public int totalMP3() {
 		MP3Counter counter = new MP3Counter();
 		for (SResource resource : getResources()) {
@@ -23,6 +19,12 @@ public class SDirectory extends SContainer {
 		return counter.getCounter();
 	}
 
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+	}
+
+	@Override
 	public int getSize() {
 		return getResources().stream().collect(Collectors.summingInt(SResource::getSize));
 	}

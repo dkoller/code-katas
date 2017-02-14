@@ -11,14 +11,16 @@ public class SStandardFile extends SResource {
 		this.size = size;
 	}
 
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
-	}
-
 	public boolean isMP3() {
 		return getName().endsWith("mp3");
 	}
 
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+	}
+
+	@Override
 	public int getSize() {
 		return size;
 	}

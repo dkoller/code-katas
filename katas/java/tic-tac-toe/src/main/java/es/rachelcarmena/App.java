@@ -29,7 +29,7 @@ public class App {
 			winner = board.play(x, y);
 			System.out.println(board.toString());
 		}
-		System.out.println((winner) ? "Win!!" : "Game over!!");
+		System.out.println(winner ? "Win!!" : "Game over!!");
 		scanner.close();
 	}
 }
