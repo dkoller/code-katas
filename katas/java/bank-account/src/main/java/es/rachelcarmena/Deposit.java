@@ -9,19 +9,13 @@ public class Deposit extends Operation {
 	}
 
 	@Override
-	public String toString(Quantity balance) {
-		String[] values = new String[4];
-		values[0] = date.format(DATE_TIME_FORMAT);
-		values[1] = quantity.toString();
-		values[2] = "";
-		values[3] = balance.toString();
-
-		String result = String.join(" || ", values);
-		return result.replaceAll("\\s+", " ");
+	public Quantity getPreviousBalance(Quantity balance) {
+		return balance.subtract(quantity);
 	}
 
 	@Override
-	public Quantity getPreviousBalance(Quantity balance) {
-		return balance.subtract(quantity);
+	public void fillOperationData(String[] statementLineData) {
+		statementLineData[1] = quantity.toString();
+		statementLineData[2] = "";
 	}
 }

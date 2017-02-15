@@ -26,8 +26,8 @@ public class AccountTest {
 		Account account = new Account();
 		account.makeDeposit(deposit1);
 
-		assertEquals("date || credit || debit || balance%n10/01/2012 || 1000.00 || || 1000.00",
-				account.printStatement());
+		assertEquals("date || credit || debit || balance" + "%n10/01/2012 || 1000.00 || || 1000.00",
+				account.createStatement());
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class AccountTest {
 		account.makeDeposit(deposit2);
 
 		assertEquals("date || credit || debit || balance" + "%n13/01/2012 || 2000.00 || || 3000.00"
-				+ "%n10/01/2012 || 1000.00 || || 1000.00", account.printStatement());
+				+ "%n10/01/2012 || 1000.00 || || 1000.00", account.createStatement());
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public class AccountTest {
 		assertEquals(
 				"date || credit || debit || balance" + "%n14/01/2012 || || 500.00 || 2500.00"
 						+ "%n13/01/2012 || 2000.00 || || 3000.00%n10/01/2012 || 1000.00 || || 1000.00",
-				account.printStatement());
+				account.createStatement());
 	}
 
 	private static Deposit createDeposit(String value, int year, Month month, int day) {

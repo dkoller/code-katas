@@ -25,19 +25,19 @@ public class Account {
 		lastBalance = lastBalance.subtract(withdrawalQuantity);
 	}
 
-	public String printStatement() {
+	public String createStatement() {
 		Quantity balance = lastBalance;
 		int numberOfOperations = operations.size();
-		StringBuilder result = new StringBuilder(STATEMENT_HEADER);
+		StringBuilder statement = new StringBuilder(STATEMENT_HEADER);
 
 		for (ListIterator<Operation> iterator = operations.listIterator(numberOfOperations); iterator.hasPrevious();) {
 			Operation operation = iterator.previous();
-			String operationString = operation.toString(balance);
+			String statementLine = operation.createStatementLine(balance);
 
-			result.append("%n");
-			result.append(operationString);
+			statement.append("%n");
+			statement.append(statementLine);
 			balance = operation.getPreviousBalance(balance);
 		}
-		return result.toString();
+		return statement.toString();
 	}
 }

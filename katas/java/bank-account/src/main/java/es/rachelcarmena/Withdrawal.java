@@ -9,19 +9,13 @@ public class Withdrawal extends Operation {
 	}
 
 	@Override
-	public String toString(Quantity balance) {
-		String[] values = new String[4];
-		values[0] = date.format(DATE_TIME_FORMAT);
-		values[1] = "";
-		values[2] = quantity.toString();
-		values[3] = balance.toString();
-
-		String result = String.join(" || ", values);
-		return result.replaceAll("\\s+", " ");
+	public Quantity getPreviousBalance(Quantity balance) {
+		return balance.add(quantity);
 	}
 
 	@Override
-	public Quantity getPreviousBalance(Quantity balance) {
-		return balance.add(quantity);
+	public void fillOperationData(String[] statementLineData) {
+		statementLineData[1] = "";
+		statementLineData[2] = quantity.toString();
 	}
 }

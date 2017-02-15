@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class Operation {
 
-	protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("DD/MM/YYYY");
+	private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("DD/MM/YYYY");
 
 	protected Quantity quantity;
 	protected LocalDate date;
@@ -15,7 +15,17 @@ public abstract class Operation {
 		this.date = date;
 	}
 
-	public abstract String toString(Quantity balance);
-
 	public abstract Quantity getPreviousBalance(Quantity balance);
+
+	public abstract void fillOperationData(String[] statementLineData);
+
+	public String createStatementLine(Quantity balance) {
+		String[] statementLineData = new String[4];
+		statementLineData[0] = date.format(DATE_TIME_FORMAT);
+		fillOperationData(statementLineData);
+		statementLineData[3] = balance.toString();
+
+		String statementLine = String.join(" || ", statementLineData);
+		return statementLine.replaceAll("\\s+", " ");
+	}
 }
