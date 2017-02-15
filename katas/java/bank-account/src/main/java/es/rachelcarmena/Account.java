@@ -11,18 +11,9 @@ public class Account {
 	private List<Operation> operations = new ArrayList<>();
 	private Quantity lastBalance = new Quantity("0.00");
 
-	public void makeDeposit(Deposit deposit) {
-		operations.add(deposit);
-
-		Quantity depositQuantity = deposit.quantity;
-		lastBalance = lastBalance.add(depositQuantity);
-	}
-
-	public void makeWithdrawal(Withdrawal withdrawal) {
-		operations.add(withdrawal);
-
-		Quantity withdrawalQuantity = withdrawal.quantity;
-		lastBalance = lastBalance.subtract(withdrawalQuantity);
+	public void makeOperation(Operation operation) {
+		operations.add(operation);
+		lastBalance = operation.nextBalance(lastBalance);
 	}
 
 	public String createStatement() {
@@ -36,7 +27,7 @@ public class Account {
 
 			statement.append("%n");
 			statement.append(statementLine);
-			balance = operation.getPreviousBalance(balance);
+			balance = operation.previousBalance(balance);
 		}
 		return statement.toString();
 	}

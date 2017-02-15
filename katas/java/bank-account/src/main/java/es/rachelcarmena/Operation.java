@@ -15,7 +15,9 @@ public abstract class Operation {
 		this.date = date;
 	}
 
-	public abstract Quantity getPreviousBalance(Quantity balance);
+	public abstract Quantity previousBalance(Quantity balance);
+
+	public abstract Quantity nextBalance(Quantity balance);
 
 	public abstract void fillOperationData(String[] statementLineData);
 

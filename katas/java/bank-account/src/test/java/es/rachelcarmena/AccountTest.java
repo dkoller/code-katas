@@ -22,30 +22,30 @@ public class AccountTest {
 	}
 
 	@Test
-	public void make_deposit() {
+	public void create_statement_with_one_deposit() {
 		Account account = new Account();
-		account.makeDeposit(deposit1);
+		account.makeOperation(deposit1);
 
 		assertEquals("date || credit || debit || balance" + "%n10/01/2012 || 1000.00 || || 1000.00",
 				account.createStatement());
 	}
 
 	@Test
-	public void make_two_deposits() {
+	public void create_statement_with_two_deposits() {
 		Account account = new Account();
-		account.makeDeposit(deposit1);
-		account.makeDeposit(deposit2);
+		account.makeOperation(deposit1);
+		account.makeOperation(deposit2);
 
 		assertEquals("date || credit || debit || balance" + "%n13/01/2012 || 2000.00 || || 3000.00"
 				+ "%n10/01/2012 || 1000.00 || || 1000.00", account.createStatement());
 	}
 
 	@Test
-	public void make_two_deposits_and_withdrawal() {
+	public void create_statement_with_two_deposits_and_withdrawal() {
 		Account account = new Account();
-		account.makeDeposit(deposit1);
-		account.makeDeposit(deposit2);
-		account.makeWithdrawal(withdrawal);
+		account.makeOperation(deposit1);
+		account.makeOperation(deposit2);
+		account.makeOperation(withdrawal);
 
 		assertEquals(
 				"date || credit || debit || balance" + "%n14/01/2012 || || 500.00 || 2500.00"

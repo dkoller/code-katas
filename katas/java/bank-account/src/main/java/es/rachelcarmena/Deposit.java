@@ -9,8 +9,13 @@ public class Deposit extends Operation {
 	}
 
 	@Override
-	public Quantity getPreviousBalance(Quantity balance) {
+	public Quantity previousBalance(Quantity balance) {
 		return balance.subtract(quantity);
+	}
+
+	@Override
+	public Quantity nextBalance(Quantity balance) {
+		return balance.add(quantity);
 	}
 
 	@Override
