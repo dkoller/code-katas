@@ -45,7 +45,8 @@ public class BerlinClock {
 			return nCopies(FOUR_ELEMENT_LAMPS, LAMP_OFF, FOUR_ELEMENT_SEPARATOR);
 
 		int lampsOff = FOUR_ELEMENT_LAMPS - lampsOn;
-		List<String> rowElements = new ArrayList<>(Collections.nCopies(lampsOn, lampOnSymbol));
+		List<String> rowElements = new ArrayList<>();
+		rowElements.addAll(Collections.nCopies(lampsOn, lampOnSymbol));
 		rowElements.addAll(Collections.nCopies(lampsOff, LAMP_OFF));
 		return rowElements.stream().collect(Collectors.joining(FOUR_ELEMENT_SEPARATOR));
 	}
@@ -65,7 +66,8 @@ public class BerlinClock {
 		int lampsOn = fiveMinuteLamps % LAMPS_PER_QUARTER;
 		int lampsOff = FIVE_MINUTE_LAMPS - quarters * LAMPS_PER_QUARTER - lampsOn;
 
-		List<String> fiveMinuteRowElements = new ArrayList<>(Collections.nCopies(quarters, QUARTER_STRING));
+		List<String> fiveMinuteRowElements = new ArrayList<>();
+		fiveMinuteRowElements.addAll(Collections.nCopies(quarters, QUARTER_STRING));
 		fiveMinuteRowElements.addAll(Collections.nCopies(lampsOn, lampOnSymbol));
 		fiveMinuteRowElements.addAll(Collections.nCopies(lampsOff, LAMP_OFF));
 		return fiveMinuteRowElements.stream().collect(Collectors.joining());
