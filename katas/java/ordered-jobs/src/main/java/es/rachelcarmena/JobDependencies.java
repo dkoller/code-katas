@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class JobDependencies {
 
-	Map<Character, Character> dependencies;
+	private Map<Character, Character> dependencies;
 
 	public JobDependencies(String[] jobStructure) {
 		fillDependencies(jobStructure);

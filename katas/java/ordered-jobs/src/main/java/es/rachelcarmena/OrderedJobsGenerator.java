@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class OrderedJobsGenerator {
 
-	JobDependencies dependencies;
+	private JobDependencies dependencies;
 
 	public OrderedJobsGenerator(String[] jobStructure) {
 		this.dependencies = new JobDependencies(jobStructure);
@@ -17,7 +17,7 @@ public class OrderedJobsGenerator {
 		List<Character> orderedJobs = new ArrayList<>();
 		orderedJobs.addAll(jobsWithoutDependencies);
 		addJobsWithExistingDependencies(orderedJobs);
-		return converToString(orderedJobs);
+		return convertToString(orderedJobs);
 	}
 
 	private void addJobsWithExistingDependencies(List<Character> orderedJobs) {
@@ -30,7 +30,7 @@ public class OrderedJobsGenerator {
 		addJobsWithExistingDependencies(orderedJobs);
 	}
 
-	private String converToString(List<Character> orderedJobs) {
+	private String convertToString(List<Character> orderedJobs) {
 		return orderedJobs.stream().map(c -> c.toString()).collect(Collectors.joining());
 	}
 }
