@@ -14,7 +14,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[O]      [O]      [O]      [O]";
 		representationElements[2] = "[O][O][O][O][O][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -25,7 +25,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[O]      [O]      [O]      [O]";
 		representationElements[2] = "[O][O][O][O][O][O][O][O][O][O][O]";
 		representationElements[3] = "[Y]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[O]      [O]      [O]      [O]";
 		representationElements[2] = "[O][O][O][O][O][O][O][O][O][O][O]";
 		representationElements[3] = "[Y]      [Y]      [Y]      [Y]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -47,7 +47,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[O]      [O]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][O][O][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[O]      [O]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][O][O][O][O][O][O][O][O]";
 		representationElements[3] = "[Y]      [Y]      [Y]      [Y]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[O]      [O]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][Y][Y][R][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[O]      [O]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][Y][Y][R][O][O][O][O][O]";
 		representationElements[3] = "[Y]      [Y]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -91,7 +91,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[O]      [O]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][Y][Y][R][Y][Y][R][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -102,7 +102,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[O]      [O]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][Y][Y][R][Y][Y][R][Y][Y]";
 		representationElements[3] = "[Y]      [Y]      [Y]      [Y]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -113,7 +113,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[R]      [O]      [O]      [O]";
 		representationElements[2] = "[Y][Y][O][O][O][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -124,7 +124,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[R]      [R]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][Y][Y][R][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -135,7 +135,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[R]      [R]      [R]      [O]";
 		representationElements[2] = "[O][O][O][O][O][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -146,7 +146,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[R]      [R]      [R]      [O]";
 		representationElements[2] = "[Y][Y][R][O][O][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -157,7 +157,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[R]      [R]      [R]      [R]";
 		representationElements[2] = "[Y][Y][R][Y][Y][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -168,7 +168,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[O]      [O]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][Y][Y][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -179,7 +179,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[R]      [O]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][Y][Y][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -190,7 +190,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[R]      [R]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][Y][Y][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -201,7 +201,7 @@ public class BerlinClockTest {
 		representationElements[1] = "[R]      [R]      [O]      [O]";
 		representationElements[2] = "[Y][Y][R][Y][Y][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 
 	@Test
@@ -212,6 +212,6 @@ public class BerlinClockTest {
 		representationElements[1] = "[R]      [R]      [R]      [O]";
 		representationElements[2] = "[Y][Y][R][Y][Y][O][O][O][O][O][O]";
 		representationElements[3] = "[O]      [O]      [O]      [O]";
-		assertEquals(String.join("%n", representationElements), clock.createRepresentation());
+		assertEquals(String.join("%n", representationElements), clock.toString());
 	}
 }

@@ -19,7 +19,8 @@ public class BerlinClock {
 		minute = localTime.getMinute();
 	}
 
-	public String createRepresentation() {
+	@Override
+	public String toString() {
 		final String HOUR_LAMP_ON = "[R]";
 		final String MINUTE_LAMP_ON = "[Y]";
 
