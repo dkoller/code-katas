@@ -62,7 +62,7 @@ public class OrderedJobsGeneratorTest {
 		jobStructure[1] = "b => ";
 		jobStructure[2] = "c => c";
 		OrderedJobsGenerator orderedJobs = new OrderedJobsGenerator(jobStructure);
-		assertEquals("acb", orderedJobs.createSequence());
+		orderedJobs.createSequence();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -75,6 +75,6 @@ public class OrderedJobsGeneratorTest {
 		jobStructure[4] = "e => ";
 		jobStructure[5] = "f => b";
 		OrderedJobsGenerator orderedJobs = new OrderedJobsGenerator(jobStructure);
-		assertEquals("afcdbe", orderedJobs.createSequence());
+		orderedJobs.createSequence();
 	}
 }
