@@ -25,8 +25,20 @@ public class JobDependencies {
 		return extractJobs(hasNoDependency());
 	}
 
-	public List<Character> extractJobsWithExistingDependencies(List<Character> jobs) {
-		return extractJobs(hasExistingDependency(jobs));
+	public List<Character> extractNewJobsWithExistingDependencies(List<Character> jobs) {
+		return extractJobs(notExistsAndHasExistingDependency(jobs));
+	}
+
+	private Predicate<? super Entry<Character, Character>> hasNoDependency() {
+		return e -> e.getValue() == null;
+	}
+
+	private Predicate<? super Entry<Character, Character>> notExistsAndHasExistingDependency(List<Character> jobs) {
+		return e -> !jobs.contains(e.getKey()) && jobs.contains(e.getValue());
+	}
+
+	private List<Character> extractJobs(Predicate<? super Entry<Character, Character>> condition) {
+		return dependencies.entrySet().stream().filter(condition).map(Entry::getKey).collect(Collectors.toList());
 	}
 
 	private void fillDependencies(String[] jobStructure) {
@@ -60,17 +72,5 @@ public class JobDependencies {
 				existsDependency = parentJob != null;
 			}
 		}
-	}
-
-	private Predicate<? super Entry<Character, Character>> hasNoDependency() {
-		return e -> e.getValue() == null;
-	}
-
-	private Predicate<? super Entry<Character, Character>> hasExistingDependency(List<Character> jobs) {
-		return e -> e.getValue() != null && !jobs.contains(e.getKey()) && jobs.contains(e.getValue());
-	}
-
-	private List<Character> extractJobs(Predicate<? super Entry<Character, Character>> condition) {
-		return dependencies.entrySet().stream().filter(condition).map(Entry::getKey).collect(Collectors.toList());
 	}
 }
