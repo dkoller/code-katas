@@ -23,22 +23,22 @@ public class Theater {
 		return structure[rowNumber][seatNumber].toString();
 	}
 
-	public void book(int rowCoordinate, int seatCoordinate) {
-		structure[rowCoordinate][seatCoordinate].book();
+	public void book(int rowNumber, int seatNumber) {
+		structure[rowNumber][seatNumber].book();
 	}
 
-	public void markAsSuggested(int rowCoordinate, int seatCoordinate) {
-		structure[rowCoordinate][seatCoordinate].markAsSuggested();
+	public void markSeatAsSuggested(int rowNumber, int seatNumber) {
+		structure[rowNumber][seatNumber].markAsSuggested();
 	}
 
-	public boolean areAvailable(int ordered, int row, int fromSeat) {
-		for (int i = 0; i < ordered; i++)
-			if (!isAvailable(row, fromSeat + i))
+	public boolean areSeatsAvailable(int numberOfSeats, int rowNumber, int fromSeat) {
+		for (int seat = 0; seat < numberOfSeats; seat++)
+			if (!isAvailable(rowNumber, fromSeat + seat))
 				return false;
 		return true;
 	}
 
-	public boolean isAvailable(int rowCoordinate, int seatCoordinate) {
-		return structure[rowCoordinate][seatCoordinate].isAvailable();
+	public boolean isAvailable(int rowNumber, int seatNumber) {
+		return structure[rowNumber][seatNumber].isAvailable();
 	}
 }

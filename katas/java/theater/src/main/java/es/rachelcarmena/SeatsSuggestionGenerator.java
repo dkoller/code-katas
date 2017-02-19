@@ -36,50 +36,50 @@ public class SeatsSuggestionGenerator {
 		return suggestedSeats.size() == ordered;
 	}
 
-	private boolean findSeatsTogether(int number) {
+	private boolean findSeatsTogether(int seatsNumber) {
 		for (int row = 0; row < theater.getRowsNumber(); row++) {
-			if (findSeatsFromCenterToLeft(number, row))
+			if (findSeatsFromCenterToLeft(seatsNumber, row))
 				return true;
-			if (findSeatsFromCenterToRight(number, row))
+			if (findSeatsFromCenterToRight(seatsNumber, row))
 				return true;
 		}
 		return false;
 	}
 
-	private boolean findSeatsFromCenterToLeft(int number, int row) {
-		int startPoint = calculateStartPoint(row, number);
+	private boolean findSeatsFromCenterToLeft(int seatsNumber, int rowNumber) {
+		int startPoint = calculateStartPoint(seatsNumber, rowNumber);
 		for (int left = startPoint; left >= 0; left--) {
-			if (!theater.areAvailable(number, row, left))
+			if (!theater.areSeatsAvailable(seatsNumber, rowNumber, left))
 				continue;
-			addSeatsNames(number, row, left);
+			addSeatsNames(seatsNumber, rowNumber, left);
 			return true;
 		}
 		return false;
 	}
 
-	private boolean findSeatsFromCenterToRight(int number, int row) {
-		int startPoint = calculateStartPoint(row, number);
-		int rowSeatsNumber = theater.getSeatsNumber(row);
-		int maxStartPoint = rowSeatsNumber - number;
+	private boolean findSeatsFromCenterToRight(int seatsNumber, int rowNumber) {
+		int startPoint = calculateStartPoint(seatsNumber, rowNumber);
+		int rowSeatsNumber = theater.getSeatsNumber(rowNumber);
+		int maxStartPoint = rowSeatsNumber - seatsNumber;
 
 		for (int right = startPoint + 1; right <= maxStartPoint; right++) {
-			if (!theater.areAvailable(number, row, right))
+			if (!theater.areSeatsAvailable(seatsNumber, rowNumber, right))
 				continue;
-			addSeatsNames(number, row, right);
+			addSeatsNames(seatsNumber, rowNumber, right);
 			return true;
 		}
 		return false;
 	}
 
-	private int calculateStartPoint(int row, int number) {
-		int rowSeatsNumber = theater.getSeatsNumber(row);
+	private int calculateStartPoint(int seatsNumber, int rowNumber) {
+		int rowSeatsNumber = theater.getSeatsNumber(rowNumber);
 		int rowMiddle = rowSeatsNumber / 2;
-		int backPositions = (number + 1) / 2;
+		int backPositions = (seatsNumber + 1) / 2;
 		return rowMiddle - backPositions;
 	}
 
-	private void addSeatsNames(int number, int rowNumber, int fromSeatNumber) {
-		for (int seat = 0; seat < number; seat++) {
+	private void addSeatsNames(int seatsNumber, int rowNumber, int fromSeatNumber) {
+		for (int seat = 0; seat < seatsNumber; seat++) {
 			int seatNumber = fromSeatNumber + seat;
 			addSeatAndMarkAsSuggested(rowNumber, seatNumber);
 		}
@@ -88,7 +88,7 @@ public class SeatsSuggestionGenerator {
 	private void addSeatAndMarkAsSuggested(int rowNumber, int seatNumber) {
 		String seatName = theater.getSeatName(rowNumber, seatNumber);
 		suggestedSeats.add(seatName);
-		theater.markAsSuggested(rowNumber, seatNumber);
+		theater.markSeatAsSuggested(rowNumber, seatNumber);
 	}
 
 	private boolean findGroupsOfSeats() {
