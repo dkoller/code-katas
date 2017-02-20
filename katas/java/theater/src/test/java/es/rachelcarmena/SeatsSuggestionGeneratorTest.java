@@ -112,7 +112,15 @@ public class SeatsSuggestionGeneratorTest {
 		for (int row = 3; row < 7; row++)
 			book(row, 0, 9);
 		SeatsSuggestionGenerator suggester = new SeatsSuggestionGenerator(theater);
-		assertArrayEquals(new String[] { "A1", "A2", "B2", "B3", "C1", "C2", "B1", "C10" }, suggester.calculateSuggestion(8));
+		assertArrayEquals(new String[] { "A1", "A2", "B2", "B3", "C1", "C2", "B1", "C10" },
+				suggester.calculateSuggestion(8));
+	}
+
+	@Test
+	public void suggest_twelve_seats_from_two_rows() throws IOException {
+		SeatsSuggestionGenerator suggester = new SeatsSuggestionGenerator(theater);
+		assertArrayEquals(new String[] { "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "B5", "B6" },
+				suggester.calculateSuggestion(12));
 	}
 
 	private void book(int row, int from, int to) {

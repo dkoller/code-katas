@@ -20,10 +20,8 @@ public class SeatsSuggestionGenerator {
 
 		if (findSeatsTogether(ordered))
 			return getSuggestedSeats();
-
 		if (findGroupsOfSeats())
 			return getSuggestedSeats();
-
 		findIndividualSeats();
 		return getSuggestedSeats();
 	}
@@ -95,7 +93,7 @@ public class SeatsSuggestionGenerator {
 		int groupSize = suggestGroupSize();
 		while (groupSize > 0) {
 			boolean groupsFound = findSeatsTogether(groupSize);
-			groupsFound = groupsFound || findSeatsTogether(MIN_GROUP_SIZE);
+			groupsFound = findSeatsTogether(MIN_GROUP_SIZE) || groupsFound;
 			if (!groupsFound)
 				return false;
 			if (isCompleted())
