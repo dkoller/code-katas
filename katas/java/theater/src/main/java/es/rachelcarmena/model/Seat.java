@@ -1,4 +1,4 @@
-package es.rachelcarmena;
+package es.rachelcarmena.model;
 
 public class Seat {
 

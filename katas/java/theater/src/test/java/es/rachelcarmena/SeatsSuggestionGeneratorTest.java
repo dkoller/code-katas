@@ -7,6 +7,8 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.rachelcarmena.model.Theater;
+
 public class SeatsSuggestionGeneratorTest {
 
 	private Theater theater;

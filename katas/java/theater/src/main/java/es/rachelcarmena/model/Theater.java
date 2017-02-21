@@ -1,6 +1,8 @@
-package es.rachelcarmena;
+package es.rachelcarmena.model;
 
 import java.io.IOException;
+
+import es.rachelcarmena.TheaterInfoReader;
 
 public class Theater {
 

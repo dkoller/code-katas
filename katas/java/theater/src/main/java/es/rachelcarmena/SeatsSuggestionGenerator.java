@@ -3,6 +3,8 @@ package es.rachelcarmena;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import es.rachelcarmena.model.Theater;
+
 public class SeatsSuggestionGenerator {
 
 	private static final int MIN_GROUP_SIZE = 2;

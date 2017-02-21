@@ -9,6 +9,8 @@ import javax.json.JsonReader;
 import javax.json.JsonString;
 import javax.json.JsonValue;
 
+import es.rachelcarmena.model.Seat;
+
 public class TheaterInfoReader {
 
 	public Seat[][] createTheaterStructure(String fileName) {
