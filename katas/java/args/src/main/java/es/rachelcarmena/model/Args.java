@@ -10,15 +10,10 @@ import java.util.regex.Pattern;
 public class Args {
 
 	private static final String ARGS_SEPARATOR = "\\s+";
-	private Map<String, Arg> args = new HashMap<>();
+	private Map<String, Arg> argValues = new HashMap<>();
 
 	public Args(String schema) {
 		loadDefaultValues(schema);
-	}
-
-	public Object getValue(String argName) {
-		Arg arg = args.get(argName);
-		return arg.getValue();
 	}
 
 	public void updateValues(String commandLine) {
@@ -27,7 +22,7 @@ public class Args {
 			String section = iterator.next();
 			String flagName = getFlagName(section);
 
-			Arg arg = args.get(flagName);
+			Arg arg = argValues.get(flagName);
 			String value = null;
 			if (arg.hasValue()) {
 				if (!iterator.hasNext())
@@ -36,6 +31,12 @@ public class Args {
 			}
 			arg.setValue(value);
 		}
+	}
+
+	public Arg getArg(String name) {
+		if (!argValues.containsKey(name))
+			throw new IllegalArgumentException();
+		return argValues.get(name);
 	}
 
 	private Iterator<String> createIterator(String commandLine) {
@@ -54,7 +55,7 @@ public class Args {
 			String argType = schemaArg[1];
 
 			Arg arg = ArgBuilder.build(argType);
-			args.put(argName, arg);
+			argValues.put(argName, arg);
 		}
 	}
 
@@ -64,7 +65,7 @@ public class Args {
 			throw new IllegalArgumentException();
 
 		String name = section.substring(1);
-		if (!args.containsKey(name))
+		if (!argValues.containsKey(name))
 			throw new IllegalArgumentException();
 		return name;
 	}

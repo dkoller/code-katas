@@ -9,11 +9,6 @@ public class IntegerArg implements Arg {
 	}
 
 	@Override
-	public Object getValue() {
-		return value;
-	}
-
-	@Override
 	public void setValue(String value) {
 		this.value = Integer.valueOf(value);
 	}
@@ -21,5 +16,11 @@ public class IntegerArg implements Arg {
 	@Override
 	public boolean hasValue() {
 		return true;
+	}
+
+	public static int getValue(Arg arg) {
+		if (!(arg instanceof IntegerArg))
+			throw new IllegalArgumentException();
+		return ((IntegerArg) arg).value;
 	}
 }

@@ -9,11 +9,6 @@ public class BooleanArg implements Arg {
 	}
 
 	@Override
-	public Object getValue() {
-		return value;
-	}
-
-	@Override
 	public void setValue(String value) {
 		this.value = true;
 	}
@@ -21,5 +16,11 @@ public class BooleanArg implements Arg {
 	@Override
 	public boolean hasValue() {
 		return false;
+	}
+
+	public static boolean getValue(Arg arg) {
+		if (!(arg instanceof BooleanArg))
+			throw new IllegalArgumentException();
+		return ((BooleanArg) arg).value;
 	}
 }

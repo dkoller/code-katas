@@ -10,6 +10,10 @@ public class ArgBuilder {
 			return new IntegerArg();
 		case "str":
 			return new StringArg();
+		case "strList":
+			return new StringListArg();
+		case "intList":
+			return new IntegerListArg();
 		default:
 			return null;
 		}
