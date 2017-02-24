@@ -10,7 +10,7 @@ public class BooleanArg implements Arg {
 
 	@Override
 	public void setValue(String value) {
-		this.value = true;
+		this.value = Boolean.valueOf(value);
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class BooleanArg implements Arg {
 
 	public static boolean getValue(Arg arg) {
 		if (!(arg instanceof BooleanArg))
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Type of flag doesn't match with query");
 		return ((BooleanArg) arg).value;
 	}
 }

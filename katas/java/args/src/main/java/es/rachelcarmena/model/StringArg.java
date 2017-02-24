@@ -20,7 +20,7 @@ public class StringArg implements Arg {
 
 	public static String getValue(Arg arg) {
 		if (!(arg instanceof StringArg))
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Type of flag doesn't match with query");
 		return ((StringArg) arg).value;
 	}
 }

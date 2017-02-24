@@ -19,7 +19,7 @@ public class IntegerListArg implements Arg {
 
 	public static int[] getValue(Arg arg) {
 		if (!(arg instanceof IntegerListArg))
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Type of flag doesn't match with query");
 		return ((IntegerListArg) arg).value;
 	}
 }

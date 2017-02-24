@@ -16,7 +16,7 @@ public class StringListArg implements Arg {
 
 	public static String[] getValue(Arg arg) {
 		if (!(arg instanceof StringListArg))
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Type of flag doesn't match with query");
 		return ((StringListArg) arg).value;
 	}
 
