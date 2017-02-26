@@ -13,7 +13,8 @@ public class CommandLineParserTest {
 
 	@Before
 	public void before() {
-		parser = new CommandLineParser(SCHEMA);
+		SchemaParser schemaParser = new SchemaParser(SCHEMA);
+		parser = new CommandLineParser(schemaParser);
 	}
 
 	@Test
@@ -27,12 +28,12 @@ public class CommandLineParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void invalid_type_in_schema() {
-		new CommandLineParser("l void");
+		new SchemaParser("l void");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void invalid_schema_format() {
-		new CommandLineParser("l int-p bool");
+		new SchemaParser("l int-p bool");
 	}
 
 	@Test

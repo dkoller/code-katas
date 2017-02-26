@@ -1,19 +1,26 @@
 package es.rachelcarmena;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import es.rachelcarmena.builder.ArgBuilder;
 import es.rachelcarmena.model.Arg;
 
 public class Args {
 
 	private Map<String, Arg> argValues;
 
-	public Args(String schema) {
-		argValues = SchemaParser.calculateDefaultValues(schema);
+	public Args(SchemaParser schemaParser) {
+		argValues = new HashMap<>();
+		for (String flagName : schemaParser.getFlagNames()) {
+			String flagType = schemaParser.getType(flagName);
+			Arg arg = ArgBuilder.build(flagType);
+			argValues.put(flagName, arg);
+		}
 	}
 
 	public void updateValues(String... args) {

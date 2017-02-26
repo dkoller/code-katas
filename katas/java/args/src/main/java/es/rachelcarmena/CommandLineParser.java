@@ -11,8 +11,8 @@ public class CommandLineParser {
 
 	private Args argValues;
 
-	public CommandLineParser(String schema) {
-		argValues = new Args(schema);
+	public CommandLineParser(SchemaParser schemaParser) {
+		argValues = new Args(schemaParser);
 	}
 
 	public void parse(String... args) {
