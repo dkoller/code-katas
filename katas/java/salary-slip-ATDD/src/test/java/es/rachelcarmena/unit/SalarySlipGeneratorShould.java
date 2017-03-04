@@ -27,4 +27,15 @@ public class SalarySlipGeneratorShould {
 
         verify(salarySlipPrinter).printLine("Employee ID: 12345");
     }
+
+    @Test
+    public void print_employeID_56789_for_an_employee_with_ID_56789() {
+        AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary(24000);
+        Employee employee = new Employee(56789, "John J Doe", annualGrossSalary);
+
+        SalarySlipGenerator salarySlipGenerator = new SalarySlipGenerator(salarySlipPrinter);
+        salarySlipGenerator.generateFor(employee);
+
+        verify(salarySlipPrinter).printLine("Employee ID: 56789");
+    }
 }
