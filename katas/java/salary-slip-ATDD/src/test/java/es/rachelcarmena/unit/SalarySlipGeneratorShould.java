@@ -48,4 +48,11 @@ public class SalarySlipGeneratorShould {
 
         verify(salarySlipPrinter).printLine("Employee Name: John J Doe");
     }
+
+    @Test
+    public void print_employeName_Paul_for_an_employee_with_name_Paul() {
+        salarySlipGenerator.generateFor(EMPLOYEE_56789_PAUL);
+
+        verify(salarySlipPrinter).printLine("Employee Name: Paul J Doe");
+    }
 }
