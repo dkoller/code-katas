@@ -5,8 +5,7 @@ import es.rachelcarmena.SalarySlipGenerator;
 import es.rachelcarmena.SalarySlipPrinter;
 import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
 import es.rachelcarmena.calculator.NationalInsuranceContributionCalculator;
-import es.rachelcarmena.calculator.TaxFreeAllowanceCalculator;
-import es.rachelcarmena.calculator.TaxableIncomeCalculator;
+import es.rachelcarmena.calculator.TaxesCalculator;
 import es.rachelcarmena.model.Amount;
 import es.rachelcarmena.model.AnnualGrossSalary;
 import es.rachelcarmena.model.MonthlyGrossSalary;
@@ -29,9 +28,7 @@ public class SalarySlipGeneratorShould {
     @Mock
     NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator;
     @Mock
-    TaxFreeAllowanceCalculator taxFreeAllowanceCalculator;
-    @Mock
-    TaxableIncomeCalculator taxableIncomeCalculator;
+    TaxesCalculator taxesCalculator;
 
     private SalarySlipGenerator salarySlipGenerator;
     private Employee employee;
@@ -41,13 +38,15 @@ public class SalarySlipGeneratorShould {
         final AnnualGrossSalary ANNUAL_GROSS_SALARY = new AnnualGrossSalary(24000);
         final MonthlyGrossSalary MONTHLY_GROSS_SALARY = new MonthlyGrossSalary(2000);
         final Amount TAX_FREE_ALLOWANCE = new Amount("916.67");
+
         employee = new Employee(12345, "John J Doe", ANNUAL_GROSS_SALARY);
 
-        salarySlipGenerator = new SalarySlipGenerator(salarySlipPrinter, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxFreeAllowanceCalculator, taxableIncomeCalculator);
         given(monthlyGrossSalaryCalculator.calculate(ANNUAL_GROSS_SALARY)).willReturn(new MonthlyGrossSalary(2000));
         given(nationalInsuranceContributionCalculator.calculate(ANNUAL_GROSS_SALARY)).willReturn(new Amount("159.40"));
-        given(taxFreeAllowanceCalculator.calculate(MONTHLY_GROSS_SALARY)).willReturn(TAX_FREE_ALLOWANCE);
-        given(taxableIncomeCalculator.calculate(MONTHLY_GROSS_SALARY, TAX_FREE_ALLOWANCE)).willReturn(new Amount("1083.33"));
+        given(taxesCalculator.calculateFreeAllowance(MONTHLY_GROSS_SALARY)).willReturn(TAX_FREE_ALLOWANCE);
+        given(taxesCalculator.calculateTaxableIncome(MONTHLY_GROSS_SALARY, TAX_FREE_ALLOWANCE)).willReturn(new Amount("1083.33"));
+
+        salarySlipGenerator = new SalarySlipGenerator(salarySlipPrinter, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxesCalculator);
     }
 
     @Test

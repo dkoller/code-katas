@@ -19,6 +19,7 @@ public class MonthlyGrossSalaryCalculatorShould {
         MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator = new MonthlyGrossSalaryCalculator();
         AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary(annualGrossAmount);
         MonthlyGrossSalary monthlyGrossSalary = new MonthlyGrossSalary(monthlyGrossAmount);
+
         assertEquals(monthlyGrossSalary, monthlyGrossSalaryCalculator.calculate(annualGrossSalary));
     }
 
@@ -27,6 +28,7 @@ public class MonthlyGrossSalaryCalculatorShould {
         MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator = new MonthlyGrossSalaryCalculator();
         AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary("49201.20");
         MonthlyGrossSalary monthlyGrossSalary = new MonthlyGrossSalary("4100.10");
+
         assertEquals(monthlyGrossSalary, monthlyGrossSalaryCalculator.calculate(annualGrossSalary));
     }
 }
