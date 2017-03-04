@@ -8,8 +8,7 @@ import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnitParamsRunner.class)
 public class MonthlyGrossSalaryCalculatorShould {
@@ -20,7 +19,7 @@ public class MonthlyGrossSalaryCalculatorShould {
         MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator = new MonthlyGrossSalaryCalculator();
         AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary(annualGrossAmount);
         MonthlyGrossSalary monthlyGrossSalary = new MonthlyGrossSalary(monthlyGrossAmount);
-        assertThat(monthlyGrossSalaryCalculator.calculate(annualGrossSalary), is(monthlyGrossSalary));
+        assertEquals(monthlyGrossSalary, monthlyGrossSalaryCalculator.calculate(annualGrossSalary));
     }
 
     @Test
@@ -28,6 +27,6 @@ public class MonthlyGrossSalaryCalculatorShould {
         MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator = new MonthlyGrossSalaryCalculator();
         AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary("49201.20");
         MonthlyGrossSalary monthlyGrossSalary = new MonthlyGrossSalary("4100.10");
-        assertThat(monthlyGrossSalaryCalculator.calculate(annualGrossSalary), is(monthlyGrossSalary));
+        assertEquals(monthlyGrossSalary, monthlyGrossSalaryCalculator.calculate(annualGrossSalary));
     }
 }

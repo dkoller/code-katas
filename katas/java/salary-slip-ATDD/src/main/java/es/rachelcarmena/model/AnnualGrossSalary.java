@@ -13,13 +13,6 @@ public class AnnualGrossSalary extends Amount {
     }
 
     public MonthlyGrossSalary toMonthlyGrossSalary() {
-        BigDecimal perMonth = value.divide(new BigDecimal(12));
-        return new MonthlyGrossSalary(perMonth);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj.getClass() != this.getClass()) return false;
-        return ((AnnualGrossSalary) obj).value.equals(this.value);
+        return new MonthlyGrossSalary(this.perMonth().value);
     }
 }
