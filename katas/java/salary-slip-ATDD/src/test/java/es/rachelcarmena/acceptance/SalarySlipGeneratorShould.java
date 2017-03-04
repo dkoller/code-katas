@@ -1,9 +1,6 @@
 package es.rachelcarmena.acceptance;
 
-import es.rachelcarmena.AnnualGrossSalary;
-import es.rachelcarmena.Employee;
-import es.rachelcarmena.SalarySlipGenerator;
-import es.rachelcarmena.SalarySlipPrinter;
+import es.rachelcarmena.*;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +14,8 @@ public class SalarySlipGeneratorShould {
 
     @Mock
     SalarySlipPrinter salarySlipPrinter;
+    @Mock
+    MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator;
 
     @Test
     @Ignore
@@ -24,7 +23,7 @@ public class SalarySlipGeneratorShould {
         AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary(24000);
         Employee employee = new Employee(12345, "John J Doe", annualGrossSalary);
 
-        SalarySlipGenerator salarySlipGenerator = new SalarySlipGenerator(salarySlipPrinter);
+        SalarySlipGenerator salarySlipGenerator = new SalarySlipGenerator(salarySlipPrinter, monthlyGrossSalaryCalculator);
         salarySlipGenerator.generateFor(employee);
 
         verify(salarySlipPrinter).printLine("Employee ID: 12345");

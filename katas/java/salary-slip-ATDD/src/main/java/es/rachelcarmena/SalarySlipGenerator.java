@@ -5,7 +5,7 @@ public class SalarySlipGenerator {
     private static final String HEADER_EMPLOYEE_NAME = "Employee Name";
     private SalarySlipPrinter salarySlipPrinter;
 
-    public SalarySlipGenerator(SalarySlipPrinter salarySlipPrinter) {
+    public SalarySlipGenerator(SalarySlipPrinter salarySlipPrinter, MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator) {
         this.salarySlipPrinter = salarySlipPrinter;
     }
 
