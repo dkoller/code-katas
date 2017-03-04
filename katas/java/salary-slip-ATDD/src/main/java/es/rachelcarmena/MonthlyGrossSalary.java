@@ -9,6 +9,10 @@ public class MonthlyGrossSalary extends Amount {
         this.value = new BigDecimal(monthlyGrossSalary);
     }
 
+    public MonthlyGrossSalary(BigDecimal monthlyGrossSalary) {
+        this.value = monthlyGrossSalary;
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();

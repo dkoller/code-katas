@@ -9,6 +9,11 @@ public class AnnualGrossSalary {
         this.value = new BigDecimal(annualGrossSalary);
     }
 
+    public MonthlyGrossSalary toMonthlyGrossSalary() {
+        BigDecimal perMonth = value.divide(new BigDecimal(12));
+        return new MonthlyGrossSalary(perMonth);
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();
