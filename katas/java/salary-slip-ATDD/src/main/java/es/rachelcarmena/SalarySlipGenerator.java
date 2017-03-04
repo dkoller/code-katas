@@ -8,7 +8,6 @@ public class SalarySlipGenerator {
     }
 
     public void generateFor(Employee employee) {
-        salarySlipPrinter.printLine("Employee ID: 12345");
-
+        salarySlipPrinter.printLine("Employee ID: " + String.valueOf(employee.employeeID));
     }
 }
