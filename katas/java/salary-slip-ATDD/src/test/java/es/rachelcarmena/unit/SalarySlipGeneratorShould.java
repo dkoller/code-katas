@@ -40,4 +40,11 @@ public class SalarySlipGeneratorShould {
 
         verify(salarySlipPrinter).printLine("Employee Name: John J Doe");
     }
+
+    @Test
+    public void print_montly_salary_for_an_employee() {
+        salarySlipGenerator.generateFor(EMPLOYEE);
+
+        verify(salarySlipPrinter).printLine("Gross Salary: £2000.00");
+    }
 }
