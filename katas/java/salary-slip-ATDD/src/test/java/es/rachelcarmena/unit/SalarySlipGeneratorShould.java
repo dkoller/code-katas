@@ -1,6 +1,9 @@
 package es.rachelcarmena.unit;
 
 import es.rachelcarmena.*;
+import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
+import es.rachelcarmena.model.AnnualGrossSalary;
+import es.rachelcarmena.model.MonthlyGrossSalary;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,13 +13,13 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SalarySlipGeneratorShould {
 
     @Mock SalarySlipPrinter salarySlipPrinter;
-    @Mock MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator;
+    @Mock
+    MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator;
 
     private static final AnnualGrossSalary ANNUAL_GROSS_SALARY = new AnnualGrossSalary(24000);
     private static final Employee EMPLOYEE = new Employee(12345, "John J Doe", ANNUAL_GROSS_SALARY);

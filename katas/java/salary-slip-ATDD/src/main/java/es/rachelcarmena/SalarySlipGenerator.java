@@ -1,5 +1,9 @@
 package es.rachelcarmena;
 
+import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
+import es.rachelcarmena.model.Amount;
+import es.rachelcarmena.model.MonthlyGrossSalary;
+
 public class SalarySlipGenerator {
 
     private SalarySlipPrinter salarySlipPrinter;

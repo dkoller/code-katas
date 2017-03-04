@@ -1,22 +1,20 @@
-package es.rachelcarmena;
+package es.rachelcarmena.model;
 
 import java.math.BigDecimal;
 
-public class AnnualGrossSalary {
-    protected BigDecimal value;
+public class AnnualGrossSalary extends Amount {
 
-    public AnnualGrossSalary(int annualGrossSalary) {
-        this.value = new BigDecimal(annualGrossSalary);
+    public AnnualGrossSalary(int amount) {
+        super(amount);
+    }
+
+    public AnnualGrossSalary(String amount) {
+        super(amount);
     }
 
     public MonthlyGrossSalary toMonthlyGrossSalary() {
         BigDecimal perMonth = value.divide(new BigDecimal(12));
         return new MonthlyGrossSalary(perMonth);
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package es.rachelcarmena;
 
+import es.rachelcarmena.model.AnnualGrossSalary;
+
 public class Employee {
 
     protected int employeeID;
