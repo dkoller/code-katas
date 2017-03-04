@@ -10,6 +10,17 @@ public class MonthlyGrossSalary extends Amount {
     }
 
     @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass()) return false;
+        return ((MonthlyGrossSalary) obj).value.equals(this.value);
+    }
+
+    @Override
     public String toString() {
         return value.setScale(2).toString();
     }
