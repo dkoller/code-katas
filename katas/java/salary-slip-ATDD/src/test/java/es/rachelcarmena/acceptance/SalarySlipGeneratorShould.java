@@ -1,6 +1,8 @@
 package es.rachelcarmena.acceptance;
 
 import es.rachelcarmena.*;
+import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
+import es.rachelcarmena.model.AnnualGrossSalary;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
