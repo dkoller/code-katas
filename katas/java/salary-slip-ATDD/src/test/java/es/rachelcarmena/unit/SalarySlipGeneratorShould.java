@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,6 +26,7 @@ public class SalarySlipGeneratorShould {
     @Before
     public void initialize() {
         salarySlipGenerator = new SalarySlipGenerator(salarySlipPrinter, monthlyGrossSalaryCalculator);
+        given(monthlyGrossSalaryCalculator.calculate(ANNUAL_GROSS_SALARY)).willReturn(new MonthlyGrossSalary(2000));
     }
 
     @Test
@@ -42,7 +45,6 @@ public class SalarySlipGeneratorShould {
 
     @Test
     public void print_montly_salary_for_an_employee() {
-        when(monthlyGrossSalaryCalculator.calculate(ANNUAL_GROSS_SALARY)).thenReturn(new MonthlyCrossSalary(2000));
         salarySlipGenerator.generateFor(EMPLOYEE);
 
         verify(salarySlipPrinter).printLine("Gross Salary: £2000.00");

@@ -1,7 +1,7 @@
 package es.rachelcarmena;
 
 public class MonthlyGrossSalaryCalculator {
-    public MonthlyCrossSalary calculate(AnnualGrossSalary annualGrossSalary) {
-        return null;
+    public MonthlyGrossSalary calculate(AnnualGrossSalary annualGrossSalary) {
+        return new MonthlyGrossSalary(0);
     }
 }
