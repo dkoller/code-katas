@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -37,14 +38,16 @@ public class SalarySlipGeneratorShould {
     public void initialize() {
         final AnnualGrossSalary ANNUAL_GROSS_SALARY = new AnnualGrossSalary(24000);
         final MonthlyGrossSalary MONTHLY_GROSS_SALARY = new MonthlyGrossSalary(2000);
+        final Amount NATIONAL_INSURANCE_CONTRIBUTION = new Amount("159.40");
         final Amount TAX_FREE_ALLOWANCE = new Amount("916.67");
+        final Amount TAXABLE_INCOME = new Amount("1083.33");
 
         employee = new Employee(12345, "John J Doe", ANNUAL_GROSS_SALARY);
 
-        given(monthlyGrossSalaryCalculator.calculate(ANNUAL_GROSS_SALARY)).willReturn(MONTHLY_GROSS_SALARY);
-        given(nationalInsuranceContributionCalculator.calculate(ANNUAL_GROSS_SALARY)).willReturn(new Amount("159.40"));
-        given(taxesCalculator.calculateFreeAllowance(MONTHLY_GROSS_SALARY)).willReturn(TAX_FREE_ALLOWANCE);
-        given(taxesCalculator.calculateTaxableIncome(MONTHLY_GROSS_SALARY, TAX_FREE_ALLOWANCE)).willReturn(new Amount("1083.33"));
+        given(monthlyGrossSalaryCalculator.calculate(any(AnnualGrossSalary.class))).willReturn(MONTHLY_GROSS_SALARY);
+        given(nationalInsuranceContributionCalculator.calculate(any(AnnualGrossSalary.class))).willReturn(NATIONAL_INSURANCE_CONTRIBUTION);
+        given(taxesCalculator.calculateFreeAllowance(any(MonthlyGrossSalary.class))).willReturn(TAX_FREE_ALLOWANCE);
+        given(taxesCalculator.calculateTaxableIncome(any(MonthlyGrossSalary.class), any(Amount.class))).willReturn(TAXABLE_INCOME);
 
         salarySlipGenerator = new SalarySlipGenerator(salarySlipPrinter, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxesCalculator);
     }
