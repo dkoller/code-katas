@@ -43,7 +43,7 @@ public class Amount {
         return value.compareTo(BigDecimal.ZERO) > 0;
     }
 
-    public Amount calculatePercentage(byte percentage) {
+    public Amount calculatePercentage(int percentage) {
         return new Amount(
                 value.multiply(BigDecimal.valueOf(percentage)).divide(BigDecimal.valueOf(100), SCALE, ROUNDING_MODE));
     }
