@@ -8,13 +8,13 @@ import es.rachelcarmena.model.MonthlyGrossSalary;
 
 public class SalarySlipGenerator {
 
-    private SalarySlipPrinter salarySlipPrinter;
+    private Console console;
     private MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator;
     private NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator;
     private TaxesCalculator taxesCalculator;
 
-    public SalarySlipGenerator(SalarySlipPrinter salarySlipPrinter, MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator, NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator, TaxesCalculator taxesCalculator) {
-        this.salarySlipPrinter = salarySlipPrinter;
+    public SalarySlipGenerator(Console console, MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator, NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator, TaxesCalculator taxesCalculator) {
+        this.console = console;
         this.monthlyGrossSalaryCalculator = monthlyGrossSalaryCalculator;
         this.nationalInsuranceContributionCalculator = nationalInsuranceContributionCalculator;
         this.taxesCalculator = taxesCalculator;
@@ -29,26 +29,26 @@ public class SalarySlipGenerator {
         final String HEADER_TAXABLE_INCOME = "Taxable income";
 
         String line = formatPrintedLine(HEADER_EMPLOYEE_ID, String.valueOf(employee.employeeID));
-        salarySlipPrinter.printLine(line);
+        console.printLine(line);
 
         line = formatPrintedLine(HEADER_EMPLOYEE_NAME, employee.employeeName);
-        salarySlipPrinter.printLine(line);
+        console.printLine(line);
 
         MonthlyGrossSalary monthlyGrossSalary = monthlyGrossSalaryCalculator.calculate(employee.annualGrossSalary);
         line = formatPrintedLine(HEADER_EMPLOYEE_MONTHLY_GROSS_SALARY, monthlyGrossSalary);
-        salarySlipPrinter.printLine(line);
+        console.printLine(line);
 
         Amount nationalInsuranceContribution = nationalInsuranceContributionCalculator.calculate(employee.annualGrossSalary);
         line = formatPrintedLine(HEADER_NATIONAL_INSURANCE_CONTRIBUTION, nationalInsuranceContribution);
-        salarySlipPrinter.printLine(line);
+        console.printLine(line);
 
         Amount taxFreeAllowance = taxesCalculator.calculateFreeAllowance(monthlyGrossSalary);
         line = formatPrintedLine(HEADER_TAX_FREE_ALLOWANCE, taxFreeAllowance);
-        salarySlipPrinter.printLine(line);
+        console.printLine(line);
 
         Amount taxableIncome = taxesCalculator.calculateTaxableIncome(monthlyGrossSalary, taxFreeAllowance);
         line = formatPrintedLine(HEADER_TAXABLE_INCOME, taxableIncome);
-        salarySlipPrinter.printLine(line);
+        console.printLine(line);
     }
 
     private String formatPrintedLine(String header, String value) {

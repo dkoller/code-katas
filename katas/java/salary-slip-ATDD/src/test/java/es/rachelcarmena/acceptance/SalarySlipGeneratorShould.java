@@ -2,7 +2,7 @@ package es.rachelcarmena.acceptance;
 
 import es.rachelcarmena.Employee;
 import es.rachelcarmena.SalarySlipGenerator;
-import es.rachelcarmena.SalarySlipPrinter;
+import es.rachelcarmena.Console;
 import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
 import es.rachelcarmena.calculator.NationalInsuranceContributionCalculator;
 import es.rachelcarmena.calculator.TaxesCalculator;
@@ -25,7 +25,7 @@ public class SalarySlipGeneratorShould {
     private final Amount TAX_FREE_ALLOWANCE = new Amount("916.67");
 
     @Mock
-    SalarySlipPrinter salarySlipPrinter;
+    Console console;
     @Mock
     MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator;
     @Mock
@@ -42,14 +42,14 @@ public class SalarySlipGeneratorShould {
         given(taxesCalculator.calculateFreeAllowance(MONTHLY_GROSS_SALARY)).willReturn(TAX_FREE_ALLOWANCE);
         given(taxesCalculator.calculateTaxableIncome(MONTHLY_GROSS_SALARY, TAX_FREE_ALLOWANCE)).willReturn(new Amount("1083.33"));
 
-        SalarySlipGenerator salarySlipGenerator = new SalarySlipGenerator(salarySlipPrinter, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxesCalculator);
+        SalarySlipGenerator salarySlipGenerator = new SalarySlipGenerator(console, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxesCalculator);
         salarySlipGenerator.generateFor(employee);
 
-        verify(salarySlipPrinter).printLine("Employee ID: 12345");
-        verify(salarySlipPrinter).printLine("Employee Name: John J Doe");
-        verify(salarySlipPrinter).printLine("Gross Salary: £2000.00");
-        verify(salarySlipPrinter).printLine("National Insurance contributions: £159.40");
-        verify(salarySlipPrinter).printLine("Tax-free allowance: £916.67");
-        verify(salarySlipPrinter).printLine("Taxable income: £1083.33");
+        verify(console).printLine("Employee ID: 12345");
+        verify(console).printLine("Employee Name: John J Doe");
+        verify(console).printLine("Gross Salary: £2000.00");
+        verify(console).printLine("National Insurance contributions: £159.40");
+        verify(console).printLine("Tax-free allowance: £916.67");
+        verify(console).printLine("Taxable income: £1083.33");
     }
 }

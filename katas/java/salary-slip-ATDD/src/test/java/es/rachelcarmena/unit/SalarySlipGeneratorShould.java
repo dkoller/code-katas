@@ -2,7 +2,7 @@ package es.rachelcarmena.unit;
 
 import es.rachelcarmena.Employee;
 import es.rachelcarmena.SalarySlipGenerator;
-import es.rachelcarmena.SalarySlipPrinter;
+import es.rachelcarmena.Console;
 import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
 import es.rachelcarmena.calculator.NationalInsuranceContributionCalculator;
 import es.rachelcarmena.calculator.TaxesCalculator;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 public class SalarySlipGeneratorShould {
 
     @Mock
-    SalarySlipPrinter salarySlipPrinter;
+    Console console;
     @Mock
     MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator;
     @Mock
@@ -49,48 +49,48 @@ public class SalarySlipGeneratorShould {
         given(taxesCalculator.calculateFreeAllowance(any(MonthlyGrossSalary.class))).willReturn(TAX_FREE_ALLOWANCE);
         given(taxesCalculator.calculateTaxableIncome(any(MonthlyGrossSalary.class), any(Amount.class))).willReturn(TAXABLE_INCOME);
 
-        salarySlipGenerator = new SalarySlipGenerator(salarySlipPrinter, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxesCalculator);
+        salarySlipGenerator = new SalarySlipGenerator(console, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxesCalculator);
     }
 
     @Test
     public void print_employeeID() {
         salarySlipGenerator.generateFor(employee);
 
-        verify(salarySlipPrinter).printLine("Employee ID: 12345");
+        verify(console).printLine("Employee ID: 12345");
     }
 
     @Test
     public void print_employeeName() {
         salarySlipGenerator.generateFor(employee);
 
-        verify(salarySlipPrinter).printLine("Employee Name: John J Doe");
+        verify(console).printLine("Employee Name: John J Doe");
     }
 
     @Test
     public void print_monthly_salary() {
         salarySlipGenerator.generateFor(employee);
 
-        verify(salarySlipPrinter).printLine("Gross Salary: £2000.00");
+        verify(console).printLine("Gross Salary: £2000.00");
     }
 
     @Test
     public void print_national_insurance_contributions() {
         salarySlipGenerator.generateFor(employee);
 
-        verify(salarySlipPrinter).printLine("National Insurance contributions: £159.40");
+        verify(console).printLine("National Insurance contributions: £159.40");
     }
 
     @Test
     public void print_tax_free_allowance() {
         salarySlipGenerator.generateFor(employee);
 
-        verify(salarySlipPrinter).printLine("Tax-free allowance: £916.67");
+        verify(console).printLine("Tax-free allowance: £916.67");
     }
 
     @Test
     public void print_tax_payable() {
         salarySlipGenerator.generateFor(employee);
 
-        verify(salarySlipPrinter).printLine("Taxable income: £1083.33");
+        verify(console).printLine("Taxable income: £1083.33");
     }
 }
