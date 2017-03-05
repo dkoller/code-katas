@@ -50,42 +50,42 @@ public class SalarySlipGeneratorShould {
     }
 
     @Test
-    public void print_employeeID_for_an_employee() {
+    public void print_employeeID() {
         salarySlipGenerator.generateFor(employee);
 
         verify(salarySlipPrinter).printLine("Employee ID: 12345");
     }
 
     @Test
-    public void print_employeeName_for_an_employee() {
+    public void print_employeeName() {
         salarySlipGenerator.generateFor(employee);
 
         verify(salarySlipPrinter).printLine("Employee Name: John J Doe");
     }
 
     @Test
-    public void print_monthly_salary_for_an_employee() {
+    public void print_monthly_salary() {
         salarySlipGenerator.generateFor(employee);
 
         verify(salarySlipPrinter).printLine("Gross Salary: £2000.00");
     }
 
     @Test
-    public void print_national_insurance_contributions_for_an_employee() {
+    public void print_national_insurance_contributions() {
         salarySlipGenerator.generateFor(employee);
 
         verify(salarySlipPrinter).printLine("National Insurance contributions: £159.40");
     }
 
     @Test
-    public void print_tax_free_allowance_for_an_employee() {
+    public void print_tax_free_allowance() {
         salarySlipGenerator.generateFor(employee);
 
         verify(salarySlipPrinter).printLine("Tax-free allowance: £916.67");
     }
 
     @Test
-    public void print_tax_payable_for_an_employee() {
+    public void print_tax_payable() {
         salarySlipGenerator.generateFor(employee);
 
         verify(salarySlipPrinter).printLine("Taxable income: £1083.33");
