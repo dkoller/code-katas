@@ -31,7 +31,7 @@ public class Amount {
     }
 
     public Amount perMonth() {
-        BigDecimal perMonth = value.divide(new BigDecimal(12), SCALE , ROUNDING_MODE);
+        BigDecimal perMonth = value.divide(BigDecimal.valueOf(12), SCALE , ROUNDING_MODE);
         return new Amount(perMonth);
     }
 
@@ -45,7 +45,7 @@ public class Amount {
 
     public Amount calculatePercentage(byte percentage) {
         return new Amount(
-                value.multiply(BigDecimal.valueOf(percentage)).divide(new BigDecimal("100.00"), SCALE, ROUNDING_MODE));
+                value.multiply(BigDecimal.valueOf(percentage)).divide(BigDecimal.valueOf(100), SCALE, ROUNDING_MODE));
     }
 
     @Override
@@ -64,5 +64,4 @@ public class Amount {
     public String toString() {
         return value.setScale(SCALE).toString();
     }
-
 }
