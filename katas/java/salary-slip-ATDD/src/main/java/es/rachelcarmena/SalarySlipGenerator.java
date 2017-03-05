@@ -56,6 +56,6 @@ public class SalarySlipGenerator {
     }
 
     private String formatPrintedLine(String header, Amount amount) {
-        return String.format("%s: £%s", header, amount.toString());
+        return formatPrintedLine(header, "£" + amount.toString());
     }
 }
