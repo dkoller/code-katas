@@ -41,7 +41,7 @@ public class SalarySlipGeneratorShould {
 
         employee = new Employee(12345, "John J Doe", ANNUAL_GROSS_SALARY);
 
-        given(monthlyGrossSalaryCalculator.calculate(ANNUAL_GROSS_SALARY)).willReturn(new MonthlyGrossSalary(2000));
+        given(monthlyGrossSalaryCalculator.calculate(ANNUAL_GROSS_SALARY)).willReturn(MONTHLY_GROSS_SALARY);
         given(nationalInsuranceContributionCalculator.calculate(ANNUAL_GROSS_SALARY)).willReturn(new Amount("159.40"));
         given(taxesCalculator.calculateFreeAllowance(MONTHLY_GROSS_SALARY)).willReturn(TAX_FREE_ALLOWANCE);
         given(taxesCalculator.calculateTaxableIncome(MONTHLY_GROSS_SALARY, TAX_FREE_ALLOWANCE)).willReturn(new Amount("1083.33"));
