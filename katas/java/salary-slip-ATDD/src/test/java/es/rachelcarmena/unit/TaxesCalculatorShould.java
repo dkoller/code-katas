@@ -79,4 +79,12 @@ public class TaxesCalculatorShould {
 
         assertEquals(new Amount(taxPayable), taxesCalculator.calculateTaxPayable(annualGrossSalary));
     }
+
+    @Test
+    @Parameters({"45000, 7200", "50000, 9200", "60000, 13200"})
+    public void calculate_tax_payable_for_higher_rate_band(int annualGrossSalaryAmount, int taxPayable) {
+        AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary(annualGrossSalaryAmount);
+
+        assertEquals(new Amount(taxPayable), taxesCalculator.calculateTaxPayable(annualGrossSalary));
+    }
 }
