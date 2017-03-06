@@ -1,6 +1,6 @@
 package es.rachelcarmena;
 
-import es.rachelcarmena.model.AnnualGrossSalary;
+import es.rachelcarmena.domain.AnnualGrossSalary;
 
 public class Employee {
 

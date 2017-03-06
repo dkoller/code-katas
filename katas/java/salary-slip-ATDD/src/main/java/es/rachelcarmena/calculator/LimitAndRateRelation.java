@@ -1,6 +1,6 @@
 package es.rachelcarmena.calculator;
 
-import es.rachelcarmena.model.Amount;
+import es.rachelcarmena.domain.Amount;
 
 public class LimitAndRateRelation {
 

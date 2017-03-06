@@ -1,9 +1,9 @@
 package es.rachelcarmena.unit;
 
 import es.rachelcarmena.calculator.TaxesCalculator;
-import es.rachelcarmena.model.Amount;
-import es.rachelcarmena.model.AnnualGrossSalary;
-import es.rachelcarmena.model.MonthlyGrossSalary;
+import es.rachelcarmena.domain.Amount;
+import es.rachelcarmena.domain.AnnualGrossSalary;
+import es.rachelcarmena.domain.MonthlyGrossSalary;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;

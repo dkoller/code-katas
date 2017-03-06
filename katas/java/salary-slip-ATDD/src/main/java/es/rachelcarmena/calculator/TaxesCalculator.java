@@ -1,8 +1,8 @@
 package es.rachelcarmena.calculator;
 
-import es.rachelcarmena.model.Amount;
-import es.rachelcarmena.model.AnnualGrossSalary;
-import es.rachelcarmena.model.MonthlyGrossSalary;
+import es.rachelcarmena.domain.Amount;
+import es.rachelcarmena.domain.AnnualGrossSalary;
+import es.rachelcarmena.domain.MonthlyGrossSalary;
 
 import java.util.ArrayList;
 import java.util.List;

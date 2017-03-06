@@ -1,4 +1,4 @@
-package es.rachelcarmena.model;
+package es.rachelcarmena.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

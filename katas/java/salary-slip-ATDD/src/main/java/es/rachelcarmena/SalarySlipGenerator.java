@@ -3,8 +3,8 @@ package es.rachelcarmena;
 import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
 import es.rachelcarmena.calculator.NationalInsuranceContributionCalculator;
 import es.rachelcarmena.calculator.TaxesCalculator;
-import es.rachelcarmena.model.Amount;
-import es.rachelcarmena.model.MonthlyGrossSalary;
+import es.rachelcarmena.domain.Amount;
+import es.rachelcarmena.domain.MonthlyGrossSalary;
 
 public class SalarySlipGenerator {
 

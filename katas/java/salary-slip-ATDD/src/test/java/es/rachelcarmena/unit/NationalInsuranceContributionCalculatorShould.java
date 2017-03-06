@@ -1,8 +1,8 @@
 package es.rachelcarmena.unit;
 
 import es.rachelcarmena.calculator.NationalInsuranceContributionCalculator;
-import es.rachelcarmena.model.Amount;
-import es.rachelcarmena.model.AnnualGrossSalary;
+import es.rachelcarmena.domain.Amount;
+import es.rachelcarmena.domain.AnnualGrossSalary;
 import junitparams.JUnitParamsRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;

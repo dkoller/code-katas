@@ -1,7 +1,7 @@
 package es.rachelcarmena.calculator;
 
-import es.rachelcarmena.model.Amount;
-import es.rachelcarmena.model.AnnualGrossSalary;
+import es.rachelcarmena.domain.Amount;
+import es.rachelcarmena.domain.AnnualGrossSalary;
 
 import java.util.List;
 

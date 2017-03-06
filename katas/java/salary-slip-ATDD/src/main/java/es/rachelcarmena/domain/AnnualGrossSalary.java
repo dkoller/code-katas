@@ -1,4 +1,4 @@
-package es.rachelcarmena.model;
+package es.rachelcarmena.domain;
 
 public class AnnualGrossSalary extends Amount {
 
