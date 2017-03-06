@@ -41,6 +41,7 @@ public class SalarySlipGeneratorShould {
         final Amount NATIONAL_INSURANCE_CONTRIBUTION = new Amount("159.40");
         final Amount TAX_FREE_ALLOWANCE = new Amount("916.67");
         final Amount TAXABLE_INCOME = new Amount("1083.33");
+        final Amount TAX_PAYABLE = new Amount("216.67");
 
         employee = new Employee(12345, "John J Doe", ANNUAL_GROSS_SALARY);
 
@@ -48,6 +49,7 @@ public class SalarySlipGeneratorShould {
         given(nationalInsuranceContributionCalculator.calculate(any(AnnualGrossSalary.class))).willReturn(NATIONAL_INSURANCE_CONTRIBUTION);
         given(taxesCalculator.calculateFreeAllowance(any(MonthlyGrossSalary.class))).willReturn(TAX_FREE_ALLOWANCE);
         given(taxesCalculator.calculateTaxableIncome(any(MonthlyGrossSalary.class), any(Amount.class))).willReturn(TAXABLE_INCOME);
+        given(taxesCalculator.calculateTaxPayable(any(AnnualGrossSalary.class))).willReturn(TAX_PAYABLE);
 
         salarySlipGenerator = new SalarySlipGenerator(console, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxesCalculator);
     }

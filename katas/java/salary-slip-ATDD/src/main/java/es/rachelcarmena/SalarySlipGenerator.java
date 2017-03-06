@@ -27,6 +27,7 @@ public class SalarySlipGenerator {
         final String DESCRIPTION_NATIONAL_INSURANCE_CONTRIBUTION = "National Insurance contributions";
         final String DESCRIPTION_TAX_FREE_ALLOWANCE = "Tax-free allowance";
         final String DESCRIPTION_TAXABLE_INCOME = "Taxable income";
+        final String DESCRIPTION_TAX_PAYABLE = "Tax payable";
 
         String line = formatPrintedLine(DESCRIPTION_EMPLOYEE_ID, String.valueOf(employee.employeeID));
         console.printLine(line);
@@ -48,6 +49,10 @@ public class SalarySlipGenerator {
 
         Amount taxableIncome = taxesCalculator.calculateTaxableIncome(monthlyGrossSalary, taxFreeAllowance);
         line = formatPrintedLine(DESCRIPTION_TAXABLE_INCOME, taxableIncome);
+        console.printLine(line);
+
+        Amount taxPayable = taxesCalculator.calculateTaxPayable(employee.annualGrossSalary);
+        line = formatPrintedLine(DESCRIPTION_TAX_PAYABLE, taxPayable);
         console.printLine(line);
     }
 
