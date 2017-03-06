@@ -5,10 +5,12 @@ import es.rachelcarmena.model.Amount;
 import es.rachelcarmena.model.AnnualGrossSalary;
 import es.rachelcarmena.model.MonthlyGrossSalary;
 import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
 public class TaxesCalculatorShould {
@@ -60,5 +62,13 @@ public class TaxesCalculatorShould {
         MonthlyGrossSalary monthlyGrossSalary = annualGrossSalary.toMonthlyGrossSalary();
 
         assertEquals(new Amount("2833.33"), taxesCalculator.calculateTaxableIncome(monthlyGrossSalary, new Amount("916.67")));
+    }
+
+    @Test
+    @Parameters({"5000", "11000"})
+    public void calculate_tax_payable_for_personal_allowance_band(int annualGrossSalaryAmount) {
+        AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary(annualGrossSalaryAmount);
+
+        assertEquals(new Amount(0), taxesCalculator.calculateTaxPayable(annualGrossSalary));
     }
 }
