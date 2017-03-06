@@ -24,27 +24,31 @@ public class TaxesCalculator {
         final int TAX_BASIC_RATE = 20;
         final int TAX_HIGHER_RATE = 40;
 
-        Amount excess = annualGrossSalary.subtract(MAX_LIMIT_RULES_CHANGE);
-        boolean hasExcess = excess.greaterThanZero();
-        if (hasExcess) {
-            Amount reduction = excess.divide(Amount.valueOf(2));
+        Amount excessToChangeRules = annualGrossSalary.subtract(MAX_LIMIT_RULES_CHANGE);
+        boolean hasExcessToChangeRules = excessToChangeRules.greaterThanZero();
+        if (hasExcessToChangeRules) {
+            Amount reduction = excessToChangeRules.divide(Amount.valueOf(2));
             MAX_LIMIT_BASIC_RATE = MAX_LIMIT_BASIC_RATE.subtract(reduction);
             MAX_LIMIT_HIGHER_RATE = MAX_LIMIT_HIGHER_RATE.subtract(reduction);
         }
 
-        Amount basicExcess = annualGrossSalary.subtract(MAX_LIMIT_BASIC_RATE);
-        boolean hasBasicExcess = basicExcess.greaterThanZero();
-        if (!hasBasicExcess)
-            return Amount.valueOf(0);
+        Amount taxPayable = new Amount(0);
 
-        Amount higherExcess = annualGrossSalary.subtract(MAX_LIMIT_HIGHER_RATE);
-        boolean hasHigherExcess = higherExcess.greaterThanZero();
-        if (!hasHigherExcess)
-            return basicExcess.calculatePercentage(TAX_BASIC_RATE);
+        Amount salaryUnderTax = annualGrossSalary;
+        Amount amount = salaryUnderTax.subtract(MAX_LIMIT_HIGHER_RATE);
+        boolean hasExcess = amount.greaterThanZero();
+        if (hasExcess) {
+            taxPayable = taxPayable.add(amount.calculatePercentage(TAX_HIGHER_RATE));
+            salaryUnderTax = MAX_LIMIT_HIGHER_RATE;
+        }
 
-        Amount rangeBasicRate = MAX_LIMIT_HIGHER_RATE.subtract(MAX_LIMIT_BASIC_RATE);
-        Amount taxPayable = rangeBasicRate.calculatePercentage(TAX_BASIC_RATE);
-        taxPayable = taxPayable.add(higherExcess.calculatePercentage(TAX_HIGHER_RATE));
+        amount = salaryUnderTax.subtract(MAX_LIMIT_BASIC_RATE);
+        hasExcess = amount.greaterThanZero();
+        if (hasExcess) {
+            taxPayable = taxPayable.add(amount.calculatePercentage(TAX_BASIC_RATE));
+            salaryUnderTax = MAX_LIMIT_BASIC_RATE;
+        }
+
         return taxPayable;
     }
 }
