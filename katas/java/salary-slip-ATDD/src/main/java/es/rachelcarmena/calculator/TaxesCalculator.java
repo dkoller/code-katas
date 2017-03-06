@@ -19,12 +19,23 @@ public class TaxesCalculator {
 
     public Amount calculateTaxPayable(AnnualGrossSalary annualGrossSalary) {
         final Amount MAX_LIMIT_BASIC_RATE = new Amount(11000);
+        final Amount MAX_LIMIT_HIGHER_RATE = new Amount(43000);
+        final int TAX_BASIC_RATE = 20;
+        final int TAX_HIGHER_RATE = 40;
 
         Amount basicExcess = annualGrossSalary.subtract(MAX_LIMIT_BASIC_RATE);
         boolean hasBasicExcess = basicExcess.greaterThanZero();
-        if (hasBasicExcess) {
-            return basicExcess.calculatePercentage(20);
-        }
-        return new Amount(0);
+        if (!hasBasicExcess)
+            return new Amount(0);
+
+        Amount higherExcess = annualGrossSalary.subtract(MAX_LIMIT_HIGHER_RATE);
+        boolean hasHigherExcess = higherExcess.greaterThanZero();
+        if (!hasHigherExcess)
+            return basicExcess.calculatePercentage(TAX_BASIC_RATE);
+
+        Amount rangeBasicRate = MAX_LIMIT_HIGHER_RATE.subtract(MAX_LIMIT_BASIC_RATE);
+        Amount taxPayable = rangeBasicRate.calculatePercentage(TAX_BASIC_RATE);
+        taxPayable = taxPayable.add(higherExcess.calculatePercentage(TAX_HIGHER_RATE));
+        return taxPayable;
     }
 }
