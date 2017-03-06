@@ -88,9 +88,16 @@ public class SalarySlipGeneratorShould {
     }
 
     @Test
-    public void print_tax_payable() {
+    public void print_taxable_income() {
         salarySlipGenerator.generateFor(employee);
 
         verify(console).printLine("Taxable income: £1083.33");
+    }
+
+    @Test
+    public void print_tax_payable() {
+        salarySlipGenerator.generateFor(employee);
+
+        verify(console).printLine("Tax payable: £216.67");
     }
 }
