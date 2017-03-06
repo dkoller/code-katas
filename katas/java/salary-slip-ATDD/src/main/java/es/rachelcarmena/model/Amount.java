@@ -9,7 +9,7 @@ public class Amount {
 
     protected final BigDecimal value;
 
-    public Amount(int amount) {
+    public Amount(long amount) {
         BigDecimal value = new BigDecimal(amount);
         this.value = value.setScale(SCALE);
     }
@@ -23,11 +23,11 @@ public class Amount {
     }
 
     public Amount subtract(Amount amount) {
-        return new Amount(this.value.subtract(amount.value));
+        return new Amount(value.subtract(amount.value));
     }
 
     public Amount min(Amount amount) {
-        return new Amount(this.value.min(amount.value));
+        return new Amount(value.min(amount.value));
     }
 
     public Amount perMonth() {
@@ -36,7 +36,7 @@ public class Amount {
     }
 
     public Amount add(Amount amount) {
-        return new Amount(this.value.add(amount.value));
+        return new Amount(value.add(amount.value));
     }
 
     public boolean greaterThanZero() {
@@ -44,8 +44,19 @@ public class Amount {
     }
 
     public Amount calculatePercentage(int percentage) {
-        return new Amount(
-                value.multiply(BigDecimal.valueOf(percentage)).divide(BigDecimal.valueOf(100), SCALE, ROUNDING_MODE));
+        BigDecimal amount = value.multiply(BigDecimal.valueOf(percentage));
+        amount = amount.divide(BigDecimal.valueOf(100), SCALE, ROUNDING_MODE);
+        return new Amount(amount);
+    }
+
+    public Amount divide(Amount amount) {
+        BigDecimal result = value.divide(amount.value, SCALE , ROUNDING_MODE);
+        return new Amount(result);
+    }
+
+    public static Amount valueOf(long amount) {
+        BigDecimal result = BigDecimal.valueOf(amount).setScale(SCALE);
+        return new Amount(result);
     }
 
     @Override

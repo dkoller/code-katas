@@ -7,7 +7,7 @@ import es.rachelcarmena.model.MonthlyGrossSalary;
 public class TaxesCalculator {
 
     public Amount calculateFreeAllowance(MonthlyGrossSalary monthlyGrossSalary) {
-        final Amount MAX_LIMIT_FREE_BAND = new Amount("11000.00");
+        final Amount MAX_LIMIT_FREE_BAND = Amount.valueOf(11000);
 
         Amount freeBandPerMonth = MAX_LIMIT_FREE_BAND.perMonth();
         return freeBandPerMonth.min(monthlyGrossSalary);
@@ -18,15 +18,24 @@ public class TaxesCalculator {
     }
 
     public Amount calculateTaxPayable(AnnualGrossSalary annualGrossSalary) {
-        final Amount MAX_LIMIT_BASIC_RATE = new Amount(11000);
-        final Amount MAX_LIMIT_HIGHER_RATE = new Amount(43000);
+        Amount MAX_LIMIT_BASIC_RATE = Amount.valueOf(11000);
+        Amount MAX_LIMIT_HIGHER_RATE = Amount.valueOf(43000);
+        Amount MAX_LIMIT_RULES_CHANGE = Amount.valueOf(100000);
         final int TAX_BASIC_RATE = 20;
         final int TAX_HIGHER_RATE = 40;
+
+        Amount excess = annualGrossSalary.subtract(MAX_LIMIT_RULES_CHANGE);
+        boolean hasExcess = excess.greaterThanZero();
+        if (hasExcess) {
+            Amount reduction = excess.divide(Amount.valueOf(2));
+            MAX_LIMIT_BASIC_RATE = MAX_LIMIT_BASIC_RATE.subtract(reduction);
+            MAX_LIMIT_HIGHER_RATE = MAX_LIMIT_HIGHER_RATE.subtract(reduction);
+        }
 
         Amount basicExcess = annualGrossSalary.subtract(MAX_LIMIT_BASIC_RATE);
         boolean hasBasicExcess = basicExcess.greaterThanZero();
         if (!hasBasicExcess)
-            return new Amount(0);
+            return Amount.valueOf(0);
 
         Amount higherExcess = annualGrossSalary.subtract(MAX_LIMIT_HIGHER_RATE);
         boolean hasHigherExcess = higherExcess.greaterThanZero();
