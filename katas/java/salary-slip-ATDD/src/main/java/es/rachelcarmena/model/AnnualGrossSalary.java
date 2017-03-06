@@ -1,7 +1,5 @@
 package es.rachelcarmena.model;
 
-import java.math.BigDecimal;
-
 public class AnnualGrossSalary extends Amount {
 
     public AnnualGrossSalary(int amount) {

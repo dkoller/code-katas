@@ -9,7 +9,6 @@ import es.rachelcarmena.calculator.TaxesCalculator;
 import es.rachelcarmena.model.Amount;
 import es.rachelcarmena.model.AnnualGrossSalary;
 import es.rachelcarmena.model.MonthlyGrossSalary;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

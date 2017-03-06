@@ -9,20 +9,11 @@ import java.util.List;
 public class NationalInsuranceContributionCalculator {
 
     public Amount calculate(AnnualGrossSalary annualGrossSalary) {
-
-        Amount nationalInsuranceContributions = new Amount(0);
-        Amount salaryUnderTax = annualGrossSalary;
-
         List<LimitAndRateRelation> limitAndRateRelations = getLimitAndRateRelations();
-        for (LimitAndRateRelation limitAndRateRelation: limitAndRateRelations) {
-            Amount amount = salaryUnderTax.subtract(limitAndRateRelation.limit);
-            boolean hasExcess = amount.greaterThanZero();
-            if (hasExcess) {
-                nationalInsuranceContributions = nationalInsuranceContributions.add(amount.calculatePercentage(limitAndRateRelation.rate));
-                salaryUnderTax = limitAndRateRelation.limit;
-            }
-        }
-        return nationalInsuranceContributions.perMonth();
+
+        SalaryAttributeCalculator salaryAttributeCalculator = new SalaryAttributeCalculator(limitAndRateRelations);
+        Amount attribute = salaryAttributeCalculator.calculate(annualGrossSalary);
+        return attribute.perMonth();
     }
 
     private List<LimitAndRateRelation> getLimitAndRateRelations() {

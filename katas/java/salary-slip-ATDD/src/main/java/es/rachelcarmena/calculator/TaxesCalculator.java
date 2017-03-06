@@ -21,20 +21,10 @@ public class TaxesCalculator {
     }
 
     public Amount calculateTaxPayable(AnnualGrossSalary annualGrossSalary) {
-
-        Amount taxPayable = new Amount(0);
-        Amount salaryUnderTax = annualGrossSalary;
-
         List<LimitAndRateRelation> limitAndRateRelations = getLimitAndRateRelations(annualGrossSalary);
-        for (LimitAndRateRelation limitAndRateRelation: limitAndRateRelations) {
-            Amount amount = salaryUnderTax.subtract(limitAndRateRelation.limit);
-            boolean hasExcess = amount.greaterThanZero();
-            if (hasExcess) {
-                taxPayable = taxPayable.add(amount.calculatePercentage(limitAndRateRelation.rate));
-                salaryUnderTax = limitAndRateRelation.limit;
-            }
-        }
-        return taxPayable;
+
+        SalaryAttributeCalculator salaryAttributeCalculator = new SalaryAttributeCalculator(limitAndRateRelations);
+        return salaryAttributeCalculator.calculate(annualGrossSalary);
     }
 
     private List<LimitAndRateRelation> getLimitAndRateRelations(AnnualGrossSalary annualGrossSalary) {
@@ -57,5 +47,4 @@ public class TaxesCalculator {
         limitAndRateRelations.add(new LimitAndRateRelation(MAX_LIMIT_BASIC_RATE, TAX_BASIC_RATE));
         return limitAndRateRelations;
     }
-
 }
