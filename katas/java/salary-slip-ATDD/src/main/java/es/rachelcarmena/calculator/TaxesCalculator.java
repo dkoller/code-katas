@@ -4,6 +4,9 @@ import es.rachelcarmena.model.Amount;
 import es.rachelcarmena.model.AnnualGrossSalary;
 import es.rachelcarmena.model.MonthlyGrossSalary;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TaxesCalculator {
 
     public Amount calculateFreeAllowance(MonthlyGrossSalary monthlyGrossSalary) {
@@ -18,9 +21,26 @@ public class TaxesCalculator {
     }
 
     public Amount calculateTaxPayable(AnnualGrossSalary annualGrossSalary) {
+
+        Amount taxPayable = new Amount(0);
+        Amount salaryUnderTax = annualGrossSalary;
+
+        List<LimitAndRateRelation> limitAndRateRelations = getLimitAndRateRelations(annualGrossSalary);
+        for (LimitAndRateRelation limitAndRateRelation: limitAndRateRelations) {
+            Amount amount = salaryUnderTax.subtract(limitAndRateRelation.limit);
+            boolean hasExcess = amount.greaterThanZero();
+            if (hasExcess) {
+                taxPayable = taxPayable.add(amount.calculatePercentage(limitAndRateRelation.rate));
+                salaryUnderTax = limitAndRateRelation.limit;
+            }
+        }
+        return taxPayable;
+    }
+
+    private List<LimitAndRateRelation> getLimitAndRateRelations(AnnualGrossSalary annualGrossSalary) {
         Amount MAX_LIMIT_BASIC_RATE = Amount.valueOf(11000);
         Amount MAX_LIMIT_HIGHER_RATE = Amount.valueOf(43000);
-        Amount MAX_LIMIT_RULES_CHANGE = Amount.valueOf(100000);
+        final Amount MAX_LIMIT_RULES_CHANGE = Amount.valueOf(100000);
         final int TAX_BASIC_RATE = 20;
         final int TAX_HIGHER_RATE = 40;
 
@@ -32,23 +52,10 @@ public class TaxesCalculator {
             MAX_LIMIT_HIGHER_RATE = MAX_LIMIT_HIGHER_RATE.subtract(reduction);
         }
 
-        Amount taxPayable = new Amount(0);
-
-        Amount salaryUnderTax = annualGrossSalary;
-        Amount amount = salaryUnderTax.subtract(MAX_LIMIT_HIGHER_RATE);
-        boolean hasExcess = amount.greaterThanZero();
-        if (hasExcess) {
-            taxPayable = taxPayable.add(amount.calculatePercentage(TAX_HIGHER_RATE));
-            salaryUnderTax = MAX_LIMIT_HIGHER_RATE;
-        }
-
-        amount = salaryUnderTax.subtract(MAX_LIMIT_BASIC_RATE);
-        hasExcess = amount.greaterThanZero();
-        if (hasExcess) {
-            taxPayable = taxPayable.add(amount.calculatePercentage(TAX_BASIC_RATE));
-            salaryUnderTax = MAX_LIMIT_BASIC_RATE;
-        }
-
-        return taxPayable;
+        List<LimitAndRateRelation> limitAndRateRelations = new ArrayList<>();
+        limitAndRateRelations.add(new LimitAndRateRelation(MAX_LIMIT_HIGHER_RATE, TAX_HIGHER_RATE));
+        limitAndRateRelations.add(new LimitAndRateRelation(MAX_LIMIT_BASIC_RATE, TAX_BASIC_RATE));
+        return limitAndRateRelations;
     }
+
 }
