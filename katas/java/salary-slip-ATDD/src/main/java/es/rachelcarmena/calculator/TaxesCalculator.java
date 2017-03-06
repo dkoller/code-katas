@@ -18,6 +18,6 @@ public class TaxesCalculator {
     }
 
     public Amount calculateTaxPayable(AnnualGrossSalary annualGrossSalary) {
-        return null;
+        return new Amount(0);
     }
 }
