@@ -4,6 +4,7 @@ import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
 import es.rachelcarmena.calculator.NationalInsuranceContributionCalculator;
 import es.rachelcarmena.calculator.TaxesCalculator;
 import es.rachelcarmena.domain.Amount;
+import es.rachelcarmena.domain.Employee;
 import es.rachelcarmena.domain.MonthlyGrossSalary;
 
 public class SalarySlipGenerator {
@@ -29,17 +30,17 @@ public class SalarySlipGenerator {
         final String DESCRIPTION_TAXABLE_INCOME = "Taxable income";
         final String DESCRIPTION_TAX_PAYABLE = "Tax payable";
 
-        String line = formatPrintedLine(DESCRIPTION_EMPLOYEE_ID, String.valueOf(employee.employeeID));
+        String line = formatPrintedLine(DESCRIPTION_EMPLOYEE_ID, String.valueOf(employee.getEmployeeID()));
         console.printLine(line);
 
-        line = formatPrintedLine(DESCRIPTION_EMPLOYEE_NAME, employee.employeeName);
+        line = formatPrintedLine(DESCRIPTION_EMPLOYEE_NAME, employee.getEmployeeName());
         console.printLine(line);
 
-        MonthlyGrossSalary monthlyGrossSalary = monthlyGrossSalaryCalculator.calculate(employee.annualGrossSalary);
+        MonthlyGrossSalary monthlyGrossSalary = monthlyGrossSalaryCalculator.calculate(employee.getAnnualGrossSalary());
         line = formatPrintedLine(DESCRIPTION_EMPLOYEE_MONTHLY_GROSS_SALARY, monthlyGrossSalary);
         console.printLine(line);
 
-        Amount nationalInsuranceContribution = nationalInsuranceContributionCalculator.calculate(employee.annualGrossSalary);
+        Amount nationalInsuranceContribution = nationalInsuranceContributionCalculator.calculate(employee.getAnnualGrossSalary());
         line = formatPrintedLine(DESCRIPTION_NATIONAL_INSURANCE_CONTRIBUTION, nationalInsuranceContribution);
         console.printLine(line);
 
@@ -51,7 +52,7 @@ public class SalarySlipGenerator {
         line = formatPrintedLine(DESCRIPTION_TAXABLE_INCOME, taxableIncome);
         console.printLine(line);
 
-        Amount taxPayable = taxesCalculator.calculateTaxPayable(employee.annualGrossSalary);
+        Amount taxPayable = taxesCalculator.calculateTaxPayable(employee.getAnnualGrossSalary());
         line = formatPrintedLine(DESCRIPTION_TAX_PAYABLE, taxPayable);
         console.printLine(line);
     }
