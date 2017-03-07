@@ -1,4 +1,4 @@
-package es.rachelcarmena.calculator;
+package es.rachelcarmena.calculator.common;
 
 import es.rachelcarmena.domain.Amount;
 

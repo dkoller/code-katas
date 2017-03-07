@@ -1,5 +1,7 @@
 package es.rachelcarmena.calculator;
 
+import es.rachelcarmena.calculator.common.LimitAndRateRelation;
+import es.rachelcarmena.calculator.common.SalaryAttributeCalculator;
 import es.rachelcarmena.domain.Amount;
 import es.rachelcarmena.domain.AnnualGrossSalary;
 import es.rachelcarmena.domain.MonthlyGrossSalary;
