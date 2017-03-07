@@ -4,11 +4,11 @@ import es.rachelcarmena.domain.Amount;
 
 public class LimitAndRateRelation {
 
-    protected Amount limit;
+    protected Amount limitFrom;
     protected int rate;
 
-    public LimitAndRateRelation(Amount limit, int rate) {
-        this.limit = limit;
+    public LimitAndRateRelation(Amount limitFrom, int rate) {
+        this.limitFrom = limitFrom;
         this.rate = rate;
     }
 }

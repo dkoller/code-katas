@@ -28,23 +28,22 @@ public class TaxesCalculator {
     }
 
     private List<LimitAndRateRelation> getLimitAndRateRelations(AnnualGrossSalary annualGrossSalary) {
-        Amount MAX_LIMIT_BASIC_RATE = Amount.valueOf(11000);
-        Amount MAX_LIMIT_HIGHER_RATE = Amount.valueOf(43000);
         final Amount MAX_LIMIT_RULES_CHANGE = Amount.valueOf(100000);
-        final int TAX_BASIC_RATE = 20;
-        final int TAX_HIGHER_RATE = 40;
+        Amount maxLimitHighRate = Amount.valueOf(43000);
+        Amount maxLimitBasicRate = Amount.valueOf(11000);
 
         Amount excessToChangeRules = annualGrossSalary.subtract(MAX_LIMIT_RULES_CHANGE);
         boolean hasExcessToChangeRules = excessToChangeRules.greaterThanZero();
         if (hasExcessToChangeRules) {
             Amount reduction = excessToChangeRules.divide(Amount.valueOf(2));
-            MAX_LIMIT_BASIC_RATE = MAX_LIMIT_BASIC_RATE.subtract(reduction);
-            MAX_LIMIT_HIGHER_RATE = MAX_LIMIT_HIGHER_RATE.subtract(reduction);
+            maxLimitBasicRate = maxLimitBasicRate.subtract(reduction);
+            maxLimitHighRate = maxLimitHighRate.subtract(reduction);
         }
 
         List<LimitAndRateRelation> limitAndRateRelations = new ArrayList<>();
-        limitAndRateRelations.add(new LimitAndRateRelation(MAX_LIMIT_HIGHER_RATE, TAX_HIGHER_RATE));
-        limitAndRateRelations.add(new LimitAndRateRelation(MAX_LIMIT_BASIC_RATE, TAX_BASIC_RATE));
+        limitAndRateRelations.add(new LimitAndRateRelation(maxLimitHighRate, 40));
+        limitAndRateRelations.add(new LimitAndRateRelation(maxLimitBasicRate, 20));
+        limitAndRateRelations.add(new LimitAndRateRelation(Amount.valueOf(0), 0));
         return limitAndRateRelations;
     }
 }

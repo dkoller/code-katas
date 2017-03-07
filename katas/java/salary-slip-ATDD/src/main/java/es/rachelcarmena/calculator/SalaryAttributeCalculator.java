@@ -16,11 +16,11 @@ public class SalaryAttributeCalculator {
         Amount attribute = new Amount(0);
         Amount salaryUnderTax = annualGrossSalary;
         for (LimitAndRateRelation limitAndRateRelation: limitAndRateRelations) {
-            Amount amount = salaryUnderTax.subtract(limitAndRateRelation.limit);
+            Amount amount = salaryUnderTax.subtract(limitAndRateRelation.limitFrom);
             boolean hasExcess = amount.greaterThanZero();
             if (hasExcess) {
                 attribute = attribute.add(amount.calculatePercentage(limitAndRateRelation.rate));
-                salaryUnderTax = limitAndRateRelation.limit;
+                salaryUnderTax = limitAndRateRelation.limitFrom;
             }
         }
         return attribute;

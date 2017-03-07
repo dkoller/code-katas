@@ -19,12 +19,10 @@ public class NationalInsuranceContributionCalculator {
     private List<LimitAndRateRelation> getLimitAndRateRelations() {
         final Amount MAX_LIMIT_NO_CONTRIBUTIONS = new Amount("8060.00");
         final Amount MAX_LIMIT_BASIC_CONTRIBUTIONS = new Amount("43000.00");
-        final byte BASIC_RATE = 12;
-        final byte HIGHER_RATE = 2;
 
         List<LimitAndRateRelation> limitAndRateRelations = new ArrayList<>();
-        limitAndRateRelations.add(new LimitAndRateRelation(MAX_LIMIT_BASIC_CONTRIBUTIONS, HIGHER_RATE));
-        limitAndRateRelations.add(new LimitAndRateRelation(MAX_LIMIT_NO_CONTRIBUTIONS, BASIC_RATE));
+        limitAndRateRelations.add(new LimitAndRateRelation(MAX_LIMIT_BASIC_CONTRIBUTIONS, 2));
+        limitAndRateRelations.add(new LimitAndRateRelation(MAX_LIMIT_NO_CONTRIBUTIONS, 12));
         return limitAndRateRelations;
     }
 }
