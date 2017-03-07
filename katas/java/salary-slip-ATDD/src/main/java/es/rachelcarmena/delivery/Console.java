@@ -1,4 +1,4 @@
-package es.rachelcarmena.infraestructure;
+package es.rachelcarmena.delivery;
 
 public class Console {
     public void printLine(String line) {

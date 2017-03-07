@@ -6,7 +6,7 @@ import es.rachelcarmena.calculator.TaxesCalculator;
 import es.rachelcarmena.domain.Amount;
 import es.rachelcarmena.domain.Employee;
 import es.rachelcarmena.domain.MonthlyGrossSalary;
-import es.rachelcarmena.infraestructure.Console;
+import es.rachelcarmena.delivery.Console;
 
 public class SalarySlipGenerator {
 

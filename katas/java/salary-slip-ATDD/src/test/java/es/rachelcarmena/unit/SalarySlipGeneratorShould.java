@@ -2,7 +2,7 @@ package es.rachelcarmena.unit;
 
 import es.rachelcarmena.domain.Employee;
 import es.rachelcarmena.SalarySlipGenerator;
-import es.rachelcarmena.infraestructure.Console;
+import es.rachelcarmena.delivery.Console;
 import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
 import es.rachelcarmena.calculator.NationalInsuranceContributionCalculator;
 import es.rachelcarmena.calculator.TaxesCalculator;
