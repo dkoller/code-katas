@@ -19,7 +19,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SalarySlipGeneratorShould {
+public class SalarySlipGeneratorFeature {
 
     private final AnnualGrossSalary ANNUAL_GROSS_SALARY = new AnnualGrossSalary(24000);
     private final MonthlyGrossSalary MONTHLY_GROSS_SALARY = new MonthlyGrossSalary(2000);
@@ -28,25 +28,15 @@ public class SalarySlipGeneratorShould {
     private final Amount TAXABLE_INCOME = new Amount("1083.33");
     private final Amount TAX_PAYABLE = new Amount("216.67");
 
-    @Mock
-    Console console;
-    @Mock
-    MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator;
-    @Mock
-    NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator;
-    @Mock
-    TaxesCalculator taxesCalculator;
-
     private final Employee employee = new Employee(12345, "John J Doe", ANNUAL_GROSS_SALARY);
 
-    @Test
-    public void print_a_salary_slip_with_employee_details_for_an_employee() {
-        given(monthlyGrossSalaryCalculator.calculate(any(AnnualGrossSalary.class))).willReturn(MONTHLY_GROSS_SALARY);
-        given(nationalInsuranceContributionCalculator.calculate(any(AnnualGrossSalary.class))).willReturn(NATIONAL_INSURANCE_CONTRIBUTION);
-        given(taxesCalculator.calculateFreeAllowance(any(MonthlyGrossSalary.class))).willReturn(TAX_FREE_ALLOWANCE);
-        given(taxesCalculator.calculateTaxableIncome(any(MonthlyGrossSalary.class), any(Amount.class))).willReturn(TAXABLE_INCOME);
-        given(taxesCalculator.calculateTaxPayable(any(AnnualGrossSalary.class))).willReturn(TAX_PAYABLE);
+    @Mock Console console;
 
+    @Test
+    public void should_print_a_salary_slip_with_employee_details_for_an_employee() {
+        MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator = new MonthlyGrossSalaryCalculator();
+        NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator = new NationalInsuranceContributionCalculator();
+        TaxesCalculator taxesCalculator = new TaxesCalculator();
         SalarySlipGenerator salarySlipGenerator = new SalarySlipGenerator(console, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxesCalculator);
         salarySlipGenerator.generateFor(employee);
 
