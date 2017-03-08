@@ -26,7 +26,8 @@ public class TaxesCalculator {
         List<LimitAndRateRelation> limitAndRateRelations = getLimitAndRateRelations(annualGrossSalary);
 
         SalaryAttributeCalculator salaryAttributeCalculator = new SalaryAttributeCalculator(limitAndRateRelations);
-        return salaryAttributeCalculator.calculate(annualGrossSalary);
+        Amount taxPayableFromAnnualSalary = salaryAttributeCalculator.calculate(annualGrossSalary);
+        return taxPayableFromAnnualSalary.perMonth();
     }
 
     private List<LimitAndRateRelation> getLimitAndRateRelations(AnnualGrossSalary annualGrossSalary) {

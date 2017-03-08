@@ -73,7 +73,7 @@ public class TaxesCalculatorShould {
     }
 
     @Test
-    @Parameters({"12000, 200.00", "24000, 216.67", "40000, 5800.00"})
+    @Parameters({"12000, 16.67", "24000, 216.67", "40000, 483.33"})
     public void calculate_tax_payable_for_basic_rate_band(int annualGrossSalaryAmount, String taxPayable) {
         AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary(annualGrossSalaryAmount);
 
@@ -81,8 +81,8 @@ public class TaxesCalculatorShould {
     }
 
     @Test
-    @Parameters({"45000, 7200", "50000, 9200", "60000, 13200", "100000, 29200", "105500, 32500"})
-    public void calculate_tax_payable_for_higher_rate_band(int annualGrossSalaryAmount, int taxPayable) {
+    @Parameters({"45000, 600.00", "50000, 766.67", "60000, 1100.00", "100000, 2433.33", "105500, 2708.33"})
+    public void calculate_tax_payable_for_higher_rate_band(int annualGrossSalaryAmount, String taxPayable) {
         AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary(annualGrossSalaryAmount);
 
         assertEquals(new Amount(taxPayable), taxesCalculator.calculateTaxPayable(annualGrossSalary));
