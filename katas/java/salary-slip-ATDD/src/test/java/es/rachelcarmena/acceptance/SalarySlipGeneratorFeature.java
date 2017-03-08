@@ -3,7 +3,6 @@ package es.rachelcarmena.acceptance;
 import es.rachelcarmena.domain.Employee;
 import es.rachelcarmena.SalarySlipGenerator;
 import es.rachelcarmena.delivery.Console;
-import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
 import es.rachelcarmena.calculator.NationalInsuranceContributionCalculator;
 import es.rachelcarmena.calculator.TaxesCalculator;
 import es.rachelcarmena.domain.Amount;
@@ -15,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -34,10 +32,9 @@ public class SalarySlipGeneratorFeature {
 
     @Test
     public void should_print_a_salary_slip_with_employee_details_for_an_employee() {
-        MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator = new MonthlyGrossSalaryCalculator();
         NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator = new NationalInsuranceContributionCalculator();
         TaxesCalculator taxesCalculator = new TaxesCalculator();
-        SalarySlipGenerator salarySlipGenerator = new SalarySlipGenerator(console, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxesCalculator);
+        SalarySlipGenerator salarySlipGenerator = new SalarySlipGenerator(console, nationalInsuranceContributionCalculator, taxesCalculator);
         salarySlipGenerator.generateFor(employee);
 
         verify(console).printLine("Employee ID: 12345");

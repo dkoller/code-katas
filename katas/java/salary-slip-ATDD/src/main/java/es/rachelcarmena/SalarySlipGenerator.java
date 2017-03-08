@@ -1,9 +1,9 @@
 package es.rachelcarmena;
 
-import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
 import es.rachelcarmena.calculator.NationalInsuranceContributionCalculator;
 import es.rachelcarmena.calculator.TaxesCalculator;
 import es.rachelcarmena.domain.Amount;
+import es.rachelcarmena.domain.AnnualGrossSalary;
 import es.rachelcarmena.domain.Employee;
 import es.rachelcarmena.domain.MonthlyGrossSalary;
 import es.rachelcarmena.delivery.Console;
@@ -11,13 +11,11 @@ import es.rachelcarmena.delivery.Console;
 public class SalarySlipGenerator {
 
     private Console console;
-    private MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator;
     private NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator;
     private TaxesCalculator taxesCalculator;
 
-    public SalarySlipGenerator(Console console, MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator, NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator, TaxesCalculator taxesCalculator) {
+    public SalarySlipGenerator(Console console, NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator, TaxesCalculator taxesCalculator) {
         this.console = console;
-        this.monthlyGrossSalaryCalculator = monthlyGrossSalaryCalculator;
         this.nationalInsuranceContributionCalculator = nationalInsuranceContributionCalculator;
         this.taxesCalculator = taxesCalculator;
     }
@@ -30,6 +28,7 @@ public class SalarySlipGenerator {
         final String DESCRIPTION_TAX_FREE_ALLOWANCE = "Tax-free allowance";
         final String DESCRIPTION_TAXABLE_INCOME = "Taxable income";
         final String DESCRIPTION_TAX_PAYABLE = "Tax payable";
+        AnnualGrossSalary annualGrossSalary = employee.getAnnualGrossSalary();
 
         String line = formatPrintedLine(DESCRIPTION_EMPLOYEE_ID, String.valueOf(employee.getEmployeeID()));
         console.printLine(line);
@@ -37,11 +36,11 @@ public class SalarySlipGenerator {
         line = formatPrintedLine(DESCRIPTION_EMPLOYEE_NAME, employee.getEmployeeName());
         console.printLine(line);
 
-        MonthlyGrossSalary monthlyGrossSalary = monthlyGrossSalaryCalculator.calculate(employee.getAnnualGrossSalary());
+        MonthlyGrossSalary monthlyGrossSalary = annualGrossSalary.toMonthlyGrossSalary();
         line = formatPrintedLine(DESCRIPTION_EMPLOYEE_MONTHLY_GROSS_SALARY, monthlyGrossSalary);
         console.printLine(line);
 
-        Amount nationalInsuranceContribution = nationalInsuranceContributionCalculator.calculate(employee.getAnnualGrossSalary());
+        Amount nationalInsuranceContribution = nationalInsuranceContributionCalculator.calculate(annualGrossSalary);
         line = formatPrintedLine(DESCRIPTION_NATIONAL_INSURANCE_CONTRIBUTION, nationalInsuranceContribution);
         console.printLine(line);
 
@@ -53,7 +52,7 @@ public class SalarySlipGenerator {
         line = formatPrintedLine(DESCRIPTION_TAXABLE_INCOME, taxableIncome);
         console.printLine(line);
 
-        Amount taxPayable = taxesCalculator.calculateTaxPayable(employee.getAnnualGrossSalary());
+        Amount taxPayable = taxesCalculator.calculateTaxPayable(annualGrossSalary);
         line = formatPrintedLine(DESCRIPTION_TAX_PAYABLE, taxPayable);
         console.printLine(line);
     }

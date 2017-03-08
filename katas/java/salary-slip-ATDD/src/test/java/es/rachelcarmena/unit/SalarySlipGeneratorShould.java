@@ -3,7 +3,6 @@ package es.rachelcarmena.unit;
 import es.rachelcarmena.domain.Employee;
 import es.rachelcarmena.SalarySlipGenerator;
 import es.rachelcarmena.delivery.Console;
-import es.rachelcarmena.calculator.MonthlyGrossSalaryCalculator;
 import es.rachelcarmena.calculator.NationalInsuranceContributionCalculator;
 import es.rachelcarmena.calculator.TaxesCalculator;
 import es.rachelcarmena.domain.Amount;
@@ -25,8 +24,6 @@ public class SalarySlipGeneratorShould {
     @Mock
     Console console;
     @Mock
-    MonthlyGrossSalaryCalculator monthlyGrossSalaryCalculator;
-    @Mock
     NationalInsuranceContributionCalculator nationalInsuranceContributionCalculator;
     @Mock
     TaxesCalculator taxesCalculator;
@@ -45,13 +42,12 @@ public class SalarySlipGeneratorShould {
 
         employee = new Employee(12345, "John J Doe", ANNUAL_GROSS_SALARY);
 
-        given(monthlyGrossSalaryCalculator.calculate(any(AnnualGrossSalary.class))).willReturn(MONTHLY_GROSS_SALARY);
         given(nationalInsuranceContributionCalculator.calculate(any(AnnualGrossSalary.class))).willReturn(NATIONAL_INSURANCE_CONTRIBUTION);
         given(taxesCalculator.calculateFreeAllowance(any(MonthlyGrossSalary.class))).willReturn(TAX_FREE_ALLOWANCE);
         given(taxesCalculator.calculateTaxableIncome(any(MonthlyGrossSalary.class), any(Amount.class))).willReturn(TAXABLE_INCOME);
         given(taxesCalculator.calculateTaxPayable(any(AnnualGrossSalary.class))).willReturn(TAX_PAYABLE);
 
-        salarySlipGenerator = new SalarySlipGenerator(console, monthlyGrossSalaryCalculator, nationalInsuranceContributionCalculator, taxesCalculator);
+        salarySlipGenerator = new SalarySlipGenerator(console, nationalInsuranceContributionCalculator, taxesCalculator);
     }
 
     @Test
