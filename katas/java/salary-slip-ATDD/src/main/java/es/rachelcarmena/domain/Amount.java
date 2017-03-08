@@ -59,6 +59,10 @@ public class Amount {
         return new Amount(result);
     }
 
+    public String toPrintedAmount() {
+        return value.setScale(SCALE).toString();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj != null && obj instanceof Amount)
@@ -69,10 +73,5 @@ public class Amount {
     @Override
     public int hashCode() {
         return this.value.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return value.setScale(SCALE).toString();
     }
 }
