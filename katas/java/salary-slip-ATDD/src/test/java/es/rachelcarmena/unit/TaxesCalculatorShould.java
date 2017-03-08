@@ -73,7 +73,7 @@ public class TaxesCalculatorShould {
     }
 
     @Test
-    @Parameters({"12000, 200", "24000, 216.67", "40000, 5800"})
+    @Parameters({"12000, 200.00", "24000, 216.67", "40000, 5800.00"})
     public void calculate_tax_payable_for_basic_rate_band(int annualGrossSalaryAmount, String taxPayable) {
         AnnualGrossSalary annualGrossSalary = new AnnualGrossSalary(annualGrossSalaryAmount);
 
