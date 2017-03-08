@@ -60,6 +60,7 @@
                 <configuration>
                     <includes>
                         <include>*Should.java</include>
+                        <include>*Feature.java</include>
                     </includes>
                 </configuration>
             </plugin>
