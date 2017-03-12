@@ -1,15 +1,17 @@
 package es.rachelcarmena.unit;
 
-import es.rachelcarmena.AccountService;
-import es.rachelcarmena.Clock;
-import es.rachelcarmena.StatementPrinter;
-import es.rachelcarmena.TransactionRepository;
+import es.rachelcarmena.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
@@ -50,5 +52,18 @@ public class AccountServiceShould {
         accountService.printStatement();
 
         verifyZeroInteractions(statementPrinter);
+    }
+
+    @Test
+    public void order_print_transactions_when_transactions_and_print_statement() {
+        List<Transaction> transactionList = new ArrayList<>();
+        given(transactionRepository.allTransactions()).willReturn(transactionList);
+
+        accountService.deposit(ANY_AMOUNT);
+        accountService.withdraw(ANY_AMOUNT);
+        accountService.printStatement();
+
+        verify(transactionRepository).allTransactions();
+        verify(statementPrinter).printTransactions(transactionList);
     }
 }
