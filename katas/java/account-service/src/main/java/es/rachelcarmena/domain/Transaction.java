@@ -19,7 +19,7 @@ public abstract class Transaction {
         return date;
     }
 
-    public abstract Amount getAmountAccordingToTypeOfTransaction();
+    public abstract Amount getAmountAsPerTransactionType();
 
     @Override
     public boolean equals(Object o) {

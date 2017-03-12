@@ -21,11 +21,12 @@ public class StatementPrinter {
         final String STATEMENT_HEADER = "DATE       | AMOUNT  | BALANCE";
 
         console.print(STATEMENT_HEADER);
+        
         List<String> statementLines = new ArrayList<>();
         Amount balance = new Amount(0);
         for (Transaction transaction : transactionList) {
             LocalDate date = transaction.getDate();
-            Amount amount = transaction.getAmountAccordingToTypeOfTransaction();
+            Amount amount = transaction.getAmountAsPerTransactionType();
             balance = balance.add(amount);
             String statementLine = String.format("%s | %-7s | %-7s", getFormattedDate(date), amount.toPrintedString(), balance.toPrintedString());
             statementLines.add(statementLine);
