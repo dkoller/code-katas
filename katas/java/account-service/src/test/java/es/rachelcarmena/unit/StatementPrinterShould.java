@@ -5,6 +5,7 @@ import es.rachelcarmena.delivery.StatementPrinter;
 import es.rachelcarmena.domain.Deposit;
 import es.rachelcarmena.domain.Transaction;
 import es.rachelcarmena.domain.Withdraw;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -21,6 +22,12 @@ public class StatementPrinterShould {
 
     @Mock
     Console console;
+    private StatementPrinter statementPrinter;
+
+    @Before
+    public void setUp() {
+        statementPrinter = new StatementPrinter(console);
+    }
 
     @Test
     public void print_transactions_in_reversed_chronological_order() {
@@ -28,8 +35,7 @@ public class StatementPrinterShould {
         transactionList.add(new Deposit(1000, LocalDate.of(2014, 4, 1)));
         transactionList.add(new Withdraw(100, LocalDate.of(2014, 4, 2)));
         transactionList.add(new Deposit(500, LocalDate.of(2014, 4, 10)));
-        StatementPrinter statementPrinter = new StatementPrinter(console);
-
+        
         statementPrinter.printTransactions(transactionList);
 
         verify(console).print("DATE       | AMOUNT  | BALANCE");

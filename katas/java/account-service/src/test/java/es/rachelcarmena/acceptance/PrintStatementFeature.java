@@ -1,10 +1,11 @@
 package es.rachelcarmena.acceptance;
 
-import es.rachelcarmena.*;
+import es.rachelcarmena.AccountService;
 import es.rachelcarmena.delivery.Console;
 import es.rachelcarmena.delivery.StatementPrinter;
 import es.rachelcarmena.domain.Clock;
 import es.rachelcarmena.repository.TransactionRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -22,12 +23,17 @@ public class PrintStatementFeature {
     Console console;
     @Mock
     Clock clock;
+    private AccountService accountService;
+
+    @Before
+    public void setUp() {
+        StatementPrinter statementPrinter = new StatementPrinter(console);
+        TransactionRepository transactionRepository = new TransactionRepository(clock);
+        accountService = new AccountService(transactionRepository, statementPrinter);
+    }
 
     @Test
     public void should_print_a_bank_statement_in_reversed_chronological_order() {
-        StatementPrinter statementPrinter = new StatementPrinter(console);
-        TransactionRepository transactionRepository = new TransactionRepository(clock);
-        AccountService accountService = new AccountService(transactionRepository, statementPrinter);
         given(clock.now()).willReturn(LocalDate.of(2014, 4, 1));
         accountService.deposit(1000);
         given(clock.now()).willReturn(LocalDate.of(2014, 4, 2));
