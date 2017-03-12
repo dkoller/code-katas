@@ -1,9 +1,6 @@
 package es.rachelcarmena.unit;
 
-import es.rachelcarmena.Clock;
-import es.rachelcarmena.Deposit;
-import es.rachelcarmena.Transaction;
-import es.rachelcarmena.TransactionRepository;
+import es.rachelcarmena.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -35,4 +32,18 @@ public class TransactionRepositoryShould {
         transactionList.add(new Deposit(ANY_AMOUNT, ANY_DATE));
         assertThat(transactionRepository.allTransactions(), is(transactionList));
     }
+
+    @Test
+    public void create_and_store_a_withdraw_when_add_a_withdraw() {
+        String ANY_DATE = "01/01/2017";
+        given(clock.now()).willReturn(ANY_DATE);
+        TransactionRepository transactionRepository = new TransactionRepository(clock);
+
+        transactionRepository.addWithdraw(ANY_AMOUNT);
+
+        List<Transaction> transactionList = new ArrayList<>();
+        transactionList.add(new Withdraw(ANY_AMOUNT, ANY_DATE));
+        assertThat(transactionRepository.allTransactions(), is(transactionList));
+    }
+
 }
