@@ -18,6 +18,8 @@ public class TransactionRepository {
     }
 
     public void addWithdraw(int amount) {
+        Transaction withdraw = new Withdraw(amount, clock.now());
+        transactionList.add(withdraw);
     }
 
     public List<Transaction> allTransactions() {
