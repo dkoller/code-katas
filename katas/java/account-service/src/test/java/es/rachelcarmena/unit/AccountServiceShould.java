@@ -26,4 +26,17 @@ public class AccountServiceShould {
 
         verify(transactionRepository).addDeposit(ANY_AMOUNT);
     }
+
+    @Test
+    public void add_a_withdraw_in_transaction_repository_when_withdraw() {
+        final int ANY_AMOUNT = 200;
+        Clock clock = new Clock();
+        Console console = new Console();
+        StatementPrinter statementPrinter = new StatementPrinter(console);
+        AccountService accountService = new AccountService(transactionRepository, clock, statementPrinter);
+
+        accountService.withdraw(ANY_AMOUNT);
+
+        verify(transactionRepository).addWithdraw(ANY_AMOUNT);
+    }
 }
