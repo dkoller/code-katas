@@ -1,17 +1,18 @@
 package es.rachelcarmena;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public abstract class Transaction {
-    private final int amount;
+    private final Amount amount;
     private final LocalDate date;
 
     public Transaction(int amount, LocalDate date) {
-        this.amount = amount;
+        this.amount = new Amount(amount);
         this.date = date;
     }
 
-    protected int getAmount() {
+    protected Amount getAmount() {
         return amount;
     }
 
@@ -19,7 +20,7 @@ public abstract class Transaction {
         return date;
     }
 
-    public abstract int getAmountAccordingToTypeOfTransaction();
+    public abstract Amount getAmountAccordingToTypeOfTransaction();
 
     @Override
     public boolean equals(Object o) {
@@ -28,13 +29,13 @@ public abstract class Transaction {
 
         Transaction that = (Transaction) o;
 
-        if (amount != that.amount) return false;
+        if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
         return date != null ? date.equals(that.date) : that.date == null;
     }
 
     @Override
     public int hashCode() {
-        int result = amount;
+        int result = amount != null ? amount.hashCode() : 0;
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
     }

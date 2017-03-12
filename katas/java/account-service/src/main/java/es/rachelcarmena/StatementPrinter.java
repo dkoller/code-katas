@@ -19,10 +19,12 @@ public class StatementPrinter {
 
         console.print(STATEMENT_HEADER);
         List<String> statementLines = new ArrayList<>();
-        int balance = 0;
+        Amount balance = new Amount(0);
         for (Transaction transaction : transactionList) {
-            balance += transaction.getAmountAccordingToTypeOfTransaction();
-            String statementLine = String.format("%s | %-7.2f | %-7.2f", getFormattedDate(transaction.getDate()), Double.valueOf(transaction.getAmountAccordingToTypeOfTransaction()), Double.valueOf(balance));
+            LocalDate date = transaction.getDate();
+            Amount amount = transaction.getAmountAccordingToTypeOfTransaction();
+            balance = balance.add(amount);
+            String statementLine = String.format("%s | %-7s | %-7s", getFormattedDate(date), amount.toPrintedString(), balance.toPrintedString());
             statementLines.add(statementLine);
         }
 

@@ -9,7 +9,7 @@ public class Deposit extends Transaction {
     }
 
     @Override
-    public int getAmountAccordingToTypeOfTransaction() {
+    public Amount getAmountAccordingToTypeOfTransaction() {
         return getAmount();
     }
 }

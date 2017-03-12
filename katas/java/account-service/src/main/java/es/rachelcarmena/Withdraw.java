@@ -9,7 +9,8 @@ public class Withdraw extends Transaction {
     }
 
     @Override
-    public int getAmountAccordingToTypeOfTransaction() {
-        return - super.getAmount();
+    public Amount getAmountAccordingToTypeOfTransaction() {
+        Amount amount = super.getAmount();
+        return amount.toNegative();
     }
 }
