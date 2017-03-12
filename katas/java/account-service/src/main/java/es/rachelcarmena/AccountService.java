@@ -1,5 +1,7 @@
 package es.rachelcarmena;
 
+import java.util.List;
+
 public class AccountService {
     private final TransactionRepository transactionRepository;
     private final Clock clock;
@@ -20,5 +22,9 @@ public class AccountService {
     }
 
     public void printStatement() {
+        List<Transaction> transactionList = transactionRepository.allTransactions();
+        if (transactionList.isEmpty())
+            return;
+        statementPrinter.printTransactions(transactionList);
     }
 }

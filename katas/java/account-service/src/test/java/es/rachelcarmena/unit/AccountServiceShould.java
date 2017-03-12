@@ -10,7 +10,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -49,21 +49,28 @@ public class AccountServiceShould {
 
     @Test
     public void not_use_statement_printer_when_no_transactions_and_print_statement() {
+        given(transactionRepository.allTransactions()).willReturn(new ArrayList<Transaction>(0));
+
         accountService.printStatement();
 
+        verify(transactionRepository).allTransactions();
         verifyZeroInteractions(statementPrinter);
     }
 
     @Test
     public void order_print_transactions_when_transactions_and_print_statement() {
-        List<Transaction> transactionList = new ArrayList<>();
-        given(transactionRepository.allTransactions()).willReturn(transactionList);
+        List<Transaction> ANY_NOT_EMPTY_TRANSACTION_LIST = createNotEmptyTransactionList();
+        given(transactionRepository.allTransactions()).willReturn(ANY_NOT_EMPTY_TRANSACTION_LIST);
 
-        accountService.deposit(ANY_AMOUNT);
-        accountService.withdraw(ANY_AMOUNT);
         accountService.printStatement();
 
         verify(transactionRepository).allTransactions();
-        verify(statementPrinter).printTransactions(transactionList);
+        verify(statementPrinter).printTransactions(ANY_NOT_EMPTY_TRANSACTION_LIST);
+    }
+
+    private List<Transaction> createNotEmptyTransactionList() {
+        ArrayList<Transaction> transactionList = new ArrayList<>();
+        transactionList.add(new Transaction());
+        return transactionList;
     }
 }
