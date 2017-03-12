@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>es.rachelcarmena</groupId>
-        <artifactId>kata-sonarqube</artifactId>
+        <groupId>com.github.rachelcarmena</groupId>
+        <artifactId>katas-parent</artifactId>
         <version>1.0.0</version>
     </parent>
 
@@ -16,7 +16,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <dependency>
+            <groupId>com.github.rachelcarmena</groupId>
+            <artifactId>katas-parent</artifactId>
+            <version>1.0.0</version>
+            <type>pom</type>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
