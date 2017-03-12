@@ -1,6 +1,9 @@
 package es.rachelcarmena.unit;
 
-import es.rachelcarmena.*;
+import es.rachelcarmena.AccountService;
+import es.rachelcarmena.Clock;
+import es.rachelcarmena.StatementPrinter;
+import es.rachelcarmena.TransactionRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceShould {
@@ -18,12 +22,12 @@ public class AccountServiceShould {
 
     @Mock
     TransactionRepository transactionRepository;
+    @Mock
+    StatementPrinter statementPrinter;
 
     @Before
     public void setUp() {
         Clock clock = new Clock();
-        Console console = new Console();
-        StatementPrinter statementPrinter = new StatementPrinter(console);
         accountService = new AccountService(transactionRepository, clock, statementPrinter);
     }
 
@@ -39,5 +43,12 @@ public class AccountServiceShould {
         accountService.withdraw(ANY_AMOUNT);
 
         verify(transactionRepository).addWithdraw(ANY_AMOUNT);
+    }
+
+    @Test
+    public void not_use_statement_printer_when_no_transactions_and_print_statement() {
+        accountService.printStatement();
+
+        verifyZeroInteractions(statementPrinter);
     }
 }
