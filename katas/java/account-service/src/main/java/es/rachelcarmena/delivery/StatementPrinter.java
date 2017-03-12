@@ -21,19 +21,28 @@ public class StatementPrinter {
         final String STATEMENT_HEADER = "DATE       | AMOUNT  | BALANCE";
 
         console.print(STATEMENT_HEADER);
-        
+
         List<String> statementLines = new ArrayList<>();
         Amount balance = new Amount(0);
         for (Transaction transaction : transactionList) {
-            LocalDate date = transaction.getDate();
-            Amount amount = transaction.getAmountAsPerTransactionType();
-            balance = balance.add(amount);
-            String statementLine = String.format("%s | %-7s | %-7s", getFormattedDate(date), amount.toPrintedString(), balance.toPrintedString());
+            balance = updateBalance(transaction, balance);
+            String statementLine = createStatementLine(transaction, balance);
             statementLines.add(statementLine);
         }
 
         for (ListIterator<String> iterator = statementLines.listIterator(statementLines.size()); iterator.hasPrevious(); )
             console.print(iterator.previous());
+    }
+
+    private Amount updateBalance(Transaction transaction, Amount balance) {
+        Amount amount = transaction.getAmountAsPerTransactionType();
+        return balance.add(amount);
+    }
+
+    private String createStatementLine(Transaction transaction, Amount balance) {
+        LocalDate date = transaction.getDate();
+        Amount amount = transaction.getAmountAsPerTransactionType();
+        return String.format("%s | %-7s | %-7s", getFormattedDate(date), amount.toPrintedString(), balance.toPrintedString());
     }
 
     private String getFormattedDate(LocalDate date) {
