@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class StatementPrinterShould {
     @Test
     public void print_transactions_in_reversed_chronological_order() {
         List<Transaction> transactionList = new ArrayList<>();
-        transactionList.add(new Deposit(1000, "01/04/2014"));
-        transactionList.add(new Withdraw(100, "02/04/2014"));
-        transactionList.add(new Deposit(500, "10/04/2014"));
+        transactionList.add(new Deposit(1000, LocalDate.of(2014, 4, 1)));
+        transactionList.add(new Withdraw(100, LocalDate.of(2014, 4, 2)));
+        transactionList.add(new Deposit(500, LocalDate.of(2014, 4, 10)));
         StatementPrinter statementPrinter = new StatementPrinter(console);
 
         statementPrinter.printTransactions(transactionList);

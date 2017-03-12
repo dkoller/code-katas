@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class AccountServiceShould {
     }
 
     private List<Transaction> createNotEmptyTransactionList() {
-        final String ANY_DATE = "01/02/2016";
+        final LocalDate ANY_DATE = LocalDate.of(2016, 2, 1);
 
         ArrayList<Transaction> transactionList = new ArrayList<>();
         transactionList.add(new Deposit(ANY_AMOUNT, ANY_DATE));

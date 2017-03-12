@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import static org.mockito.BDDMockito.given;
 public class TransactionRepositoryShould {
 
     private static final int ANY_AMOUNT = 300;
-    private static final String ANY_DATE = "01/01/2017";
+    private static final LocalDate ANY_DATE = LocalDate.of(2017, 1, 1);
 
     @Mock Clock clock;
 

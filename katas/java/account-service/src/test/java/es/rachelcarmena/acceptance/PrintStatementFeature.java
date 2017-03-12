@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.LocalDate;
+
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -22,11 +24,11 @@ public class PrintStatementFeature {
         StatementPrinter statementPrinter = new StatementPrinter(console);
         TransactionRepository transactionRepository = new TransactionRepository(clock);
         AccountService accountService = new AccountService(transactionRepository, statementPrinter);
-        given(clock.now()).willReturn("01/04/2014");
+        given(clock.now()).willReturn(LocalDate.of(2014, 4, 1));
         accountService.deposit(1000);
-        given(clock.now()).willReturn("02/04/2014");
+        given(clock.now()).willReturn(LocalDate.of(2014, 4, 2));
         accountService.withdraw(100);
-        given(clock.now()).willReturn("10/04/2014");
+        given(clock.now()).willReturn(LocalDate.of(2014, 4, 10));
         accountService.deposit(500);
 
         accountService.printStatement();

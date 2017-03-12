@@ -1,10 +1,12 @@
 package es.rachelcarmena;
 
+import java.time.LocalDate;
+
 public abstract class Transaction {
     private final int amount;
-    private final String date;
+    private final LocalDate date;
 
-    public Transaction(int amount, String date) {
+    public Transaction(int amount, LocalDate date) {
         this.amount = amount;
         this.date = date;
     }
@@ -13,7 +15,7 @@ public abstract class Transaction {
         return amount;
     }
 
-    protected String getDate() {
+    protected LocalDate getDate() {
         return date;
     }
 
