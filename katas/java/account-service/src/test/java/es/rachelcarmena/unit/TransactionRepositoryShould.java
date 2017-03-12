@@ -47,4 +47,6 @@ public class TransactionRepositoryShould {
         transactionList.add(new Withdraw(ANY_AMOUNT, ANY_DATE));
         assertThat(transactionRepository.allTransactions(), is(transactionList));
     }
+
+
 }
