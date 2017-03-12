@@ -20,8 +20,8 @@ public class PrintStatementFeature {
     @Test
     public void should_print_a_bank_statement_in_reversed_chronological_order() {
         StatementPrinter statementPrinter = new StatementPrinter(console);
-        TransactionRepository transactionRepository = new TransactionRepository();
-        AccountService accountService = new AccountService(transactionRepository, clock, statementPrinter);
+        TransactionRepository transactionRepository = new TransactionRepository(clock);
+        AccountService accountService = new AccountService(transactionRepository, statementPrinter);
         given(clock.now()).willReturn("01/04/2014");
         accountService.deposit(1000);
         given(clock.now()).willReturn("02/04/2014");

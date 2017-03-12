@@ -3,6 +3,12 @@ package es.rachelcarmena;
 import java.util.List;
 
 public class TransactionRepository {
+    private Clock clock;
+
+    public TransactionRepository(Clock clock) {
+        this.clock = clock;
+    }
+
     public void addDeposit(int amount) {
     }
 

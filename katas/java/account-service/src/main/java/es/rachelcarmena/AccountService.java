@@ -4,12 +4,10 @@ import java.util.List;
 
 public class AccountService {
     private final TransactionRepository transactionRepository;
-    private final Clock clock;
     private final StatementPrinter statementPrinter;
 
-    public AccountService(TransactionRepository transactionRepository, Clock clock, StatementPrinter statementPrinter) {
+    public AccountService(TransactionRepository transactionRepository, StatementPrinter statementPrinter) {
         this.transactionRepository = transactionRepository;
-        this.clock = clock;
         this.statementPrinter = statementPrinter;
     }
 

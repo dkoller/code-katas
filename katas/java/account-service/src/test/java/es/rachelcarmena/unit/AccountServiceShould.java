@@ -29,8 +29,7 @@ public class AccountServiceShould {
 
     @Before
     public void setUp() {
-        Clock clock = new Clock();
-        accountService = new AccountService(transactionRepository, clock, statementPrinter);
+        accountService = new AccountService(transactionRepository, statementPrinter);
     }
 
     @Test
