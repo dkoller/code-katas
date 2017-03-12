@@ -1,6 +1,6 @@
 package es.rachelcarmena;
 
-public class Transaction {
+public abstract class Transaction {
     private final int amount;
     private final String date;
 
@@ -8,6 +8,16 @@ public class Transaction {
         this.amount = amount;
         this.date = date;
     }
+
+    protected int getAmount() {
+        return amount;
+    }
+
+    protected String getDate() {
+        return date;
+    }
+
+    public abstract int getAmountAccordingToTypeOfTransaction();
 
     @Override
     public boolean equals(Object o) {

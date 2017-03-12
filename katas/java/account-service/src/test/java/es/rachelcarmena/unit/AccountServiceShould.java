@@ -71,7 +71,7 @@ public class AccountServiceShould {
         final String ANY_DATE = "01/02/2016";
 
         ArrayList<Transaction> transactionList = new ArrayList<>();
-        transactionList.add(new Transaction(ANY_AMOUNT, ANY_DATE));
+        transactionList.add(new Deposit(ANY_AMOUNT, ANY_DATE));
         return transactionList;
     }
 }
