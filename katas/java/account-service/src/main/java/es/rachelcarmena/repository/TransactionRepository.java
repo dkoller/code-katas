@@ -1,4 +1,9 @@
-package es.rachelcarmena;
+package es.rachelcarmena.repository;
+
+import es.rachelcarmena.domain.Clock;
+import es.rachelcarmena.domain.Deposit;
+import es.rachelcarmena.domain.Transaction;
+import es.rachelcarmena.domain.Withdraw;
 
 import java.util.ArrayList;
 import java.util.List;

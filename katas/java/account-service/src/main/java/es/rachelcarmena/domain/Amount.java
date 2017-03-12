@@ -1,4 +1,4 @@
-package es.rachelcarmena;
+package es.rachelcarmena.domain;
 
 import java.math.BigDecimal;
 

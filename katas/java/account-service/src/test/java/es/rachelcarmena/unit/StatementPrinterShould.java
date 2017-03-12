@@ -1,6 +1,10 @@
 package es.rachelcarmena.unit;
 
-import es.rachelcarmena.*;
+import es.rachelcarmena.delivery.Console;
+import es.rachelcarmena.delivery.StatementPrinter;
+import es.rachelcarmena.domain.Deposit;
+import es.rachelcarmena.domain.Transaction;
+import es.rachelcarmena.domain.Withdraw;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

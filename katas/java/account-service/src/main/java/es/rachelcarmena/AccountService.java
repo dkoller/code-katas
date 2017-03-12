@@ -1,5 +1,9 @@
 package es.rachelcarmena;
 
+import es.rachelcarmena.delivery.StatementPrinter;
+import es.rachelcarmena.domain.Transaction;
+import es.rachelcarmena.repository.TransactionRepository;
+
 import java.util.List;
 
 public class AccountService {

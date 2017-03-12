@@ -1,4 +1,7 @@
-package es.rachelcarmena;
+package es.rachelcarmena.domain;
+
+import es.rachelcarmena.domain.Amount;
+import es.rachelcarmena.domain.Transaction;
 
 import java.time.LocalDate;
 

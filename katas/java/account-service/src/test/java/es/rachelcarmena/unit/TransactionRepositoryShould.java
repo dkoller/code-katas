@@ -1,6 +1,10 @@
 package es.rachelcarmena.unit;
 
-import es.rachelcarmena.*;
+import es.rachelcarmena.domain.Clock;
+import es.rachelcarmena.domain.Deposit;
+import es.rachelcarmena.domain.Transaction;
+import es.rachelcarmena.domain.Withdraw;
+import es.rachelcarmena.repository.TransactionRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +25,8 @@ public class TransactionRepositoryShould {
     private static final int ANY_AMOUNT = 300;
     private static final LocalDate ANY_DATE = LocalDate.of(2017, 1, 1);
 
-    @Mock Clock clock;
+    @Mock
+    Clock clock;
 
     private TransactionRepository transactionRepository;
 

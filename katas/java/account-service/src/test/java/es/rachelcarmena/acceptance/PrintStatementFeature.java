@@ -1,6 +1,10 @@
 package es.rachelcarmena.acceptance;
 
 import es.rachelcarmena.*;
+import es.rachelcarmena.delivery.Console;
+import es.rachelcarmena.delivery.StatementPrinter;
+import es.rachelcarmena.domain.Clock;
+import es.rachelcarmena.repository.TransactionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

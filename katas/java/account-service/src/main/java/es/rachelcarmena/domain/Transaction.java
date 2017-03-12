@@ -1,6 +1,5 @@
-package es.rachelcarmena;
+package es.rachelcarmena.domain;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public abstract class Transaction {
@@ -16,7 +15,7 @@ public abstract class Transaction {
         return amount;
     }
 
-    protected LocalDate getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
