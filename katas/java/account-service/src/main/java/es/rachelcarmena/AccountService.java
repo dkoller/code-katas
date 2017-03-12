@@ -16,6 +16,7 @@ public class AccountService {
     }
 
     public void withdraw(int amount) {
+        transactionRepository.addWithdraw(amount);
     }
 
     public void printStatement() {
