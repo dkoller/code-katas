@@ -28,8 +28,8 @@ public class PrintStatementFeature {
     @Before
     public void setUp() {
         StatementPrinter statementPrinter = new StatementPrinter(console);
-        TransactionRepository transactionRepository = new TransactionRepository(clock);
-        accountService = new AccountService(transactionRepository, statementPrinter);
+        TransactionRepository transactionRepository = new TransactionRepository();
+        accountService = new AccountService(transactionRepository, statementPrinter, clock);
     }
 
     @Test

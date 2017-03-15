@@ -1,9 +1,11 @@
 package es.rachelcarmena.unit;
 
-import es.rachelcarmena.*;
+import es.rachelcarmena.AccountService;
 import es.rachelcarmena.delivery.StatementPrinter;
+import es.rachelcarmena.domain.Clock;
 import es.rachelcarmena.domain.Deposit;
 import es.rachelcarmena.domain.Transaction;
+import es.rachelcarmena.domain.Withdraw;
 import es.rachelcarmena.repository.TransactionRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +17,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -24,6 +25,9 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 public class AccountServiceShould {
 
     private static final int ANY_AMOUNT = 200;
+    private static final LocalDate ANY_DATE = LocalDate.of(2017, 1, 1);
+    private static final Transaction ANY_DEPOSIT = new Deposit(ANY_AMOUNT, ANY_DATE);
+    private static final Transaction ANY_WITHDRAW = new Withdraw(ANY_AMOUNT, ANY_DATE);
 
     public AccountService accountService;
 
@@ -31,29 +35,33 @@ public class AccountServiceShould {
     TransactionRepository transactionRepository;
     @Mock
     StatementPrinter statementPrinter;
+    @Mock
+    Clock clock;
 
     @Before
     public void setUp() {
-        accountService = new AccountService(transactionRepository, statementPrinter);
+        accountService = new AccountService(transactionRepository, statementPrinter, clock);
     }
 
     @Test
     public void add_a_deposit_in_transaction_repository_when_deposit() {
+        given(clock.now()).willReturn(ANY_DATE);
         accountService.deposit(ANY_AMOUNT);
 
-        verify(transactionRepository).addDeposit(ANY_AMOUNT);
+        verify(transactionRepository).addTransaction(ANY_DEPOSIT);
     }
 
     @Test
     public void add_a_withdraw_in_transaction_repository_when_withdraw() {
+        given(clock.now()).willReturn(ANY_DATE);
         accountService.withdraw(ANY_AMOUNT);
 
-        verify(transactionRepository).addWithdraw(ANY_AMOUNT);
+        verify(transactionRepository).addTransaction(ANY_WITHDRAW);
     }
 
     @Test
     public void not_use_statement_printer_when_no_transactions_and_print_statement() {
-        given(transactionRepository.allTransactions()).willReturn(new ArrayList<Transaction>(0));
+        given(transactionRepository.allTransactions()).willReturn(new ArrayList<>(0));
 
         accountService.printStatement();
 
@@ -73,10 +81,8 @@ public class AccountServiceShould {
     }
 
     private List<Transaction> createNotEmptyTransactionList() {
-        final LocalDate ANY_DATE = LocalDate.of(2016, 2, 1);
-
         ArrayList<Transaction> transactionList = new ArrayList<>();
-        transactionList.add(new Deposit(ANY_AMOUNT, ANY_DATE));
+        transactionList.add(ANY_DEPOSIT);
         return transactionList;
     }
 }
