@@ -15,14 +15,6 @@ public class MarsRover {
         return direction;
     }
 
-    public int getCoordinateX() {
-        return position.x;
-    }
-
-    public int getCoordinateY() {
-        return position.y;
-    }
-
     public void moveForward() {
         switch (direction) {
             case NORTH:
@@ -31,5 +23,9 @@ public class MarsRover {
             default:
                 position.y--;
         }
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }

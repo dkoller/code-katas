@@ -1,5 +1,6 @@
 package es.rachelcarmena;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -7,27 +8,37 @@ import static org.hamcrest.Matchers.is;
 
 public class RoverDriverShould {
 
+    private static final int ANY_X = 0;
+    private static final int ANY_Y = 0;
+
+    private Position INITIAL_POSITION;
+    private RoverDriver roverDriver;
+
+    @Before
+    public void setUp() throws Exception {
+        INITIAL_POSITION = new Position(ANY_X, ANY_Y);
+        roverDriver = new RoverDriver();
+    }
+
     @Test
     public void move_forward_when_f_command_and_north_direction() {
-        RoverDriver roverDriver = new RoverDriver();
-        MarsRover marsRover = new MarsRover(new Position(0, 0), Direction.Type.NORTH);
+        MarsRover marsRover = new MarsRover(INITIAL_POSITION, Direction.Type.NORTH);
 
         roverDriver.send(marsRover, 'f');
 
+        Position newPosition = new Position(ANY_X, ANY_Y + 1);
+        assertThat(marsRover.getPosition(), is(newPosition));
         assertThat(marsRover.getDirection(), is(Direction.Type.NORTH));
-        assertThat(marsRover.getCoordinateX(), is(0));
-        assertThat(marsRover.getCoordinateY(), is(1));
     }
 
     @Test
     public void move_forward_when_f_command_and_south_direction() {
-        RoverDriver roverDriver = new RoverDriver();
-        MarsRover marsRover = new MarsRover(new Position(0, 0), Direction.Type.SOUTH);
+        MarsRover marsRover = new MarsRover(INITIAL_POSITION, Direction.Type.SOUTH);
 
         roverDriver.send(marsRover, 'f');
 
+        Position newPosition = new Position(ANY_X, ANY_Y - 1);
+        assertThat(marsRover.getPosition(), is(newPosition));
         assertThat(marsRover.getDirection(), is(Direction.Type.SOUTH));
-        assertThat(marsRover.getCoordinateX(), is(0));
-        assertThat(marsRover.getCoordinateY(), is(-1));
     }
 }
