@@ -52,4 +52,15 @@ public class RoverDriverShould {
         assertThat(marsRover.getPosition(), is(newPosition));
         assertThat(marsRover.getDirection(), is(Direction.Type.EAST));
     }
+
+    @Test
+    public void move_forward_when_f_command_and_west_direction() {
+        MarsRover marsRover = new MarsRover(INITIAL_POSITION, Direction.Type.WEST);
+
+        roverDriver.send(marsRover, 'f');
+
+        Position newPosition = new Position(ANY_X - 1, ANY_Y);
+        assertThat(marsRover.getPosition(), is(newPosition));
+        assertThat(marsRover.getDirection(), is(Direction.Type.WEST));
+    }
 }
