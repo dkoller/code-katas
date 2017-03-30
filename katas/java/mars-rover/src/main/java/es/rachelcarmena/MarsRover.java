@@ -20,8 +20,11 @@ public class MarsRover {
             case NORTH:
                 position.y++;
                 break;
-            default:
+            case SOUTH:
                 position.y--;
+                break;
+            default:
+                position.x++;
         }
     }
 
