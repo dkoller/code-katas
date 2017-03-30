@@ -18,4 +18,16 @@ public class RoverDriverShould {
         assertThat(marsRover.getCoordinateX(), is(0));
         assertThat(marsRover.getCoordinateY(), is(1));
     }
+
+    @Test
+    public void move_forward_when_f_command_and_south_direction() {
+        RoverDriver roverDriver = new RoverDriver();
+        MarsRover marsRover = new MarsRover(new Position(0, 0), Direction.Type.SOUTH);
+
+        roverDriver.send(marsRover, 'f');
+
+        assertThat(marsRover.getDirection(), is(Direction.Type.SOUTH));
+        assertThat(marsRover.getCoordinateX(), is(0));
+        assertThat(marsRover.getCoordinateY(), is(-1));
+    }
 }

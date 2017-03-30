@@ -1,10 +1,12 @@
 package es.rachelcarmena;
 
+import es.rachelcarmena.Direction.Type;
+
 public class MarsRover {
     private final Position position;
-    private Direction.Type direction;
+    private Type direction;
 
-    public MarsRover(Position position, Direction.Type direction) {
+    public MarsRover(Position position, Type direction) {
         this.position = position;
         this.direction = direction;
     }
@@ -14,10 +16,20 @@ public class MarsRover {
     }
 
     public int getCoordinateX() {
-        return 0;
+        return position.x;
     }
 
     public int getCoordinateY() {
-        return 1;
+        return position.y;
+    }
+
+    public void moveForward() {
+        switch (direction) {
+            case NORTH:
+                position.y++;
+                break;
+            default:
+                position.y--;
+        }
     }
 }

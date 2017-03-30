@@ -1,6 +1,8 @@
 package es.rachelcarmena;
 
 public class RoverDriver {
-    public void send(MarsRover marsRover, char... command) {
+
+    public void send(MarsRover marsRover, char... commands) {
+        marsRover.moveForward();
     }
 }
