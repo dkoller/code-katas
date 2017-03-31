@@ -17,4 +17,18 @@ public class Direction {
         }
         return null;
     }
+
+    public static Type turnRight(Type direction) {
+        switch (direction) {
+            case NORTH:
+                return Type.EAST;
+            case SOUTH:
+                return Type.WEST;
+            case EAST:
+                return Type.SOUTH;
+            case WEST:
+                return Type.NORTH;
+        }
+        return null;
+    }
 }

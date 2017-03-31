@@ -11,6 +11,9 @@ public class RoverDriver {
                 case 'b':
                     marsRover.moveBackward();
                     break;
+                case 'r':
+                    marsRover.turnRight();
+                    break;
             }
         }
     }

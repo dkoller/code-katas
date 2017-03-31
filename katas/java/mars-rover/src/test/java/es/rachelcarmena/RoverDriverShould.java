@@ -63,4 +63,24 @@ public class RoverDriverShould {
                 new Object[]{Direction.Type.WEST, new Position(ANY_X + 1, ANY_Y), Direction.Type.EAST}
         };
     }
+
+    @Test
+    @Parameters(method = "pairs_of_direction_and_new_direction")
+    public void turn_to_right_when_right_command(Direction.Type currentDirection, Direction.Type newDirection) {
+        MarsRover marsRover = new MarsRover(INITIAL_POSITION, currentDirection);
+
+        roverDriver.send(marsRover, 'r');
+
+        assertThat(marsRover.getPosition(), is(INITIAL_POSITION));
+        assertThat(marsRover.getDirection(), is(newDirection));
+    }
+
+    @SuppressWarnings("unused")
+    private Object pairs_of_direction_and_new_direction() {
+        return new Object[]{new Object[]{Direction.Type.NORTH, Direction.Type.EAST},
+                new Object[]{Direction.Type.SOUTH, Direction.Type.WEST},
+                new Object[]{Direction.Type.EAST, Direction.Type.SOUTH},
+                new Object[]{Direction.Type.WEST, Direction.Type.NORTH}
+        };
+    }
 }
