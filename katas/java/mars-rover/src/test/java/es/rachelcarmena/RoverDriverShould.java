@@ -65,7 +65,7 @@ public class RoverDriverShould {
     }
 
     @Test
-    @Parameters(method = "pairs_of_direction_and_new_direction")
+    @Parameters(method = "pairs_of_direction_and_new_direction_when_right")
     public void turn_to_right_when_right_command(Direction.Type currentDirection, Direction.Type newDirection) {
         MarsRover marsRover = new MarsRover(INITIAL_POSITION, currentDirection);
 
@@ -76,11 +76,31 @@ public class RoverDriverShould {
     }
 
     @SuppressWarnings("unused")
-    private Object pairs_of_direction_and_new_direction() {
+    private Object pairs_of_direction_and_new_direction_when_right() {
         return new Object[]{new Object[]{Direction.Type.NORTH, Direction.Type.EAST},
                 new Object[]{Direction.Type.SOUTH, Direction.Type.WEST},
                 new Object[]{Direction.Type.EAST, Direction.Type.SOUTH},
                 new Object[]{Direction.Type.WEST, Direction.Type.NORTH}
+        };
+    }
+
+    @Test
+    @Parameters(method = "pairs_of_direction_and_new_direction_when_left")
+    public void turn_to_right_when_left_command(Direction.Type currentDirection, Direction.Type newDirection) {
+        MarsRover marsRover = new MarsRover(INITIAL_POSITION, currentDirection);
+
+        roverDriver.send(marsRover, 'l');
+
+        assertThat(marsRover.getPosition(), is(INITIAL_POSITION));
+        assertThat(marsRover.getDirection(), is(newDirection));
+    }
+
+    @SuppressWarnings("unused")
+    private Object pairs_of_direction_and_new_direction_when_left() {
+        return new Object[]{new Object[]{Direction.Type.NORTH, Direction.Type.WEST},
+                new Object[]{Direction.Type.SOUTH, Direction.Type.EAST},
+                new Object[]{Direction.Type.EAST, Direction.Type.NORTH},
+                new Object[]{Direction.Type.WEST, Direction.Type.SOUTH}
         };
     }
 }

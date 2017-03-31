@@ -43,4 +43,8 @@ public class MarsRover {
     public void turnRight() {
         direction = Direction.turnRight(direction);
     }
+
+    public void turnLeft() {
+        direction = Direction.turnLeft(direction);
+    }
 }

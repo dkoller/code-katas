@@ -14,6 +14,9 @@ public class RoverDriver {
                 case 'r':
                     marsRover.turnRight();
                     break;
+                case 'l':
+                    marsRover.turnLeft();
+                    break;
             }
         }
     }
