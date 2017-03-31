@@ -1,5 +1,9 @@
 package es.rachelcarmena;
 
+import es.rachelcarmena.domain.MarsRover;
+import es.rachelcarmena.domain.RoverDriver;
+import es.rachelcarmena.utils.Direction;
+import es.rachelcarmena.utils.Position;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Before;
