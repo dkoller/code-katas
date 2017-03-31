@@ -8,10 +8,6 @@ public class Direction {
 
     private static final List<Type> cardinalPoints = new ArrayList<>(Arrays.asList(Type.NORTH, Type.EAST, Type.SOUTH, Type.WEST));
 
-    public static Type oppositeOf(Type direction) {
-        return getNextCardinalPoint(direction, 2);
-    }
-
     public static Type turnRight(Type direction) {
         return getNextCardinalPoint(direction, 1);
     }
