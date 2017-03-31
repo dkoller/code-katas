@@ -16,34 +16,26 @@ public class MarsRover {
     }
 
     public void moveForward() {
-        switch (direction) {
-            case NORTH:
-                position.y++;
-                break;
-            case SOUTH:
-                position.y--;
-                break;
-            case EAST:
-                position.x++;
-                break;
-            default:
-                position.x--;
-        }
+        calculateNewPosition(true);
     }
 
     public void moveBackward() {
+        calculateNewPosition(false);
+    }
+
+    private void calculateNewPosition(boolean forward) {
         switch (direction) {
             case NORTH:
-                position.y--;
+                position.y = forward ? position.y + 1 : position.y - 1;
                 break;
             case SOUTH:
-                position.y++;
+                position.y = forward ? position.y - 1 : position.y + 1;
                 break;
             case EAST:
-                position.x--;
+                position.x = forward ? position.x + 1 : position.x - 1;
                 break;
             default:
-                position.x++;
+                position.x = forward ? position.x - 1 : position.x + 1;
         }
     }
 
