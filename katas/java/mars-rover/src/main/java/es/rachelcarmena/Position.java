@@ -9,6 +9,26 @@ public class Position {
         this.y = y;
     }
 
+    void calculateNewPosition(Direction.Type currentDirection, boolean forward) {
+        int newX = x;
+        int newY = y;
+        switch (currentDirection) {
+            case NORTH:
+                newY = forward ? newY + 1 : newY - 1;
+                break;
+            case SOUTH:
+                newY = forward ? newY - 1 : newY + 1;
+                break;
+            case EAST:
+                newX = forward ? newX + 1 : newX - 1;
+                break;
+            case WEST:
+                newX = forward ? newX - 1 : newX + 1;
+        }
+        x = newX;
+        y = newY;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
