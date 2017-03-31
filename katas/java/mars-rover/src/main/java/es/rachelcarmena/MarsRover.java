@@ -32,7 +32,7 @@ public class MarsRover {
     }
 
     public void moveBackward() {
-        direction = Direction.getOppositeOf(direction);
+        direction = Direction.oppositeOf(direction);
         moveForward();
     }
 
