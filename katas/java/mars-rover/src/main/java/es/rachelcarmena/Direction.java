@@ -6,21 +6,23 @@ import java.util.List;
 
 public class Direction {
 
-    private static final List<Type> cardinalPoints = new ArrayList<>(Arrays.asList(Type.NORTH, Type.EAST, Type.SOUTH, Type.WEST));
+    public enum Type {
+        NORTH, EAST, WEST, SOUTH;
 
-    public static Type turnRight(Type direction) {
-        return getNextCardinalPoint(direction, 1);
+        private static final List<Type> cardinalPoints = new ArrayList<>(Arrays.asList(Type.NORTH, Type.EAST, Type.SOUTH, Type.WEST));
+
+        public Type turnRight() {
+            return getNextCardinalPoint(1);
+        }
+
+        public Type turnLeft() {
+            return getNextCardinalPoint(3);
+        }
+
+        private Type getNextCardinalPoint(int steps) {
+            int index = cardinalPoints.indexOf(this);
+            index = (index + steps) % 4;
+            return cardinalPoints.get(index);
+        }
     }
-
-    public static Type turnLeft(Type direction) {
-        return getNextCardinalPoint(direction, 3);
-    }
-
-    private static Type getNextCardinalPoint(Type direction, int steps) {
-        int index = cardinalPoints.indexOf(direction);
-        index = (index + steps) % 4;
-        return cardinalPoints.get(index);
-    }
-
-    public enum Type {NORTH, EAST, WEST, SOUTH;}
 }
