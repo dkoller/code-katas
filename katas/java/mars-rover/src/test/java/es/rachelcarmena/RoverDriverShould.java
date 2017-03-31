@@ -1,37 +1,54 @@
 package es.rachelcarmena;
 
 import es.rachelcarmena.domain.MarsRover;
+import es.rachelcarmena.domain.ObstacleManager;
 import es.rachelcarmena.domain.RoverDriver;
-import es.rachelcarmena.utils.Direction;
-import es.rachelcarmena.utils.Position;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InOrder;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static junit.framework.TestCase.assertFalse;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.times;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RoverDriverShould {
 
-    private static final int ANY_X = 0;
-    private static final int ANY_Y = 0;
-
-    private Position INITIAL_POSITION;
-    private RoverDriver roverDriver;
+    private final ObstacleManager obstacleManager = new ObstacleManager();
+    private final RoverDriver roverDriver = new RoverDriver();
+    @Mock
+    MarsRover marsRover;
+    InOrder inOrder;
 
     @Before
     public void setUp() throws Exception {
-        INITIAL_POSITION = new Position(ANY_X, ANY_Y);
-        roverDriver = new RoverDriver();
+        inOrder = inOrder(marsRover);
     }
 
     @Test
-    public void send_several_commands() {
-        MarsRover marsRover = new MarsRover(INITIAL_POSITION, Direction.Type.NORTH);
+    public void send_commands_to_mars_rover() {
+        given(marsRover.moveBackward(obstacleManager)).willReturn(true);
+        given(marsRover.moveForward(obstacleManager)).willReturn(true);
 
-        roverDriver.send(marsRover, 'l', 'r', 'f', 'f', 'b', 'l');
+        roverDriver.send(marsRover, obstacleManager, 'l', 'r', 'f', 'f', 'b', 'l');
 
-        Position newPosition = new Position(ANY_X, ANY_Y + 1);
-        assertThat(marsRover.getPosition(), is(newPosition));
-        assertThat(marsRover.getDirection(), is(Direction.Type.WEST));
+        inOrder.verify(marsRover).turnOnTheLeft();
+        inOrder.verify(marsRover).turnOnTheRight();
+        inOrder.verify(marsRover, times(2)).moveForward(obstacleManager);
+        inOrder.verify(marsRover).moveBackward(obstacleManager);
+        inOrder.verify(marsRover).turnOnTheLeft();
+    }
+
+    @Test
+    public void inform_if_one_command_not_successful() {
+        given(marsRover.moveForward(obstacleManager)).willReturn(false);
+
+        boolean successAllCommands = roverDriver.send(marsRover, obstacleManager, 'l', 'r', 'f', 'f', 'b', 'l');
+
+        assertFalse(successAllCommands);
     }
 }
