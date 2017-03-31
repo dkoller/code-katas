@@ -31,6 +31,11 @@ public class MarsRover {
         }
     }
 
+    public void moveBackward() {
+        direction = Direction.getOppositeOf(direction);
+        moveForward();
+    }
+
     public Position getPosition() {
         return position;
     }

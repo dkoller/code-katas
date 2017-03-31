@@ -25,22 +25,42 @@ public class RoverDriverShould {
     }
 
     @Test
-    @Parameters(method = "pairs_of_command_direction_and_new_position")
-    public void move_forward_when_f_command_and_north_direction(char command, Direction.Type direction, Position newPosition) {
-        MarsRover marsRover = new MarsRover(INITIAL_POSITION, direction);
+    @Parameters(method = "pairs_of_direction_and_new_position")
+    public void move_in_same_direction_when_forward_command(Direction.Type currentDirection, Position newPosition) {
+        MarsRover marsRover = new MarsRover(INITIAL_POSITION, currentDirection);
 
-        roverDriver.send(marsRover, command);
+        roverDriver.send(marsRover, 'f');
 
         assertThat(marsRover.getPosition(), is(newPosition));
-        assertThat(marsRover.getDirection(), is(direction));
+        assertThat(marsRover.getDirection(), is(currentDirection));
     }
 
     @SuppressWarnings("unused")
-    private Object pairs_of_command_direction_and_new_position() {
-        return new Object[]{new Object[]{'f', Direction.Type.NORTH, new Position(ANY_X, ANY_Y + 1)},
-                new Object[]{'f', Direction.Type.SOUTH, new Position(ANY_X, ANY_Y - 1)},
-                new Object[]{'f', Direction.Type.EAST, new Position(ANY_X + 1, ANY_Y)},
-                new Object[]{'f', Direction.Type.WEST, new Position(ANY_X - 1, ANY_Y)}
+    private Object pairs_of_direction_and_new_position() {
+        return new Object[]{new Object[]{Direction.Type.NORTH, new Position(ANY_X, ANY_Y + 1)},
+                new Object[]{Direction.Type.SOUTH, new Position(ANY_X, ANY_Y - 1)},
+                new Object[]{Direction.Type.EAST, new Position(ANY_X + 1, ANY_Y)},
+                new Object[]{Direction.Type.WEST, new Position(ANY_X - 1, ANY_Y)}
+        };
+    }
+
+    @Test
+    @Parameters(method = "pairs_of_direction_and_new_position_and_direction")
+    public void move_in_opposite_direction_when_backward_command(Direction.Type currentDirection, Position newPosition, Direction.Type newDirection) {
+        MarsRover marsRover = new MarsRover(INITIAL_POSITION, currentDirection);
+
+        roverDriver.send(marsRover, 'b');
+
+        assertThat(marsRover.getPosition(), is(newPosition));
+        assertThat(marsRover.getDirection(), is(newDirection));
+    }
+
+    @SuppressWarnings("unused")
+    private Object pairs_of_direction_and_new_position_and_direction() {
+        return new Object[]{new Object[]{Direction.Type.NORTH, new Position(ANY_X, ANY_Y - 1), Direction.Type.SOUTH},
+                new Object[]{Direction.Type.SOUTH, new Position(ANY_X, ANY_Y + 1), Direction.Type.NORTH},
+                new Object[]{Direction.Type.EAST, new Position(ANY_X - 1, ANY_Y), Direction.Type.WEST},
+                new Object[]{Direction.Type.WEST, new Position(ANY_X + 1, ANY_Y), Direction.Type.EAST}
         };
     }
 }
