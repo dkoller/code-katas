@@ -12,10 +12,10 @@ public class RoverDriver {
                     marsRover.moveBackward();
                     break;
                 case 'r':
-                    marsRover.turnRight();
+                    marsRover.turnOnTheRight();
                     break;
                 case 'l':
-                    marsRover.turnLeft();
+                    marsRover.turnOnTheLeft();
                     break;
             }
         }

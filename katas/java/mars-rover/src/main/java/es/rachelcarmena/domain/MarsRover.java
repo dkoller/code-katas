@@ -28,11 +28,11 @@ public class MarsRover {
         position = position.calculateNewPosition(direction, false);
     }
 
-    public void turnRight() {
+    public void turnOnTheRight() {
         direction = direction.turnRight();
     }
 
-    public void turnLeft() {
+    public void turnOnTheLeft() {
         direction = direction.turnLeft();
     }
 }
