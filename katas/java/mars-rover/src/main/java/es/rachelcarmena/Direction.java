@@ -6,9 +6,8 @@ import java.util.List;
 
 public class Direction {
 
-    public enum Type {NORTH, EAST, WEST, SOUTH;}
-
     private static final List<Type> cardinalPoints = new ArrayList<>(Arrays.asList(Type.NORTH, Type.EAST, Type.SOUTH, Type.WEST));
+
     public static Type oppositeOf(Type direction) {
         return getNextCardinalPoint(direction, 2);
     }
@@ -26,4 +25,6 @@ public class Direction {
         index = (index + steps) % 4;
         return cardinalPoints.get(index);
     }
+
+    public enum Type {NORTH, EAST, WEST, SOUTH;}
 }
