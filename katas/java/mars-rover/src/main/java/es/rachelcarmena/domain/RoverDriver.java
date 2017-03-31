@@ -1,7 +1,5 @@
 package es.rachelcarmena.domain;
 
-import es.rachelcarmena.ObstacleManager;
-
 public class RoverDriver {
 
     public boolean send(MarsRover marsRover, ObstacleManager obstacleManager, char... commands) {

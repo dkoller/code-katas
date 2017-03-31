@@ -20,12 +20,18 @@ public class MarsRover {
         return position;
     }
 
-    public void moveForward() {
-        position = position.calculateNewPosition(direction, true);
+    public boolean moveForward(ObstacleManager obstacleManager) {
+        Position newPosition = position.calculateNewPosition(direction, true);
+        if (!obstacleManager.detectObstacleIn(newPosition)) return false;
+        position = newPosition;
+        return true;
     }
 
-    public void moveBackward() {
-        position = position.calculateNewPosition(direction, false);
+    public boolean moveBackward(ObstacleManager obstacleManager) {
+        Position newPosition = position.calculateNewPosition(direction, false);
+        if (!obstacleManager.detectObstacleIn(newPosition)) return false;
+        position = newPosition;
+        return true;
     }
 
     public void turnOnTheRight() {
