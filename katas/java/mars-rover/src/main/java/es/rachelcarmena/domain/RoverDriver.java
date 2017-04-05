@@ -8,19 +8,19 @@ public class RoverDriver {
         this.marsRover = marsRover;
     }
 
-    public void sendCommands(char... commands) {
-        for(char command: commands) {
+    public void sendCommands(Command... commands) {
+        for(Command command: commands) {
             switch (command) {
-                case 'f':
+                case FORWARD:
                     marsRover.moveForward();
                     break;
-                case 'b':
+                case BACKWARD:
                     marsRover.moveBackward();
                     break;
-                case 'r':
+                case RIGHT:
                     marsRover.turnOnTheRight();
                     break;
-                case 'l':
+                case LEFT:
                     marsRover.turnOnTheLeft();
                     break;
             }

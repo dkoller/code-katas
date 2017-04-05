@@ -9,6 +9,7 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static es.rachelcarmena.domain.Command.*;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.times;
 
@@ -28,7 +29,7 @@ public class RoverDriverShould {
     public void send_commands_to_mars_rover() {
         RoverDriver roverDriver = new RoverDriver(marsRover);
 
-        roverDriver.sendCommands('l', 'r', 'f', 'f', 'b', 'l');
+        roverDriver.sendCommands(LEFT, RIGHT, FORWARD, FORWARD, BACKWARD, LEFT);
 
         inOrder.verify(marsRover).turnOnTheLeft();
         inOrder.verify(marsRover).turnOnTheRight();
