@@ -1,28 +1,52 @@
 package es.rachelcarmena.utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Direction {
 
     public enum Type {
-        NORTH, EAST, WEST, SOUTH;
+        NORTH {
+            @Override
+            public Type turnRight() {
+                return EAST;
+            }
 
-        private static final List<Type> cardinalPoints = new ArrayList<>(Arrays.asList(Type.NORTH, Type.EAST, Type.SOUTH, Type.WEST));
+            @Override
+            public Type turnLeft() {
+                return WEST;
+            }
+        }, EAST {
+            @Override
+            public Type turnRight() {
+                return SOUTH;
+            }
 
-        public Type turnRight() {
-            return getNextCardinalPoint(1);
-        }
+            @Override
+            public Type turnLeft() {
+                return NORTH;
+            }
+        }, WEST {
+            @Override
+            public Type turnRight() {
+                return NORTH;
+            }
 
-        public Type turnLeft() {
-            return getNextCardinalPoint(3);
-        }
+            @Override
+            public Type turnLeft() {
+                return SOUTH;
+            }
+        }, SOUTH {
+            @Override
+            public Type turnRight() {
+                return WEST;
+            }
 
-        private Type getNextCardinalPoint(int steps) {
-            int index = cardinalPoints.indexOf(this);
-            index = (index + steps) % 4;
-            return cardinalPoints.get(index);
-        }
+            @Override
+            public Type turnLeft() {
+                return EAST;
+            }
+        };
+
+        public abstract Type turnRight();
+
+        public abstract Type turnLeft();
     }
 }
