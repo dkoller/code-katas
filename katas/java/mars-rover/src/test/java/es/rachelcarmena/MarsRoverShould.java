@@ -7,6 +7,7 @@ import es.rachelcarmena.utils.Location;
 import es.rachelcarmena.utils.Position;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -125,30 +126,35 @@ public class MarsRoverShould {
     }
 
     @Test
-    public void not_move_forward_if_obstacle_in_new_position() {
-        Position obstaclePosition = new Position(ANY_X, ANY_Y + 1);
-        ObstacleManager obstacleManager = new ObstacleManager();
-        obstacleManager.addObstacleIn(obstaclePosition);
-        Location INITIAL_LOCATION = new Location(ANY_POSITION, Direction.NORTH);
+    public void not_change_location_and_report_obstacle_if_obstacle_in_expected_position_after_forward() {
+        final Location INITIAL_LOCATION = new Location(ANY_POSITION, Direction.NORTH);
+        final Position EXPECTED_POSITION_IF_FORWARD = new Position(ANY_X, ANY_Y + 1);
+        ObstacleManager obstacleManager = getObstacleManagerWithObstacleIn(EXPECTED_POSITION_IF_FORWARD);
         MarsRover marsRover = new MarsRover(INITIAL_LOCATION, obstacleManager, statusReporter);
 
         marsRover.moveForward();
 
         assertThat(marsRover.getLocation(), is(INITIAL_LOCATION));
-        verify(statusReporter).reportObstacleIn(obstaclePosition);
+        verify(statusReporter).reportObstacleIn(EXPECTED_POSITION_IF_FORWARD);
     }
 
     @Test
-    public void not_move_backward_if_obstacle_in_new_position() {
-        Position obstaclePosition = new Position(ANY_X, ANY_Y - 1);
-        ObstacleManager obstacleManager = new ObstacleManager();
-        obstacleManager.addObstacleIn(obstaclePosition);
-        Location INITIAL_LOCATION = new Location(ANY_POSITION, Direction.NORTH);
+    public void not_change_location_and_report_obstacle_if_obstacle_in_expected_position_after_backward() {
+        final Location INITIAL_LOCATION = new Location(ANY_POSITION, Direction.NORTH);
+        final Position EXPECTED_POSITION_IF_BACKWARD = new Position(ANY_X, ANY_Y - 1);
+        ObstacleManager obstacleManager = getObstacleManagerWithObstacleIn(EXPECTED_POSITION_IF_BACKWARD);
         MarsRover marsRover = new MarsRover(INITIAL_LOCATION, obstacleManager, statusReporter);
 
         marsRover.moveBackward();
 
         assertThat(marsRover.getLocation(), is(INITIAL_LOCATION));
-        verify(statusReporter).reportObstacleIn(obstaclePosition);
+        verify(statusReporter).reportObstacleIn(EXPECTED_POSITION_IF_BACKWARD);
+    }
+
+    @NotNull
+    private ObstacleManager getObstacleManagerWithObstacleIn(Position position) {
+        ObstacleManager obstacleManager = new ObstacleManager();
+        obstacleManager.addObstacleIn(position);
+        return obstacleManager;
     }
 }
