@@ -1,14 +1,14 @@
 package es.rachelcarmena.domain;
 
-import es.rachelcarmena.utils.Position.Direction;
-import es.rachelcarmena.utils.Position;
+import es.rachelcarmena.utils.Location;
+import es.rachelcarmena.utils.Location.Direction;
 
 public class MarsRover {
-    private Position position;
+    private Location location;
     private Direction direction;
 
-    public MarsRover(Position position, Direction direction) {
-        this.position = position;
+    public MarsRover(Location location, Direction direction) {
+        this.location = location;
         this.direction = direction;
     }
 
@@ -16,21 +16,21 @@ public class MarsRover {
         return direction;
     }
 
-    public Position getPosition() {
-        return position;
+    public Location getLocation() {
+        return location;
     }
 
     public boolean moveForward(ObstacleManager obstacleManager) {
-        Position newPosition = position.calculateNewPosition(direction, true);
-        if (!obstacleManager.detectObstacleIn(newPosition)) return false;
-        position = newPosition;
+        Location newLocation = location.calculateNewPosition(direction, true);
+        if (!obstacleManager.detectObstacleIn(newLocation)) return false;
+        location = newLocation;
         return true;
     }
 
     public boolean moveBackward(ObstacleManager obstacleManager) {
-        Position newPosition = position.calculateNewPosition(direction, false);
-        if (!obstacleManager.detectObstacleIn(newPosition)) return false;
-        position = newPosition;
+        Location newLocation = location.calculateNewPosition(direction, false);
+        if (!obstacleManager.detectObstacleIn(newLocation)) return false;
+        location = newLocation;
         return true;
     }
 

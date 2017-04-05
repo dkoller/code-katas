@@ -1,16 +1,16 @@
 package es.rachelcarmena.utils;
 
-public class Position {
+public class Location {
 
     protected final int x;
     protected final int y;
 
-    public Position(int x, int y) {
+    public Location(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public Position calculateNewPosition(Direction currentDirection, boolean forward) {
+    public Location calculateNewPosition(Direction currentDirection, boolean forward) {
         int newX = x;
         int newY = y;
         switch (currentDirection) {
@@ -26,7 +26,7 @@ public class Position {
             case WEST:
                 newX = forward ? newX - 1 : newX + 1;
         }
-        return new Position(newX, newY);
+        return new Location(newX, newY);
     }
 
     @Override
@@ -34,10 +34,10 @@ public class Position {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Position position = (Position) o;
+        Location location = (Location) o;
 
-        if (x != position.x) return false;
-        return y == position.y;
+        if (x != location.x) return false;
+        return y == location.y;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Position {
 
     @Override
     public String toString() {
-        return "Position{" +
+        return "Location{" +
                 "x=" + x +
                 ", y=" + y +
                 '}';

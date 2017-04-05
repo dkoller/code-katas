@@ -1,19 +1,19 @@
 package es.rachelcarmena.domain;
 
-import es.rachelcarmena.utils.Position;
+import es.rachelcarmena.utils.Location;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class ObstacleManager {
 
-    Set<Position> obstacles = new HashSet<>();
+    Set<Location> obstacles = new HashSet<>();
 
-    public boolean detectObstacleIn(Position position) {
-        return !obstacles.contains(position);
+    public boolean detectObstacleIn(Location location) {
+        return !obstacles.contains(location);
     }
 
-    public void addObstacleIn(Position position) {
-        obstacles.add(position);
+    public void addObstacleIn(Location location) {
+        obstacles.add(location);
     }
 }
