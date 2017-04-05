@@ -22,7 +22,6 @@ public class MarsRoverShould {
 
     private static final int ANY_X = 0;
     private static final int ANY_Y = 0;
-    private static final Location.Direction ANY_DIRECTION = Location.Direction.EAST;
     private static final Location INITIAL_LOCATION = new Location(ANY_X, ANY_Y);
 
     @Mock
