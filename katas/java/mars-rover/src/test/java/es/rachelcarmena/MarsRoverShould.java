@@ -2,7 +2,6 @@ package es.rachelcarmena;
 
 import es.rachelcarmena.domain.MarsRover;
 import es.rachelcarmena.domain.ObstacleManager;
-import es.rachelcarmena.utils.Direction;
 import es.rachelcarmena.utils.Position;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -23,7 +22,7 @@ public class MarsRoverShould {
 
     private static final int ANY_X = 0;
     private static final int ANY_Y = 0;
-    private static final Direction.Type ANY_DIRECTION = Direction.Type.EAST;
+    private static final Position.Direction ANY_DIRECTION = Position.Direction.EAST;
     private static final Position INITIAL_POSITION = new Position(ANY_X, ANY_Y);
 
     @Mock
@@ -36,7 +35,7 @@ public class MarsRoverShould {
 
     @Test
     @Parameters(method = "pairs_of_direction_and_new_position_when_forward")
-    public void change_position_when_move_forward(Direction.Type currentDirection, Position newPosition) {
+    public void change_position_when_move_forward(Position.Direction currentDirection, Position newPosition) {
         MarsRover marsRover = new MarsRover(INITIAL_POSITION, currentDirection);
         given(obstacleManager.detectObstacleIn(any(Position.class))).willReturn(true);
 
@@ -48,16 +47,16 @@ public class MarsRoverShould {
 
     @SuppressWarnings("unused")
     private Object pairs_of_direction_and_new_position_when_forward() {
-        return new Object[]{new Object[]{Direction.Type.NORTH, new Position(ANY_X, ANY_Y + 1)},
-                new Object[]{Direction.Type.SOUTH, new Position(ANY_X, ANY_Y - 1)},
-                new Object[]{Direction.Type.EAST, new Position(ANY_X + 1, ANY_Y)},
-                new Object[]{Direction.Type.WEST, new Position(ANY_X - 1, ANY_Y)}
+        return new Object[]{new Object[]{Position.Direction.NORTH, new Position(ANY_X, ANY_Y + 1)},
+                new Object[]{Position.Direction.SOUTH, new Position(ANY_X, ANY_Y - 1)},
+                new Object[]{Position.Direction.EAST, new Position(ANY_X + 1, ANY_Y)},
+                new Object[]{Position.Direction.WEST, new Position(ANY_X - 1, ANY_Y)}
         };
     }
 
     @Test
     @Parameters(method = "pairs_of_direction_and_new_position_when_backward")
-    public void change_position_when_move_backward(Direction.Type currentDirection, Position newPosition) {
+    public void change_position_when_move_backward(Position.Direction currentDirection, Position newPosition) {
         MarsRover marsRover = new MarsRover(INITIAL_POSITION, currentDirection);
         given(obstacleManager.detectObstacleIn(any(Position.class))).willReturn(true);
 
@@ -69,16 +68,16 @@ public class MarsRoverShould {
 
     @SuppressWarnings("unused")
     private Object pairs_of_direction_and_new_position_when_backward() {
-        return new Object[]{new Object[]{Direction.Type.NORTH, new Position(ANY_X, ANY_Y - 1)},
-                new Object[]{Direction.Type.SOUTH, new Position(ANY_X, ANY_Y + 1)},
-                new Object[]{Direction.Type.EAST, new Position(ANY_X - 1, ANY_Y)},
-                new Object[]{Direction.Type.WEST, new Position(ANY_X + 1, ANY_Y)}
+        return new Object[]{new Object[]{Position.Direction.NORTH, new Position(ANY_X, ANY_Y - 1)},
+                new Object[]{Position.Direction.SOUTH, new Position(ANY_X, ANY_Y + 1)},
+                new Object[]{Position.Direction.EAST, new Position(ANY_X - 1, ANY_Y)},
+                new Object[]{Position.Direction.WEST, new Position(ANY_X + 1, ANY_Y)}
         };
     }
 
     @Test
     @Parameters(method = "pairs_of_direction_and_new_direction_when_right")
-    public void change_direction_when_turn_on_the_right(Direction.Type currentDirection, Direction.Type newDirection) {
+    public void change_direction_when_turn_on_the_right(Position.Direction currentDirection, Position.Direction newDirection) {
         MarsRover marsRover = new MarsRover(INITIAL_POSITION, currentDirection);
 
         marsRover.turnOnTheRight();
@@ -89,16 +88,16 @@ public class MarsRoverShould {
 
     @SuppressWarnings("unused")
     private Object pairs_of_direction_and_new_direction_when_right() {
-        return new Object[]{new Object[]{Direction.Type.NORTH, Direction.Type.EAST},
-                new Object[]{Direction.Type.SOUTH, Direction.Type.WEST},
-                new Object[]{Direction.Type.EAST, Direction.Type.SOUTH},
-                new Object[]{Direction.Type.WEST, Direction.Type.NORTH}
+        return new Object[]{new Object[]{Position.Direction.NORTH, Position.Direction.EAST},
+                new Object[]{Position.Direction.SOUTH, Position.Direction.WEST},
+                new Object[]{Position.Direction.EAST, Position.Direction.SOUTH},
+                new Object[]{Position.Direction.WEST, Position.Direction.NORTH}
         };
     }
 
     @Test
     @Parameters(method = "pairs_of_direction_and_new_direction_when_left")
-    public void change_direction_when_turn_on_the_left(Direction.Type currentDirection, Direction.Type newDirection) {
+    public void change_direction_when_turn_on_the_left(Position.Direction currentDirection, Position.Direction newDirection) {
         MarsRover marsRover = new MarsRover(INITIAL_POSITION, currentDirection);
 
         marsRover.turnOnTheLeft();
@@ -109,10 +108,10 @@ public class MarsRoverShould {
 
     @SuppressWarnings("unused")
     private Object pairs_of_direction_and_new_direction_when_left() {
-        return new Object[]{new Object[]{Direction.Type.NORTH, Direction.Type.WEST},
-                new Object[]{Direction.Type.SOUTH, Direction.Type.EAST},
-                new Object[]{Direction.Type.EAST, Direction.Type.NORTH},
-                new Object[]{Direction.Type.WEST, Direction.Type.SOUTH}
+        return new Object[]{new Object[]{Position.Direction.NORTH, Position.Direction.WEST},
+                new Object[]{Position.Direction.SOUTH, Position.Direction.EAST},
+                new Object[]{Position.Direction.EAST, Position.Direction.NORTH},
+                new Object[]{Position.Direction.WEST, Position.Direction.SOUTH}
         };
     }
 
@@ -120,7 +119,7 @@ public class MarsRoverShould {
     public void not_move_forward_if_obstacle_in_new_position() {
         ObstacleManager obstacleManager = new ObstacleManager();
         obstacleManager.addObstacleIn(new Position(ANY_X, ANY_Y + 1));
-        MarsRover marsRover = new MarsRover(INITIAL_POSITION, Direction.Type.NORTH);
+        MarsRover marsRover = new MarsRover(INITIAL_POSITION, Position.Direction.NORTH);
 
         boolean moveDone = marsRover.moveForward(obstacleManager);
 
@@ -132,7 +131,7 @@ public class MarsRoverShould {
     public void not_move_backward_if_obstacle_in_new_position() {
         ObstacleManager obstacleManager = new ObstacleManager();
         obstacleManager.addObstacleIn(new Position(ANY_X, ANY_Y - 1));
-        MarsRover marsRover = new MarsRover(INITIAL_POSITION, Direction.Type.NORTH);
+        MarsRover marsRover = new MarsRover(INITIAL_POSITION, Position.Direction.NORTH);
 
         boolean moveDone = marsRover.moveBackward(obstacleManager);
 

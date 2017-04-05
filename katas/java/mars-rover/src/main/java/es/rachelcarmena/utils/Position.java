@@ -10,7 +10,7 @@ public class Position {
         this.y = y;
     }
 
-    public Position calculateNewPosition(Direction.Type currentDirection, boolean forward) {
+    public Position calculateNewPosition(Direction currentDirection, boolean forward) {
         int newX = x;
         int newY = y;
         switch (currentDirection) {
@@ -53,5 +53,53 @@ public class Position {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    public enum Direction {
+        NORTH {
+            @Override
+            public Direction turnRight() {
+                return EAST;
+            }
+
+            @Override
+            public Direction turnLeft() {
+                return WEST;
+            }
+        }, EAST {
+            @Override
+            public Direction turnRight() {
+                return SOUTH;
+            }
+
+            @Override
+            public Direction turnLeft() {
+                return NORTH;
+            }
+        }, WEST {
+            @Override
+            public Direction turnRight() {
+                return NORTH;
+            }
+
+            @Override
+            public Direction turnLeft() {
+                return SOUTH;
+            }
+        }, SOUTH {
+            @Override
+            public Direction turnRight() {
+                return WEST;
+            }
+
+            @Override
+            public Direction turnLeft() {
+                return EAST;
+            }
+        };
+
+        public abstract Direction turnRight();
+
+        public abstract Direction turnLeft();
     }
 }

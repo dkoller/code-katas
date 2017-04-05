@@ -1,13 +1,13 @@
 package es.rachelcarmena.domain;
 
-import es.rachelcarmena.utils.Direction.Type;
+import es.rachelcarmena.utils.Position.Direction;
 import es.rachelcarmena.utils.Position;
 
 public class MarsRover {
     private Position position;
-    private Type direction;
+    private Direction direction;
 
-    public MarsRover(Position position, Type direction) {
+    public MarsRover(Position position, Direction direction) {
         this.position = position;
         this.direction = direction;
     }
