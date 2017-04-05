@@ -29,12 +29,12 @@ public class RoverDriverShould {
 
     @Test
     public void send_commands_to_mars_rover() {
-        roverDriver.send(marsRover, obstacleManager, 'l', 'r', 'f', 'f', 'b', 'l');
+        roverDriver.send(marsRover, 'l', 'r', 'f', 'f', 'b', 'l');
 
         inOrder.verify(marsRover).turnOnTheLeft();
         inOrder.verify(marsRover).turnOnTheRight();
-        inOrder.verify(marsRover, times(2)).moveForward(obstacleManager);
-        inOrder.verify(marsRover).moveBackward(obstacleManager);
+        inOrder.verify(marsRover, times(2)).moveForward();
+        inOrder.verify(marsRover).moveBackward();
         inOrder.verify(marsRover).turnOnTheLeft();
     }
 }

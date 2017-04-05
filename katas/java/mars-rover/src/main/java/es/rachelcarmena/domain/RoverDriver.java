@@ -2,14 +2,14 @@ package es.rachelcarmena.domain;
 
 public class RoverDriver {
 
-    public void send(MarsRover marsRover, ObstacleManager obstacleManager, char... commands) {
+    public void send(MarsRover marsRover, char... commands) {
         for(char command: commands) {
             switch (command) {
                 case 'f':
-                    marsRover.moveForward(obstacleManager);
+                    marsRover.moveForward();
                     break;
                 case 'b':
-                    marsRover.moveBackward(obstacleManager);
+                    marsRover.moveBackward();
                     break;
                 case 'r':
                     marsRover.turnOnTheRight();

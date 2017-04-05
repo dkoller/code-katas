@@ -41,10 +41,10 @@ public class MarsRoverShould {
     @Test
     @Parameters(method = "pairs_of_direction_and_new_position_when_forward")
     public void change_position_when_move_forward(Location currentLocation, Location newLocation) {
-        MarsRover marsRover = new MarsRover(currentLocation, statusReporter);
+        MarsRover marsRover = new MarsRover(currentLocation, obstacleManager, statusReporter);
         given(obstacleManager.detectObstacleIn(any(Position.class))).willReturn(true);
 
-        marsRover.moveForward(obstacleManager);
+        marsRover.moveForward();
 
         assertThat(marsRover.getLocation(), is(newLocation));
         verifyZeroInteractions(statusReporter);
@@ -63,10 +63,10 @@ public class MarsRoverShould {
     @Test
     @Parameters(method = "pairs_of_direction_and_new_position_when_backward")
     public void change_position_when_move_backward(Location currentLocation, Location newLocation) {
-        MarsRover marsRover = new MarsRover(currentLocation, statusReporter);
+        MarsRover marsRover = new MarsRover(currentLocation, obstacleManager, statusReporter);
         given(obstacleManager.detectObstacleIn(any(Position.class))).willReturn(true);
 
-        marsRover.moveBackward(obstacleManager);
+        marsRover.moveBackward();
 
         assertThat(marsRover.getLocation(), is(newLocation));
         verifyZeroInteractions(statusReporter);
@@ -85,7 +85,7 @@ public class MarsRoverShould {
     @Test
     @Parameters(method = "pairs_of_direction_and_new_direction_when_right")
     public void change_direction_when_turn_on_the_right(Location currentLocation, Location newLocation) {
-        MarsRover marsRover = new MarsRover(currentLocation, statusReporter);
+        MarsRover marsRover = new MarsRover(currentLocation, obstacleManager, statusReporter);
 
         marsRover.turnOnTheRight();
 
@@ -106,7 +106,7 @@ public class MarsRoverShould {
     @Test
     @Parameters(method = "pairs_of_direction_and_new_direction_when_left")
     public void change_direction_when_turn_on_the_left(Location currentLocation, Location newLocation) {
-        MarsRover marsRover = new MarsRover(currentLocation, statusReporter);
+        MarsRover marsRover = new MarsRover(currentLocation, obstacleManager, statusReporter);
 
         marsRover.turnOnTheLeft();
 
@@ -130,9 +130,9 @@ public class MarsRoverShould {
         ObstacleManager obstacleManager = new ObstacleManager();
         obstacleManager.addObstacleIn(obstaclePosition);
         Location INITIAL_LOCATION = new Location(ANY_POSITION, Direction.NORTH);
-        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, statusReporter);
+        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, obstacleManager, statusReporter);
 
-        marsRover.moveForward(obstacleManager);
+        marsRover.moveForward();
 
         assertThat(marsRover.getLocation(), is(INITIAL_LOCATION));
         verify(statusReporter).reportObstacleIn(obstaclePosition);
@@ -144,9 +144,9 @@ public class MarsRoverShould {
         ObstacleManager obstacleManager = new ObstacleManager();
         obstacleManager.addObstacleIn(obstaclePosition);
         Location INITIAL_LOCATION = new Location(ANY_POSITION, Direction.NORTH);
-        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, statusReporter);
+        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, obstacleManager, statusReporter);
 
-        marsRover.moveBackward(obstacleManager);
+        marsRover.moveBackward();
 
         assertThat(marsRover.getLocation(), is(INITIAL_LOCATION));
         verify(statusReporter).reportObstacleIn(obstaclePosition);
