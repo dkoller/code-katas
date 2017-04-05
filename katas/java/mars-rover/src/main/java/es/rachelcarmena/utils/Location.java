@@ -2,18 +2,30 @@ package es.rachelcarmena.utils;
 
 public class Location {
 
-    protected final int x;
-    protected final int y;
+    protected final Position position;
+    protected final Direction direction;
 
-    public Location(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Location(Position position, Direction direction) {
+        this.position = position;
+        this.direction = direction;
     }
 
-    public Location calculateNewPosition(Direction currentDirection, boolean forward) {
-        int newX = x;
-        int newY = y;
-        switch (currentDirection) {
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public Position calculatePositionWhenForward() {
+        return calculatePosition(true);
+    }
+
+    public Position calculatePositionWhenBackward() {
+        return calculatePosition(false);
+    }
+
+    private Position calculatePosition(boolean forward) {
+        int newX = position.x;
+        int newY = position.y;
+        switch (direction) {
             case NORTH:
                 newY = forward ? newY + 1 : newY - 1;
                 break;
@@ -26,33 +38,17 @@ public class Location {
             case WEST:
                 newX = forward ? newX - 1 : newX + 1;
         }
-        return new Location(newX, newY);
+        return new Position(newX, newY);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Location location = (Location) o;
-
-        if (x != location.x) return false;
-        return y == location.y;
+    public Location calculateLocationWhenTurnRight() {
+        Direction newDirection = direction.turnRight();
+        return new Location(position, newDirection);
     }
 
-    @Override
-    public int hashCode() {
-        int result = x;
-        result = 31 * result + y;
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Location{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+    public Location calculateLocationWhenTurnLeft() {
+        Direction newDirection = direction.turnLeft();
+        return new Location(position, newDirection);
     }
 
     public enum Direction {
@@ -101,5 +97,32 @@ public class Location {
         public abstract Direction turnRight();
 
         public abstract Direction turnLeft();
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Location location = (Location) o;
+
+        if (!position.equals(location.position)) return false;
+        return direction == location.direction;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = position.hashCode();
+        result = 31 * result + direction.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "position=" + position +
+                ", direction=" + direction +
+                '}';
     }
 }

@@ -1,22 +1,16 @@
 package es.rachelcarmena.domain;
 
+import es.rachelcarmena.utils.Position;
 import es.rachelcarmena.delivery.StatusReporter;
 import es.rachelcarmena.utils.Location;
-import es.rachelcarmena.utils.Location.Direction;
 
 public class MarsRover {
     private Location location;
-    private Direction direction;
     private StatusReporter statusReporter;
 
-    public MarsRover(Location location, Direction direction, StatusReporter statusReporter) {
+    public MarsRover(Location location, StatusReporter statusReporter) {
         this.location = location;
-        this.direction = direction;
         this.statusReporter = statusReporter;
-    }
-
-    public Object getDirection() {
-        return direction;
     }
 
     public Location getLocation() {
@@ -24,28 +18,28 @@ public class MarsRover {
     }
 
     public void moveForward(ObstacleManager obstacleManager) {
-        Location newLocation = location.calculateNewPosition(direction, true);
-        if (!obstacleManager.detectObstacleIn(newLocation)) {
-            statusReporter.reportObstacleIn(newLocation);
+        Position newPosition = location.calculatePositionWhenForward();
+        if (!obstacleManager.detectObstacleIn(newPosition)) {
+            statusReporter.reportObstacleIn(newPosition);
             return;
         }
-        location = newLocation;
+        location = new Location(newPosition, location.getDirection());
     }
 
     public void moveBackward(ObstacleManager obstacleManager) {
-        Location newLocation = location.calculateNewPosition(direction, false);
-        if (!obstacleManager.detectObstacleIn(newLocation)) {
-            statusReporter.reportObstacleIn(newLocation);
+        Position newPosition = location.calculatePositionWhenBackward();
+        if (!obstacleManager.detectObstacleIn(newPosition)) {
+            statusReporter.reportObstacleIn(newPosition);
             return;
         }
-        location = newLocation;
+        location = new Location(newPosition, location.getDirection());
     }
 
     public void turnOnTheRight() {
-        direction = direction.turnRight();
+        location = location.calculateLocationWhenTurnRight();
     }
 
     public void turnOnTheLeft() {
-        direction = direction.turnLeft();
+        location = location.calculateLocationWhenTurnLeft();
     }
 }
