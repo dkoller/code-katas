@@ -68,12 +68,4 @@ public class Location {
         result = 31 * result + direction.hashCode();
         return result;
     }
-
-    @Override
-    public String toString() {
-        return "Location{" +
-                "position=" + position +
-                ", direction=" + direction +
-                '}';
-    }
 }
