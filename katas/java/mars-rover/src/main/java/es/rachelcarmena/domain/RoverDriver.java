@@ -2,7 +2,13 @@ package es.rachelcarmena.domain;
 
 public class RoverDriver {
 
-    public void send(MarsRover marsRover, char... commands) {
+    private MarsRover marsRover;
+
+    public RoverDriver(MarsRover marsRover) {
+        this.marsRover = marsRover;
+    }
+
+    public void sendCommands(char... commands) {
         for(char command: commands) {
             switch (command) {
                 case 'f':
