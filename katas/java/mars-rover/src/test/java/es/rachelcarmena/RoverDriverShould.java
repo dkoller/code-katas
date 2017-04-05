@@ -16,7 +16,6 @@ import static org.mockito.Mockito.times;
 @RunWith(MockitoJUnitRunner.class)
 public class RoverDriverShould {
 
-    private final ObstacleManager obstacleManager = new ObstacleManager();
     private final RoverDriver roverDriver = new RoverDriver();
     @Mock
     MarsRover marsRover;
