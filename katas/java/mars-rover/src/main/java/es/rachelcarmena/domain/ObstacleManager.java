@@ -10,7 +10,7 @@ public class ObstacleManager {
     Set<Position> obstacles = new HashSet<>();
 
     public boolean detectObstacleIn(Position position) {
-        return !obstacles.contains(position);
+        return obstacles.contains(position);
     }
 
     public void addObstacleIn(Position position) {

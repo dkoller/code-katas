@@ -42,7 +42,7 @@ public class MarsRoverShould {
     @Parameters(method = "pairs_of_direction_and_new_position_when_forward")
     public void change_position_when_move_forward(Location currentLocation, Location newLocation) {
         MarsRover marsRover = new MarsRover(currentLocation, obstacleManager, statusReporter);
-        given(obstacleManager.detectObstacleIn(any(Position.class))).willReturn(true);
+        given(obstacleManager.detectObstacleIn(any(Position.class))).willReturn(false);
 
         marsRover.moveForward();
 
@@ -64,7 +64,7 @@ public class MarsRoverShould {
     @Parameters(method = "pairs_of_direction_and_new_position_when_backward")
     public void change_position_when_move_backward(Location currentLocation, Location newLocation) {
         MarsRover marsRover = new MarsRover(currentLocation, obstacleManager, statusReporter);
-        given(obstacleManager.detectObstacleIn(any(Position.class))).willReturn(true);
+        given(obstacleManager.detectObstacleIn(any(Position.class))).willReturn(false);
 
         marsRover.moveBackward();
 

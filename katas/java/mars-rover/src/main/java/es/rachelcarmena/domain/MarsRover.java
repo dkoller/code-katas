@@ -21,7 +21,7 @@ public class MarsRover {
 
     public void moveForward() {
         Position newPosition = location.calculatePositionWhenForward();
-        if (!obstacleManager.detectObstacleIn(newPosition)) {
+        if (obstacleManager.detectObstacleIn(newPosition)) {
             statusReporter.reportObstacleIn(newPosition);
             return;
         }
@@ -30,7 +30,7 @@ public class MarsRover {
 
     public void moveBackward() {
         Position newPosition = location.calculatePositionWhenBackward();
-        if (!obstacleManager.detectObstacleIn(newPosition)) {
+        if (obstacleManager.detectObstacleIn(newPosition)) {
             statusReporter.reportObstacleIn(newPosition);
             return;
         }
