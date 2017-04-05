@@ -1,5 +1,6 @@
 package es.rachelcarmena;
 
+import es.rachelcarmena.delivery.StatusReporter;
 import es.rachelcarmena.domain.MarsRover;
 import es.rachelcarmena.domain.ObstacleManager;
 import es.rachelcarmena.utils.Location;
@@ -10,11 +11,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
-import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(JUnitParamsRunner.class)
@@ -26,6 +28,8 @@ public class MarsRoverShould {
 
     @Mock
     ObstacleManager obstacleManager;
+    @Mock
+    StatusReporter statusReporter;
 
     @Before
     public void setUp() throws Exception {
@@ -35,13 +39,14 @@ public class MarsRoverShould {
     @Test
     @Parameters(method = "pairs_of_direction_and_new_position_when_forward")
     public void change_position_when_move_forward(Location.Direction currentDirection, Location newLocation) {
-        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, currentDirection);
+        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, currentDirection, statusReporter);
         given(obstacleManager.detectObstacleIn(any(Location.class))).willReturn(true);
 
         marsRover.moveForward(obstacleManager);
 
         assertThat(marsRover.getLocation(), is(newLocation));
         assertThat(marsRover.getDirection(), is(currentDirection));
+        verifyZeroInteractions(statusReporter);
     }
 
     @SuppressWarnings("unused")
@@ -56,13 +61,14 @@ public class MarsRoverShould {
     @Test
     @Parameters(method = "pairs_of_direction_and_new_position_when_backward")
     public void change_position_when_move_backward(Location.Direction currentDirection, Location newLocation) {
-        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, currentDirection);
+        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, currentDirection, statusReporter);
         given(obstacleManager.detectObstacleIn(any(Location.class))).willReturn(true);
 
         marsRover.moveBackward(obstacleManager);
 
         assertThat(marsRover.getLocation(), is(newLocation));
         assertThat(marsRover.getDirection(), is(currentDirection));
+        verifyZeroInteractions(statusReporter);
     }
 
     @SuppressWarnings("unused")
@@ -77,12 +83,13 @@ public class MarsRoverShould {
     @Test
     @Parameters(method = "pairs_of_direction_and_new_direction_when_right")
     public void change_direction_when_turn_on_the_right(Location.Direction currentDirection, Location.Direction newDirection) {
-        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, currentDirection);
+        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, currentDirection, statusReporter);
 
         marsRover.turnOnTheRight();
 
         assertThat(marsRover.getLocation(), is(INITIAL_LOCATION));
         assertThat(marsRover.getDirection(), is(newDirection));
+        verifyZeroInteractions(statusReporter);
     }
 
     @SuppressWarnings("unused")
@@ -97,12 +104,13 @@ public class MarsRoverShould {
     @Test
     @Parameters(method = "pairs_of_direction_and_new_direction_when_left")
     public void change_direction_when_turn_on_the_left(Location.Direction currentDirection, Location.Direction newDirection) {
-        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, currentDirection);
+        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, currentDirection, statusReporter);
 
         marsRover.turnOnTheLeft();
 
         assertThat(marsRover.getLocation(), is(INITIAL_LOCATION));
         assertThat(marsRover.getDirection(), is(newDirection));
+        verifyZeroInteractions(statusReporter);
     }
 
     @SuppressWarnings("unused")
@@ -116,25 +124,26 @@ public class MarsRoverShould {
 
     @Test
     public void not_move_forward_if_obstacle_in_new_position() {
+        Location obstaclePosition = new Location(ANY_X, ANY_Y + 1);
         ObstacleManager obstacleManager = new ObstacleManager();
-        obstacleManager.addObstacleIn(new Location(ANY_X, ANY_Y + 1));
-        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, Location.Direction.NORTH);
+        obstacleManager.addObstacleIn(obstaclePosition);
+        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, Location.Direction.NORTH, statusReporter);
 
-        boolean moveDone = marsRover.moveForward(obstacleManager);
+        marsRover.moveForward(obstacleManager);
 
-        assertFalse(moveDone);
         assertThat(marsRover.getLocation(), is(INITIAL_LOCATION));
+        verify(statusReporter).reportObstacleIn(obstaclePosition);
     }
 
     @Test
     public void not_move_backward_if_obstacle_in_new_position() {
+        Location obstaclePosition = new Location(ANY_X, ANY_Y - 1);
         ObstacleManager obstacleManager = new ObstacleManager();
-        obstacleManager.addObstacleIn(new Location(ANY_X, ANY_Y - 1));
-        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, Location.Direction.NORTH);
+        obstacleManager.addObstacleIn(obstaclePosition);
+        MarsRover marsRover = new MarsRover(INITIAL_LOCATION, Location.Direction.NORTH, statusReporter);
 
-        boolean moveDone = marsRover.moveBackward(obstacleManager);
+        marsRover.moveBackward(obstacleManager);
 
-        assertFalse(moveDone);
-        assertThat(marsRover.getLocation(), is(INITIAL_LOCATION));
+        verify(statusReporter).reportObstacleIn(obstaclePosition);
     }
 }

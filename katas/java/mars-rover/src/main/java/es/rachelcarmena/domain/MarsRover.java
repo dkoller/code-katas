@@ -1,15 +1,18 @@
 package es.rachelcarmena.domain;
 
+import es.rachelcarmena.delivery.StatusReporter;
 import es.rachelcarmena.utils.Location;
 import es.rachelcarmena.utils.Location.Direction;
 
 public class MarsRover {
     private Location location;
     private Direction direction;
+    private StatusReporter statusReporter;
 
-    public MarsRover(Location location, Direction direction) {
+    public MarsRover(Location location, Direction direction, StatusReporter statusReporter) {
         this.location = location;
         this.direction = direction;
+        this.statusReporter = statusReporter;
     }
 
     public Object getDirection() {
@@ -20,18 +23,22 @@ public class MarsRover {
         return location;
     }
 
-    public boolean moveForward(ObstacleManager obstacleManager) {
+    public void moveForward(ObstacleManager obstacleManager) {
         Location newLocation = location.calculateNewPosition(direction, true);
-        if (!obstacleManager.detectObstacleIn(newLocation)) return false;
+        if (!obstacleManager.detectObstacleIn(newLocation)) {
+            statusReporter.reportObstacleIn(newLocation);
+            return;
+        }
         location = newLocation;
-        return true;
     }
 
-    public boolean moveBackward(ObstacleManager obstacleManager) {
+    public void moveBackward(ObstacleManager obstacleManager) {
         Location newLocation = location.calculateNewPosition(direction, false);
-        if (!obstacleManager.detectObstacleIn(newLocation)) return false;
+        if (!obstacleManager.detectObstacleIn(newLocation)) {
+            statusReporter.reportObstacleIn(newLocation);
+            return;
+        }
         location = newLocation;
-        return true;
     }
 
     public void turnOnTheRight() {

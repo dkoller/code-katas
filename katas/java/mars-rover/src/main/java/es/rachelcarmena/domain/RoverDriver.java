@@ -2,18 +2,14 @@ package es.rachelcarmena.domain;
 
 public class RoverDriver {
 
-    public boolean send(MarsRover marsRover, ObstacleManager obstacleManager, char... commands) {
-        boolean movementDone;
-
+    public void send(MarsRover marsRover, ObstacleManager obstacleManager, char... commands) {
         for(char command: commands) {
             switch (command) {
                 case 'f':
-                    movementDone = marsRover.moveForward(obstacleManager);
-                    if (!movementDone) return false;
+                    marsRover.moveForward(obstacleManager);
                     break;
                 case 'b':
-                    movementDone = marsRover.moveBackward(obstacleManager);
-                    if (!movementDone) return false;
+                    marsRover.moveBackward(obstacleManager);
                     break;
                 case 'r':
                     marsRover.turnOnTheRight();
@@ -23,6 +19,5 @@ public class RoverDriver {
                     break;
             }
         }
-        return true;
     }
 }
