@@ -20,5 +20,11 @@ public class BasketCalculatorPriceShould {
     @Test
     public void not_apply_discount_when_equal_books() {
         assertThat(BasketCalculatorPrice.priceOf(0, 0), is(16.0));
+        assertThat(BasketCalculatorPrice.priceOf(1, 1, 1), is(24.0));
+    }
+
+    @Test
+    public void apply_specific_discount_when_two_different_books() {
+        assertThat(BasketCalculatorPrice.priceOf(0, 1), is(15.2));
     }
 }
