@@ -13,7 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
-import es.rachelcarmena.utils.Direction;
+import static es.rachelcarmena.LocationBuilder.aLocation;
+import static es.rachelcarmena.utils.Direction.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -54,10 +55,10 @@ public class MarsRoverShould {
     @SuppressWarnings("unused")
     private Object pairs_of_direction_and_new_position_when_forward() {
         return new Object[]{
-                new Object[]{new Location(ANY_POSITION, Direction.NORTH), new Location(new Position(ANY_X, ANY_Y + 1), Direction.NORTH)},
-                new Object[]{new Location(ANY_POSITION, Direction.SOUTH), new Location(new Position(ANY_X, ANY_Y - 1), Direction.SOUTH)},
-                new Object[]{new Location(ANY_POSITION, Direction.EAST), new Location(new Position(ANY_X + 1, ANY_Y), Direction.EAST)},
-                new Object[]{new Location(ANY_POSITION, Direction.WEST), new Location(new Position(ANY_X - 1, ANY_Y), Direction.WEST)}
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(NORTH).build(), aLocation().in(ANY_X, ANY_Y + 1).withDirection(NORTH).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(SOUTH).build(), aLocation().in(ANY_X, ANY_Y - 1).withDirection(SOUTH).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(EAST).build(), aLocation().in(ANY_X + 1, ANY_Y).withDirection(EAST).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(WEST).build(), aLocation().in(ANY_X - 1, ANY_Y).withDirection(WEST).build()},
         };
     }
 
@@ -76,10 +77,10 @@ public class MarsRoverShould {
     @SuppressWarnings("unused")
     private Object pairs_of_direction_and_new_position_when_backward() {
         return new Object[]{
-                new Object[]{new Location(ANY_POSITION, Direction.NORTH), new Location(new Position(ANY_X, ANY_Y - 1), Direction.NORTH)},
-                new Object[]{new Location(ANY_POSITION, Direction.SOUTH), new Location(new Position(ANY_X, ANY_Y + 1), Direction.SOUTH)},
-                new Object[]{new Location(ANY_POSITION, Direction.EAST), new Location(new Position(ANY_X - 1, ANY_Y), Direction.EAST)},
-                new Object[]{new Location(ANY_POSITION, Direction.WEST), new Location(new Position(ANY_X + 1, ANY_Y), Direction.WEST)}
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(NORTH).build(), aLocation().in(ANY_X, ANY_Y - 1).withDirection(NORTH).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(SOUTH).build(), aLocation().in(ANY_X, ANY_Y + 1).withDirection(SOUTH).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(EAST).build(), aLocation().in(ANY_X - 1, ANY_Y).withDirection(EAST).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(WEST).build(), aLocation().in(ANY_X + 1, ANY_Y).withDirection(WEST).build()}
         };
     }
 
@@ -97,10 +98,10 @@ public class MarsRoverShould {
     @SuppressWarnings("unused")
     private Object pairs_of_direction_and_new_direction_when_right() {
         return new Object[]{
-                new Object[]{new Location(ANY_POSITION, Direction.NORTH), new Location(ANY_POSITION, Direction.EAST)},
-                new Object[]{new Location(ANY_POSITION, Direction.SOUTH), new Location(ANY_POSITION, Direction.WEST)},
-                new Object[]{new Location(ANY_POSITION, Direction.EAST), new Location(ANY_POSITION, Direction.SOUTH)},
-                new Object[]{new Location(ANY_POSITION, Direction.WEST), new Location(ANY_POSITION, Direction.NORTH)}
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(NORTH).build(), aLocation().in(ANY_POSITION).withDirection(EAST).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(SOUTH).build(), aLocation().in(ANY_POSITION).withDirection(WEST).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(EAST).build(), aLocation().in(ANY_POSITION).withDirection(SOUTH).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(WEST).build(), aLocation().in(ANY_POSITION).withDirection(NORTH).build()}
         };
     }
 
@@ -118,16 +119,16 @@ public class MarsRoverShould {
     @SuppressWarnings("unused")
     private Object pairs_of_direction_and_new_direction_when_left() {
         return new Object[]{
-                new Object[]{new Location(ANY_POSITION, Direction.NORTH), new Location(ANY_POSITION, Direction.WEST)},
-                new Object[]{new Location(ANY_POSITION, Direction.SOUTH), new Location(ANY_POSITION, Direction.EAST)},
-                new Object[]{new Location(ANY_POSITION, Direction.EAST), new Location(ANY_POSITION, Direction.NORTH)},
-                new Object[]{new Location(ANY_POSITION, Direction.WEST), new Location(ANY_POSITION, Direction.SOUTH)}
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(NORTH).build(), aLocation().in(ANY_POSITION).withDirection(WEST).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(SOUTH).build(), aLocation().in(ANY_POSITION).withDirection(EAST).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(EAST).build(), aLocation().in(ANY_POSITION).withDirection(NORTH).build()},
+                new Object[]{aLocation().in(ANY_POSITION).withDirection(WEST).build(), aLocation().in(ANY_POSITION).withDirection(SOUTH).build()}
         };
     }
 
     @Test
     public void not_change_location_and_report_obstacle_if_obstacle_in_expected_position_after_forward() {
-        final Location INITIAL_LOCATION = new Location(ANY_POSITION, Direction.NORTH);
+        final Location INITIAL_LOCATION = aLocation().in(ANY_POSITION).withDirection(NORTH).build();
         final Position EXPECTED_POSITION_IF_FORWARD = new Position(ANY_X, ANY_Y + 1);
         ObstacleManager obstacleManager = getObstacleManagerWithObstacleIn(EXPECTED_POSITION_IF_FORWARD);
         MarsRover marsRover = new MarsRover(INITIAL_LOCATION, obstacleManager, statusReporter);
@@ -140,7 +141,7 @@ public class MarsRoverShould {
 
     @Test
     public void not_change_location_and_report_obstacle_if_obstacle_in_expected_position_after_backward() {
-        final Location INITIAL_LOCATION = new Location(ANY_POSITION, Direction.NORTH);
+        final Location INITIAL_LOCATION = aLocation().in(ANY_POSITION).withDirection(NORTH).build();
         final Position EXPECTED_POSITION_IF_BACKWARD = new Position(ANY_X, ANY_Y - 1);
         ObstacleManager obstacleManager = getObstacleManagerWithObstacleIn(EXPECTED_POSITION_IF_BACKWARD);
         MarsRover marsRover = new MarsRover(INITIAL_LOCATION, obstacleManager, statusReporter);
