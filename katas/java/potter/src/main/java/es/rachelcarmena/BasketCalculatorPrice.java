@@ -15,18 +15,18 @@ public class BasketCalculatorPrice {
         put(3, THREE_DIFFERENT_BOOKS_DISCOUNT);
     }};
 
-    public static double priceOf(int... books) {
+    public double priceOf(int... books) {
         if (books.length == 1) return PRICE_PER_BOOK;
         if (areDifferentBooks(books))
             return calculateDiscount(books.length, discountPerBooks.get(books.length));
         return PRICE_PER_BOOK * books.length;
     }
 
-    private static boolean areDifferentBooks(int[] books) {
+    private boolean areDifferentBooks(int[] books) {
         return IntStream.of(books).distinct().count() == books.length;
     }
 
-    private static double calculateDiscount(int numberOfBooks, int discount) {
+    private double calculateDiscount(int numberOfBooks, int discount) {
         return numberOfBooks * PRICE_PER_BOOK * (1.0 - discount / 100.0);
     }
 }
