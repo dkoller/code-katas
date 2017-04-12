@@ -60,22 +60,20 @@ public class BasketCalculatorPrice {
         return numberOfDifferentBooks;
     }
 
-    private int getNumberOfIndividualBooks(int[] numberOfBooks) {
-        for (int number : numberOfBooks) {
-            if (number > 0) return number;
-        }
-        return 0;
+    private int getNumberOfIndividualBooks(int[] numberOfBooksPerTitle) {
+        return IntStream.of(numberOfBooksPerTitle).filter(n -> n > 0).findFirst().getAsInt();
     }
 
-    private boolean existIndividualBooksIn(int[] numberOfBooks) {
-        for (int number : numberOfBooks) {
-            if (number > 0) return true;
-        }
-        return false;
+    private long numbersGreaterThanZeroIn(int[] numbers) {
+        return IntStream.of(numbers).filter(n -> n > 0).count();
     }
 
-    private boolean existMoreThanOneTitleIn(int[] numberOfBooks) {
-        return IntStream.of(numberOfBooks).filter(n -> n > 0).count() > 1;
+    private boolean existIndividualBooksIn(int[] numberOfBooksPerTitle) {
+        return numbersGreaterThanZeroIn(numberOfBooksPerTitle) > 0;
+    }
+
+    private boolean existMoreThanOneTitleIn(int[] numberOfBooksPerTitle) {
+        return numbersGreaterThanZeroIn(numberOfBooksPerTitle) > 1;
     }
 
     private int[] calculateNumberOfBooksPerTitle(int[] books) {
