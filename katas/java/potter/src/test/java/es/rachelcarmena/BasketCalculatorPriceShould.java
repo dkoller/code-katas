@@ -38,4 +38,9 @@ public class BasketCalculatorPriceShould {
     public void apply_specific_discount_when_three_different_books() {
         assertThat(basketCalculatorPrice.priceOf(0, 1, 2), is(21.6));
     }
+
+    @Test
+    public void apply_specific_discount_when_four_different_books() {
+        assertThat(basketCalculatorPrice.priceOf(0, 1, 2, 4), is(25.6));
+    }
 }
