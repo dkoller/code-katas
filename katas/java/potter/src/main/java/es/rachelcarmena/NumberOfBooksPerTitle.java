@@ -8,18 +8,21 @@ public class NumberOfBooksPerTitle {
 
     private static final int NUMBER_OF_TITLES = 5;
     private Integer[] values;
+    private boolean minNumberOfGroups;
 
-    public NumberOfBooksPerTitle(int[] titles) {
-        calculateValuesInReverseOrder(titles);
+    public NumberOfBooksPerTitle(int[] titles, boolean minNumberOfGroups) {
+        this.values = calculateValuesInReverseOrder(titles);
+        this.minNumberOfGroups = minNumberOfGroups;
     }
 
-    private void calculateValuesInReverseOrder(int[] titles) {
-        values = new Integer[NUMBER_OF_TITLES];
+    private Integer[] calculateValuesInReverseOrder(int[] titles) {
+        Integer[] values = new Integer[NUMBER_OF_TITLES];
         Arrays.fill(values, 0);
         for (Integer title : titles) {
             values[title]++;
         }
         Arrays.sort(values, Comparator.reverseOrder());
+        return values;
     }
 
     public boolean existIndividualBooks() {
@@ -41,6 +44,9 @@ public class NumberOfBooksPerTitle {
             if (values[i] > 0) {
                 values[i]--;
                 numberOfDifferentBooks++;
+                if (!minNumberOfGroups) {
+                    if (values[i] == 0) return numberOfDifferentBooks;
+                }
             }
         }
         return numberOfDifferentBooks;

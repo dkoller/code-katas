@@ -40,6 +40,10 @@ public class Amount {
         return subtract(discount);
     }
 
+    public Amount min(Amount amount) {
+        return new Amount(amount.value.min(this.value));
+    }
+
     @Override
     public int hashCode() {
         return super.hashCode();
