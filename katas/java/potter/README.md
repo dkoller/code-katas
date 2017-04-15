@@ -6,7 +6,7 @@
 
 Representation:
 
-| number of books of one title | number of books of one title | number of books of title | number of books of title | number of books of title |
+| number of books of one title | number of books of one title | number of books of one title | number of books of one title | number of books of one title |
 |---|---|---|---|---|
 
 Ordered by quantity in descending order, regardless of the title.
