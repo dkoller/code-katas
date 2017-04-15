@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-public class BasketCalculatorPrice {
+public class BasketPriceCalculator {
 
     private static final Amount PRICE_PER_BOOK = Amount.valueOf(8);
 
