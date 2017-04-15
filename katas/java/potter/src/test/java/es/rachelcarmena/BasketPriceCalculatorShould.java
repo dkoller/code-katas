@@ -59,4 +59,10 @@ public class BasketPriceCalculatorShould {
         assertThat(basketPriceCalculator.priceOf(0, 0, 1, 1, 2, 2, 3, 3), is(Amount.valueOf(51.2)));
         assertThat(basketPriceCalculator.priceOf(0, 0, 1, 1, 2, 2, 3, 3, 4, 4), is(Amount.valueOf(60.0)));
     }
+
+    @Test
+    public void apply_several_discounts_when_edge_cases_of_different_books() {
+        assertThat(basketPriceCalculator.priceOf(0, 0, 1, 1, 2, 2, 3, 4), is(Amount.valueOf(51.2)));
+        assertThat(basketPriceCalculator.priceOf(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4), is(Amount.valueOf(141.2)));
+    }
 }
