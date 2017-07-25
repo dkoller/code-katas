@@ -1,0 +1,68 @@
+[
+  {
+    "name": "AccountService",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "deposit (amount)",
+      "withdraw (amount)",
+      "printStatement"
+    ],
+    "collaborators": [
+      "TransactionRepository",
+      "StatementPrinter",
+      "Clock"
+    ]
+  },
+  {
+    "name": "TransactionRepository",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "addTransaction (transaction)",
+      "getAllTransactions"
+    ],
+    "collaborators": [
+      ""
+    ]
+  },
+  {
+    "name": "StatementPrinter",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "printTransactions (list of transactions)"
+    ],
+    "collaborators": [
+      "Console"
+    ]
+  },
+  {
+    "name": "Clock",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "now"
+    ],
+    "collaborators": [
+      ""
+    ]
+  },
+  {
+    "name": "Transaction",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "getAmount",
+      "getDate"
+    ],
+    "collaborators": [
+      ""
+    ]
+  }
+]

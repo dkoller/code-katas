@@ -32,3 +32,7 @@ public class AccountService {
 
 }
 ```
+
+## CRC Cards
+
+[CRC cards](CRC-cards.pdf) from https://echeung.me/crcmaker/
