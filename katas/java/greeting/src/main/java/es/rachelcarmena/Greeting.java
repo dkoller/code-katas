@@ -1,14 +1,17 @@
 package es.rachelcarmena;
 
+import static es.rachelcarmena.UsualNames.USUAL_GREETING;
+
 public class Greeting {
 
-    public String greet(String... names) {
-        GreetingCreator greetingCreator = new GreetingCreator(names);
+    private static final String ANONYMOUS_NAME = "my friend";
 
+    public String greet(String... names) {
         if (names == null) {
-            return greetingCreator.anonymousGreating();
+            return String.format(USUAL_GREETING, ANONYMOUS_NAME);
         }
 
+        GreetingCreator greetingCreator = new GreetingCreator(names);
         StringBuilder greeting = new StringBuilder();
         greeting.append(greetingCreator.withUsualNames());
         greeting.append(greetingCreator.withUpperCaseName());
