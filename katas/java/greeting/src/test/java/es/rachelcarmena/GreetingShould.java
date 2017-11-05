@@ -38,5 +38,6 @@ public class GreetingShould {
 	@Test
 	public void create_a_multiple_greeting_when_more_than_two_names() {
 		assertThat(greeting.greet("Amy", "Brian", "Charlotte"), is("Hello, Amy, Brian, and Charlotte."));
+		assertThat(greeting.greet("Amy", "Brian", "Charlotte", "Rachel"), is("Hello, Amy, Brian, Charlotte, and Rachel."));
 	}
 }
