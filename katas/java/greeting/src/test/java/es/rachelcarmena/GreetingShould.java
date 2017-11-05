@@ -40,4 +40,9 @@ public class GreetingShould {
 		assertThat(greeting.greet("Amy", "Brian", "Charlotte"), is("Hello, Amy, Brian, and Charlotte."));
 		assertThat(greeting.greet("Amy", "Brian", "Charlotte", "Rachel"), is("Hello, Amy, Brian, Charlotte, and Rachel."));
 	}
+
+	@Test
+	public void create_separated_greetings_when_mixing_names() {
+		assertThat(greeting.greet("Amy", "BRIAN", "Charlotte"), is("Hello, Amy and Charlotte. AND HELLO BRIAN!"));
+	}
 }

@@ -1,32 +1,71 @@
 package es.rachelcarmena;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 public class Greeting {
 
     private static final String USUAL_GREETING = "Hello, %s.";
+    private static final String SHOUTING_GREETING = "HELLO %s!";
+
     private static final String ANONYMOUS_NAME = "my friend";
+    private static final String SEPARATOR = ",";
 
     public String greet(String... names) {
         if (names == null)
             return String.format(USUAL_GREETING, ANONYMOUS_NAME);
 
-        if (names[0].toUpperCase().equals(names[0]))
-            return String.format("HELLO %s!", names[0]);
+        List<String> notUpperCaseNames = getNotUpperCaseName(names);
+        Optional<String> upperCaseName = getUpperCaseNames(names);
 
-        if (names.length == 1) {
-            return String.format(USUAL_GREETING, names[0]);
+        StringBuilder greeting = new StringBuilder();
+        if (notUpperCaseNames.size() != 0) {
+            greeting.append(createGreetingWithoutUppercaseNames(notUpperCaseNames));
         }
 
-        StringBuilder greetingNames = new StringBuilder(names[0]);
-        if (names.length > 2) {
-            greetingNames.append(",");
-            for (int index = 1; index < names.length - 1; index++) {
+        if (upperCaseName.isPresent()) {
+            if (greeting.length() > 0)
+                greeting.append(" AND ");
+            greeting.append(createGreetingWithUpperCaseNames(upperCaseName.get()));
+        }
+
+        return greeting.toString();
+    }
+
+    private boolean isUpperCase(String name) {
+        return name.toUpperCase().equals(name);
+    }
+
+    private Optional<String> getUpperCaseNames(String[] names) {
+        return Arrays.stream(names).filter(name -> isUpperCase(name)).findFirst();
+    }
+
+    private List<String> getNotUpperCaseName(String[] names) {
+        return Arrays.stream(names).filter(name -> !isUpperCase(name)).collect(Collectors.toList());
+    }
+
+    private String createGreetingWithUpperCaseNames(String name) {
+        return String.format(SHOUTING_GREETING, name);
+    }
+
+    private String createGreetingWithoutUppercaseNames(List<String> names) {
+        if (names.size() == 1) {
+            return String.format(USUAL_GREETING, names.get(0));
+        }
+
+        StringBuilder greetingNames = new StringBuilder(names.get(0));
+        if (names.size() > 2) {
+            greetingNames.append(SEPARATOR);
+            for (int index = 1; index < names.size() - 1; index++) {
                 greetingNames.append(" ");
-                greetingNames.append(names[index]);
-                greetingNames.append(",");
+                greetingNames.append(names.get(index));
+                greetingNames.append(SEPARATOR);
             }
         }
         greetingNames.append(" and ");
-        greetingNames.append(names[names.length - 1]);
+        greetingNames.append(names.get(names.size() - 1));
         return String.format(USUAL_GREETING, greetingNames);
     }
 }
