@@ -1,8 +1,5 @@
 package es.rachelcarmena.domain;
 
-import es.rachelcarmena.domain.Amount;
-import es.rachelcarmena.domain.Transaction;
-
 import java.time.LocalDate;
 
 public class Withdraw extends Transaction {

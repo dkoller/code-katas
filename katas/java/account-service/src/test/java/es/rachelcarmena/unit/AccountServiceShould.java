@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -48,7 +49,7 @@ public class AccountServiceShould {
         given(clock.now()).willReturn(ANY_DATE);
         accountService.deposit(ANY_AMOUNT);
 
-        verify(transactionRepository).addTransaction(ANY_DEPOSIT);
+        verify(transactionRepository).addTransaction(refEq(ANY_DEPOSIT));
     }
 
     @Test
@@ -56,7 +57,7 @@ public class AccountServiceShould {
         given(clock.now()).willReturn(ANY_DATE);
         accountService.withdraw(ANY_AMOUNT);
 
-        verify(transactionRepository).addTransaction(ANY_WITHDRAW);
+        verify(transactionRepository).addTransaction(refEq(ANY_WITHDRAW));
     }
 
     @Test

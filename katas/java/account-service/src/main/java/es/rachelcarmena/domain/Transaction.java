@@ -20,22 +20,4 @@ public abstract class Transaction {
     }
 
     public abstract Amount getAmountAsPerTransactionType();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Transaction that = (Transaction) o;
-
-        if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
-        return date != null ? date.equals(that.date) : that.date == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = amount != null ? amount.hashCode() : 0;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        return result;
-    }
 }
