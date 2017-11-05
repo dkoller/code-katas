@@ -24,4 +24,9 @@ public class GreetingShould {
 	public void create_an_anonymous_greeting_when_no_name() {
 		assertThat(greeting.greet(null), is("Hello, my friend."));
 	}
+
+	@Test
+	public void shout_when_name_is_all_uppercase() {
+		assertThat(greeting.greet("JERRY"), is("HELLO JERRY!"));
+	}
 }
