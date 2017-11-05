@@ -29,4 +29,9 @@ public class GreetingShould {
 	public void shout_when_name_is_all_uppercase() {
 		assertThat(greeting.greet("JERRY"), is("HELLO JERRY!"));
 	}
+
+	@Test
+	public void create_a_multiple_greeting_when_two_names() {
+		assertThat(greeting.greet("Jill", "Jane"), is("Hello, Jill and Jane."));
+	}
 }
