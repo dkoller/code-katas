@@ -1,14 +1,12 @@
 package es.rachelcarmena;
 
-import static es.rachelcarmena.CommonNames.COMMON_GREETING;
+import es.rachelcarmena.creator.GreetingCreator;
 
 public class Greeting {
 
-    private static final String ANONYMOUS_NAME = "my friend";
-
     public String greet(String... names) {
         if (names == null) {
-            return String.format(COMMON_GREETING, ANONYMOUS_NAME);
+            return GreetingCreator.anonymous();
         }
 
         GreetingCreator greetingCreator = new GreetingCreator(names);

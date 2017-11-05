@@ -1,11 +1,18 @@
-package es.rachelcarmena;
+package es.rachelcarmena.creator;
+
+import static es.rachelcarmena.creator.CommonNames.COMMON_GREETING;
 
 public class GreetingCreator {
 
+    private static final String ANONYMOUS_NAME = "my friend";
     private static final String EMPTY_GREETING = "";
 
     private CommonNames commonNames;
     private UpperCaseName upperCaseName;
+
+    public static String anonymous() {
+        return String.format(COMMON_GREETING, ANONYMOUS_NAME);
+    }
 
     public GreetingCreator(String... names) {
         commonNames = new CommonNames(names);

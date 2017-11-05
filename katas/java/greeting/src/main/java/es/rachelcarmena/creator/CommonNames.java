@@ -1,4 +1,6 @@
-package es.rachelcarmena;
+package es.rachelcarmena.creator;
+
+import es.rachelcarmena.common.Name;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,13 +8,13 @@ import java.util.stream.Collectors;
 
 public class CommonNames {
 
-    static final String COMMON_GREETING = "Hello, %s.";
+    public static final String COMMON_GREETING = "Hello, %s.";
     private static final String SEPARATOR = ",";
 
     private final List<String> names;
 
     CommonNames(String[] names) {
-        this.names = Arrays.stream(names).filter(name -> !NameUtils.isUpperCase(name)).collect(Collectors.toList());
+        this.names = Arrays.stream(names).filter(name -> !Name.isUpperCase(name)).collect(Collectors.toList());
     }
 
     boolean exists() {
