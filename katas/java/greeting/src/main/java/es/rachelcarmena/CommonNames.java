@@ -12,7 +12,7 @@ public class CommonNames {
     private final List<String> names;
 
     CommonNames(String[] names) {
-        this.names = Arrays.stream(names).filter(name -> !isUpperCase(name)).collect(Collectors.toList());
+        this.names = Arrays.stream(names).filter(name -> !NameUtils.isUpperCase(name)).collect(Collectors.toList());
     }
 
     boolean exists() {
@@ -36,9 +36,5 @@ public class CommonNames {
         greetingNames.append(" and ");
         greetingNames.append(names.get(names.size() - 1));
         return String.format(COMMON_GREETING, greetingNames);
-    }
-
-    private boolean isUpperCase(String name) {
-        return name.toUpperCase().equals(name);
     }
 }

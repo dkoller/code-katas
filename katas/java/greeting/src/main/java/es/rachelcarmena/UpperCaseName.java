@@ -10,7 +10,7 @@ public class UpperCaseName {
     private final Optional<String> name;
 
     UpperCaseName(String[] names) {
-        this.name = Arrays.stream(names).filter(name -> isUpperCase(name)).findFirst();
+        this.name = Arrays.stream(names).filter(name -> NameUtils.isUpperCase(name)).findFirst();
     }
 
     boolean exists() {
@@ -19,9 +19,5 @@ public class UpperCaseName {
 
     String getGreeting() {
         return String.format(SHOUTING_GREETING, name.get());
-    }
-
-    private boolean isUpperCase(String name) {
-        return name.toUpperCase().equals(name);
     }
 }
