@@ -1,6 +1,6 @@
 package es.rachelcarmena;
 
-import static es.rachelcarmena.UsualNames.USUAL_GREETING;
+import static es.rachelcarmena.CommonNames.COMMON_GREETING;
 
 public class Greeting {
 
@@ -8,12 +8,12 @@ public class Greeting {
 
     public String greet(String... names) {
         if (names == null) {
-            return String.format(USUAL_GREETING, ANONYMOUS_NAME);
+            return String.format(COMMON_GREETING, ANONYMOUS_NAME);
         }
 
         GreetingCreator greetingCreator = new GreetingCreator(names);
         StringBuilder greeting = new StringBuilder();
-        greeting.append(greetingCreator.withUsualNames());
+        greeting.append(greetingCreator.withCommonNames());
         greeting.append(greetingCreator.withUpperCaseName());
         return greeting.toString();
     }

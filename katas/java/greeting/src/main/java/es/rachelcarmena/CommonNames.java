@@ -4,14 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UsualNames {
+public class CommonNames {
 
-    static final String USUAL_GREETING = "Hello, %s.";
+    static final String COMMON_GREETING = "Hello, %s.";
     private static final String SEPARATOR = ",";
 
     private final List<String> names;
 
-    UsualNames(String[] names) {
+    CommonNames(String[] names) {
         this.names = Arrays.stream(names).filter(name -> !isUpperCase(name)).collect(Collectors.toList());
     }
 
@@ -21,7 +21,7 @@ public class UsualNames {
 
     String getGreeting() {
         if (names.size() == 1) {
-            return String.format(USUAL_GREETING, names.get(0));
+            return String.format(COMMON_GREETING, names.get(0));
         }
 
         StringBuilder greetingNames = new StringBuilder(names.get(0));
@@ -35,7 +35,7 @@ public class UsualNames {
         }
         greetingNames.append(" and ");
         greetingNames.append(names.get(names.size() - 1));
-        return String.format(USUAL_GREETING, greetingNames);
+        return String.format(COMMON_GREETING, greetingNames);
     }
 
     private boolean isUpperCase(String name) {
