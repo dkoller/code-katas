@@ -50,4 +50,9 @@ public class GreetingShould {
 	public void create_greeting_accepting_commas_separating_names() {
 		assertThat(greeting.greet("Bob", "Charlie, Dianne"), is("Hello, Bob, Charlie, and Dianne."));
 	}
+
+	@Test
+	public void create_greeting_accepting_escaped_commas_separating_names() {
+		assertThat(greeting.greet("Bob", "'Charlie, Dianne'"), is("Hello, Bob and Charlie, Dianne."));
+	}
 }
