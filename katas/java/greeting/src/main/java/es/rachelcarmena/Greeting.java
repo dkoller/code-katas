@@ -1,6 +1,7 @@
 package es.rachelcarmena;
 
 import es.rachelcarmena.creator.GreetingCreator;
+import es.rachelcarmena.creator.NamesSplitter;
 
 public class Greeting {
 
@@ -9,7 +10,9 @@ public class Greeting {
             return GreetingCreator.anonymous();
         }
 
-        GreetingCreator greetingCreator = new GreetingCreator(names);
+        NamesSplitter namesSplitter = new NamesSplitter(names);
+        GreetingCreator greetingCreator = new GreetingCreator(namesSplitter);
+
         StringBuilder greeting = new StringBuilder();
         greeting.append(greetingCreator.withCommonNames());
         greeting.append(greetingCreator.withUpperCaseName());

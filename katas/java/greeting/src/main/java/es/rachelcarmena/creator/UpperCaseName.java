@@ -1,8 +1,5 @@
 package es.rachelcarmena.creator;
 
-import es.rachelcarmena.common.Name;
-
-import java.util.List;
 import java.util.Optional;
 
 public class UpperCaseName {
@@ -11,8 +8,8 @@ public class UpperCaseName {
 
     private final Optional<String> name;
 
-    UpperCaseName(List<String> names) {
-        this.name = names.stream().filter(name -> Name.isUpperCase(name)).findFirst();
+    UpperCaseName(Optional<String> name) {
+        this.name = name;
     }
 
     boolean exists() {
