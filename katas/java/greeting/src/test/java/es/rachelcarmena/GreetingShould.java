@@ -45,4 +45,9 @@ public class GreetingShould {
 	public void create_separated_greetings_when_mixing_names() {
 		assertThat(greeting.greet("Amy", "BRIAN", "Charlotte"), is("Hello, Amy and Charlotte. AND HELLO BRIAN!"));
 	}
+
+	@Test
+	public void create_greeting_accepting_commas_separating_names() {
+		assertThat(greeting.greet("Bob", "Charlie, Dianne"), is("Hello, Bob, Charlie, and Dianne."));
+	}
 }

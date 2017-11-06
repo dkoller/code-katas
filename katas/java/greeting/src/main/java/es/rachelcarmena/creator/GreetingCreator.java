@@ -1,5 +1,9 @@
 package es.rachelcarmena.creator;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static es.rachelcarmena.creator.CommonNames.COMMON_GREETING;
 
 public class GreetingCreator {
@@ -15,8 +19,13 @@ public class GreetingCreator {
     }
 
     public GreetingCreator(String... names) {
-        commonNames = new CommonNames(names);
-        upperCaseName = new UpperCaseName(names);
+        List<String> splittedNames = splitNamesWithCommas(names);
+        commonNames = new CommonNames(splittedNames);
+        upperCaseName = new UpperCaseName(splittedNames);
+    }
+
+    private List<String> splitNamesWithCommas(String[] names) {
+        return Arrays.stream(names).map(name -> name.split("\\s*,\\s*")).flatMap(Arrays::stream).collect(Collectors.toList());
     }
 
     public String withCommonNames() {
