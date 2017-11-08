@@ -10,37 +10,41 @@ import java.util.stream.Stream;
 
 public class NamesSplitter {
 
-    private final List<String> collection;
+    private final List<String> names;
 
-    public NamesSplitter(String[] names) {
-        Map<Boolean, List<String>> partitionByEscapedStrings = partitionByEscapedStrings(names);
-
-        Stream<String> splittedNames = getSplittedNames(partitionByEscapedStrings);
-        Stream<String> escapedStrings = getEscapedNames(partitionByEscapedStrings);
-
-        collection = Stream.concat(splittedNames, escapedStrings).collect(Collectors.toList());
+    public NamesSplitter(String... names) {
+        this.names = getRealNamesFrom(names);
     }
 
     public List<String> commonNames() {
-        return collection.stream().filter(name -> !isUpperCase(name)).collect(Collectors.toList());
+        return names.stream().filter(name -> !isUpperCase(name)).collect(Collectors.toList());
     }
 
     public Optional<String> upperCaseName() {
-        return collection.stream().filter(name -> isUpperCase(name)).findFirst();
+        return names.stream().filter(name -> isUpperCase(name)).findFirst();
     }
 
-    private Stream<String> getEscapedNames(Map<Boolean, List<String>> partitionByEscapedStrings) {
-        Function<String, String> removeEscapingCharacters = name -> name.substring(1, name.length() - 1);
-        return partitionByEscapedStrings.get(true).stream().map(removeEscapingCharacters);
-    }
+    private List<String> getRealNamesFrom(String... names) {
+        Map<Boolean, List<String>> partitionByEscapedStrings = partitionByEscapedStrings(names);
 
-    private Stream<String> getSplittedNames(Map<Boolean, List<String>> partitionByEscapedStrings) {
-        Function<String, String[]> splitByCommas = name -> name.split("\\s*,\\s*");
-        return partitionByEscapedStrings.get(false).stream().map(splitByCommas).flatMap(Arrays::stream).collect(Collectors.toList()).stream();
+        Stream<String> splittedNames = getSplittedNames(partitionByEscapedStrings.get(false));
+        Stream<String> escapedStrings = getEscapedNames(partitionByEscapedStrings.get(true));
+
+        return Stream.concat(splittedNames, escapedStrings).collect(Collectors.toList());
     }
 
     private Map<Boolean, List<String>> partitionByEscapedStrings(String[] names) {
         return Arrays.stream(names).collect(Collectors.partitioningBy(name -> name.matches("'.+'")));
+    }
+
+    private Stream<String> getEscapedNames(List<String> partitionByEscapedStrings) {
+        Function<String, String> removeEscapingCharacters = name -> name.substring(1, name.length() - 1);
+        return partitionByEscapedStrings.stream().map(removeEscapingCharacters);
+    }
+
+    private Stream<String> getSplittedNames(List<String> partitionByEscapedStrings) {
+        Function<String, String[]> splitByCommas = name -> name.split("\\s*,\\s*");
+        return partitionByEscapedStrings.stream().map(splitByCommas).flatMap(Arrays::stream).collect(Collectors.toList()).stream();
     }
 
     private boolean isUpperCase(String name) {
