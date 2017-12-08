@@ -11,6 +11,8 @@ For example, involvedItem A might cost 50 pounds individually, but this week we 
  buy three As and they'll cost you 130.
 
 Our quantityToDiscount table and offers:
+
+```
 +------+-------+----------------+
 | Item | Price | Special offers |
 +------+-------+----------------+
@@ -19,6 +21,7 @@ Our quantityToDiscount table and offers:
 | C    | 20    |                |
 | D    | 15    |                |
 +------+-------+----------------+
+```
 
 Notes: 
  - For any illegal input return -1
@@ -39,6 +42,7 @@ We are going to sell a new involvedItem E.
 Normally E costs 40, but if you buy 2 of Es you will get B free. How cool is that ? Multi-priced items also seemed to work well so we should have more of these.
 
 Our price table and offers: 
+```
 +------+-------+------------------------+
 | Item | Price | Special offers         |
 +------+-------+------------------------+
@@ -48,6 +52,7 @@ Our price table and offers:
 | D    | 15    |                        |
 | E    | 40    | 2E get one B free      |
 +------+-------+------------------------+
+```
 
 Notes: 
  - The policy of the supermarket is to always favor the customer when applying special offers.
@@ -69,6 +74,7 @@ Instead of multi-pricing this involvedItem they want to say "buy 2Fs and get ano
 The offer requires you to have 3 Fs in the basket.
 
 Our price table and offers: 
+```
 +------+-------+------------------------+
 | Item | Price | Special offers         |
 +------+-------+------------------------+
@@ -79,6 +85,7 @@ Our price table and offers:
 | E    | 40    | 2E get one B free      |
 | F    | 10    | 2F get one F free      |
 +------+-------+------------------------+
+```
 
 
 Notes: 
@@ -101,6 +108,7 @@ Our management decided that it is time to start selling a broader range of produ
 We just got a good deal for 20 products. Please add the to the system.
 
 Our price table and offers: 
+```
 +------+-------+------------------------+
 | Item | Price | Special offers         |
 +------+-------+------------------------+
@@ -131,6 +139,7 @@ Our price table and offers:
 | Y    | 10    |                        |
 | Z    | 50    |                        |
 +------+-------+------------------------+
+```
 
 
 Notes: 
@@ -153,6 +162,7 @@ To keep up with the market, we need to make some price adjustments.
 Please use the new and updated price table.
 
 Our price table and offers: 
+```
 +------+-------+---------------------------------+
 | Item | Price | Special offers                  |
 +------+-------+---------------------------------+
@@ -183,6 +193,7 @@ Our price table and offers:
 | Y    | 20    | buy any 3 of (S,T,X,Y,Z) for 45 |
 | Z    | 21    | buy any 3 of (S,T,X,Y,Z) for 45 |
 +------+-------+---------------------------------+
+```
 
 Notes: 
  - The policy of the supermarket is to always favor the customer when applying special offers.
