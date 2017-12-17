@@ -1,7 +1,7 @@
 package es.rachelcarmena;
 
 public class Parser {
-    public PostCommand parse(String command) {
+    public Command parse(String input) {
         return null;
     }
 }

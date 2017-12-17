@@ -2,7 +2,7 @@ package es.rachelcarmena;
 
 import java.time.LocalDateTime;
 
-public class PostCommand {
+public class PostCommand extends Command {
     private final String author;
     private final String message;
 
@@ -11,7 +11,7 @@ public class PostCommand {
         this.message = message;
     }
 
-    public void execute(LocalDateTime datetime, Repository repository) {
+    public void execute(LocalDateTime datetime, Repository repository, Console console) {
         Post post = new Post(message, datetime);
         repository.savePost(author, post);
     }

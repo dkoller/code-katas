@@ -18,7 +18,8 @@ public class Twitter {
     public void execute() {
         String input = console.read();
         LocalDateTime datetime = clock.now();
-        PostCommand command = parser.parse(input);
-        command.execute(datetime, repository);
+
+        Command command = parser.parse(input);
+        command.execute(datetime, repository, console);
     }
 }
