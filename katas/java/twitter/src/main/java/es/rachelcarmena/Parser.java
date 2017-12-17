@@ -6,6 +6,10 @@ public class Parser {
             String[] inputParts = input.split(" -> ");
             return new PostCommand(inputParts[0], inputParts[1]);
         }
+        if (input.contains(" follows ")) {
+            String[] inputParts = input.split(" follows ");
+            return new FollowCommand(inputParts[0], inputParts[1]);
+        }
         return new ReadCommand(input);
     }
 }
