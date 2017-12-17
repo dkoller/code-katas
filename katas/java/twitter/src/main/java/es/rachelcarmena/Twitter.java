@@ -1,5 +1,7 @@
 package es.rachelcarmena;
 
+import java.time.LocalDateTime;
+
 public class Twitter {
     private final Console console;
     private final Clock clock;
@@ -14,5 +16,9 @@ public class Twitter {
     }
 
     public void execute() {
+        String input = console.read();
+        LocalDateTime datetime = clock.now();
+        PostCommand command = parser.parse(input);
+        command.execute(datetime, repository);
     }
 }
