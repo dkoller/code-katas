@@ -18,8 +18,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class TwitterShould {
 
-    private static final String POST_SEPARATOR = " -> ";
-
     private static final String ALICE = "Alice";
     private static final String BOB = "Bob";
     private static final String CHARLIE = "Charlie";
@@ -29,10 +27,10 @@ public class TwitterShould {
     private static final String BOB_POST_MESSAGE_2 = "Good game though.";
     private static final String CHARLIE_POST_MESSAGE = "I'm in New York today! Anyone want to have a coffee?";
 
-    private static final String ALICE_COMMAND_LINE = String.format("%s%s%s", ALICE, POST_SEPARATOR, ALICE_POST_MESSAGE);
-    private static final String BOB_COMMAND_LINE_1 = String.format("%s%s%s", BOB, POST_SEPARATOR, BOB_POST_MESSAGE_1);
-    private static final String BOB_COMMAND_LINE_2 = String.format("%s%s%s", BOB, POST_SEPARATOR, BOB_POST_MESSAGE_2);
-    private static final String CHARLIE_COMMAND_LINE = String.format("%s%s%s", CHARLIE, POST_SEPARATOR, CHARLIE_POST_MESSAGE);
+    private static final String ALICE_COMMAND_LINE = String.format("%s%s%s", ALICE, Parser.POST_SEPARATOR, ALICE_POST_MESSAGE);
+    private static final String BOB_COMMAND_LINE_1 = String.format("%s%s%s", BOB, Parser.POST_SEPARATOR, BOB_POST_MESSAGE_1);
+    private static final String BOB_COMMAND_LINE_2 = String.format("%s%s%s", BOB, Parser.POST_SEPARATOR, BOB_POST_MESSAGE_2);
+    private static final String CHARLIE_COMMAND_LINE = String.format("%s%s%s", CHARLIE, Parser.POST_SEPARATOR, CHARLIE_POST_MESSAGE);
 
     private static final LocalDateTime ALICE_POST_DATETIME = LocalDateTime.of(2018, 2, 3, 10, 0, 0);
     private static final LocalDateTime BOB_POST_DATETIME_1 = LocalDateTime.of(2018, 2, 3, 10, 3, 0);
