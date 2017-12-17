@@ -16,4 +16,14 @@ public class ParserShould {
 
         assertThat(command, is(new PostCommand("Alice", "I love the weather today")));
     }
+
+    @Test
+    public void create_read_command_when_providing_a_user() {
+        String input = "Alice";
+        Parser parser = new Parser();
+
+        Command command = parser.parse(input);
+
+        assertThat(command, is(new ReadCommand("Alice")));
+    }
 }

@@ -21,4 +21,19 @@ public class ReadCommand extends Command {
             console.print(message);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReadCommand)) return false;
+
+        ReadCommand that = (ReadCommand) o;
+
+        return user != null ? user.equals(that.user) : that.user == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return user != null ? user.hashCode() : 0;
+    }
 }
