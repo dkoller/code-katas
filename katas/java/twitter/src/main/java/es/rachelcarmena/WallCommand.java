@@ -35,4 +35,19 @@ public class WallCommand extends Command {
             console.print(message);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WallCommand)) return false;
+
+        WallCommand that = (WallCommand) o;
+
+        return user != null ? user.equals(that.user) : that.user == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return user != null ? user.hashCode() : 0;
+    }
 }
