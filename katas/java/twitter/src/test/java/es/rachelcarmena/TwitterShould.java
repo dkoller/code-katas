@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -110,6 +111,14 @@ public class TwitterShould {
         twitter.execute();
         inOrder.verify(repository).getPostsFrom(CHARLIE);
         inOrder.verify(console).print("I'm in New York today! Anyone want to have a coffee? (2 seconds ago)");
+    }
+
+    @Test
+    public void save_following_when_subscribing() {
+        when(console.read()).thenReturn("Charlie follows Alice");
+        when(parser.parse("Charlie follows Alice")).thenReturn(new FollowCommand("Charlie", "Alice"));
+        twitter.execute();
+        verify(repository).saveFollowing("Charlie", "Alice");
     }
 
     private void whenReadCommand(List<Post> posts, String user) {

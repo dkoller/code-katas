@@ -11,4 +11,7 @@ public class Repository {
         return null;
     }
 
+    public void saveFollowing(String from, String to) {
+
+    }
 }
