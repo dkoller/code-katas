@@ -104,7 +104,9 @@ public class TwitterShould {
     public void save_following_when_subscribing() {
         when(console.read()).thenReturn("Charlie follows Alice");
         when(parser.parse("Charlie follows Alice")).thenReturn(new FollowCommand("Charlie", "Alice"));
+
         twitter.execute();
+
         verify(repository).saveFollowing("Charlie", "Alice");
     }
 
@@ -116,7 +118,9 @@ public class TwitterShould {
         when(repository.getFollowedBy(CHARLIE)).thenReturn(Arrays.asList(ALICE));
         when(repository.getPostsFrom(CHARLIE)).thenReturn(Arrays.asList(CHARLIE_POST));
         when(repository.getPostsFrom(ALICE)).thenReturn(Arrays.asList(ALICE_POST));
+
         twitter.execute();
+
         inOrder.verify(repository).getPostsFrom("Charlie");
         inOrder.verify(repository).getPostsFrom("Alice");
         inOrder.verify(console).print("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)");
