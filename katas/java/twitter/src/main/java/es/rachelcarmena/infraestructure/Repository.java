@@ -1,4 +1,6 @@
-package es.rachelcarmena;
+package es.rachelcarmena.infraestructure;
+
+import es.rachelcarmena.domain.Post;
 
 import java.util.List;
 

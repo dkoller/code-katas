@@ -1,5 +1,11 @@
 package es.rachelcarmena;
 
+import es.rachelcarmena.domain.commands.Command;
+import es.rachelcarmena.infraestructure.Clock;
+import es.rachelcarmena.infraestructure.Console;
+import es.rachelcarmena.infraestructure.Repository;
+import es.rachelcarmena.utils.Parser;
+
 import java.time.LocalDateTime;
 
 public class Twitter {

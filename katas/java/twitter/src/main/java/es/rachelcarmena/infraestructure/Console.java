@@ -1,4 +1,4 @@
-package es.rachelcarmena;
+package es.rachelcarmena.infraestructure;
 
 public class Console {
     public void print(String message) {

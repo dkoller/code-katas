@@ -1,5 +1,11 @@
 package es.rachelcarmena;
 
+import es.rachelcarmena.domain.commands.Command;
+import es.rachelcarmena.domain.commands.FollowCommand;
+import es.rachelcarmena.domain.commands.PostCommand;
+import es.rachelcarmena.domain.commands.ReadCommand;
+import es.rachelcarmena.domain.commands.WallCommand;
+import es.rachelcarmena.utils.Parser;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -1,5 +1,9 @@
 package es.rachelcarmena;
 
+import es.rachelcarmena.infraestructure.Clock;
+import es.rachelcarmena.infraestructure.Console;
+import es.rachelcarmena.infraestructure.Repository;
+import es.rachelcarmena.utils.Parser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;

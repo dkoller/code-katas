@@ -1,4 +1,4 @@
-package es.rachelcarmena;
+package es.rachelcarmena.domain;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -22,6 +22,14 @@ public class Post {
         return String.format("%s (%s second%s ago)", message, seconds, seconds > 1 ? "s" : "");
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public Post getNewPostBy(String user) {
+        return new Post(user + " - " + message, dateTime);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,13 +46,5 @@ public class Post {
         int result = message != null ? message.hashCode() : 0;
         result = 31 * result + (dateTime != null ? dateTime.hashCode() : 0);
         return result;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public Post getNewPostBy(String user) {
-        return new Post(user + " - " + message, dateTime);
     }
 }

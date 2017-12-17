@@ -1,5 +1,14 @@
 package es.rachelcarmena;
 
+import es.rachelcarmena.domain.commands.FollowCommand;
+import es.rachelcarmena.domain.commands.PostCommand;
+import es.rachelcarmena.domain.commands.ReadCommand;
+import es.rachelcarmena.domain.commands.WallCommand;
+import es.rachelcarmena.domain.Post;
+import es.rachelcarmena.infraestructure.Clock;
+import es.rachelcarmena.infraestructure.Console;
+import es.rachelcarmena.infraestructure.Repository;
+import es.rachelcarmena.utils.Parser;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

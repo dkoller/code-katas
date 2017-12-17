@@ -1,4 +1,4 @@
-package es.rachelcarmena;
+package es.rachelcarmena.infraestructure;
 
 import java.time.LocalDateTime;
 
