@@ -43,4 +43,8 @@ public class Post {
     public LocalDateTime getDateTime() {
         return dateTime;
     }
+
+    public Post getNewPostBy(String user) {
+        return new Post(user + " - " + message, dateTime);
+    }
 }

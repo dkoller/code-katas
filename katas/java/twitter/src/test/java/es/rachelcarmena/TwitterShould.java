@@ -83,19 +83,6 @@ public class TwitterShould {
 
     @Test
     public void show_timeline_when_receiving_a_name() {
-        whenPostCommand(ALICE_POST_DATETIME, ALICE_COMMAND_LINE, ALICE, ALICE_POST_MESSAGE);
-        twitter.execute();
-
-        whenPostCommand(BOB_POST_DATETIME_1, BOB_COMMAND_LINE_1, BOB, BOB_POST_MESSAGE_1);
-        twitter.execute();
-
-        whenPostCommand(BOB_POST_DATETIME_2, BOB_COMMAND_LINE_2, BOB, BOB_POST_MESSAGE_2);
-        twitter.execute();
-
-        whenPostCommand(CHARLIE_POST_DATETIME, CHARLIE_COMMAND_LINE, CHARLIE, CHARLIE_POST_MESSAGE);
-        twitter.execute();
-
-
         whenReadCommand(Arrays.asList(ALICE_POST), ALICE);
         twitter.execute();
         inOrder.verify(repository).getPostsFrom(ALICE);
@@ -119,6 +106,21 @@ public class TwitterShould {
         when(parser.parse("Charlie follows Alice")).thenReturn(new FollowCommand("Charlie", "Alice"));
         twitter.execute();
         verify(repository).saveFollowing("Charlie", "Alice");
+    }
+
+    @Test
+    public void show_aggregated_list_of_all_subscriptions_when_wall_command() {
+        when(clock.now()).thenReturn(NOW);
+        when(console.read()).thenReturn("Charlie wall");
+        when(parser.parse("Charlie wall")).thenReturn(new WallCommand(CHARLIE));
+        when(repository.getFollowedBy(CHARLIE)).thenReturn(Arrays.asList(ALICE));
+        when(repository.getPostsFrom(CHARLIE)).thenReturn(Arrays.asList(CHARLIE_POST));
+        when(repository.getPostsFrom(ALICE)).thenReturn(Arrays.asList(ALICE_POST));
+        twitter.execute();
+        inOrder.verify(repository).getPostsFrom("Charlie");
+        inOrder.verify(repository).getPostsFrom("Alice");
+        inOrder.verify(console).print("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)");
+        inOrder.verify(console).print("Alice - I love the weather today (5 minutes ago)");
     }
 
     private void whenReadCommand(List<Post> posts, String user) {

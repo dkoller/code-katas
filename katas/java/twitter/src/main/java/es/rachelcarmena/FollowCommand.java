@@ -12,7 +12,7 @@ public class FollowCommand extends Command {
     }
 
     @Override
-    public void execute(LocalDateTime datetime, Repository repository, Console console) {
+    public void execute(LocalDateTime now, Repository repository, Console console) {
         repository.saveFollowing(from, to);
     }
 }

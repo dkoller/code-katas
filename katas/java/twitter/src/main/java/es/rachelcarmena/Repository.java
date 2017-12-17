@@ -14,4 +14,8 @@ public class Repository {
     public void saveFollowing(String from, String to) {
 
     }
+
+    public List<String> getFollowedBy(String user) {
+        return null;
+    }
 }
