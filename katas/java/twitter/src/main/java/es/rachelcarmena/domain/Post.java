@@ -24,7 +24,7 @@ public class Post {
         return dateTime;
     }
 
-    Post getNewPostBy(String user) {
+    Post createNewPostBy(String user) {
         String newMessage = String.format(MESSAGE_WITH_AUTHOR_FORMAT, user, message);
         return new Post(newMessage, dateTime);
     }
@@ -55,19 +55,21 @@ public class Post {
             posts = posts.stream().sorted(Comparator.comparing(Post::getDateTime).reversed()).collect(Collectors.toList());
         }
 
-        public String[] createMessagesAt(LocalDateTime now) {
-            List<String> messages = new ArrayList<>();
-            for (Post post : posts) {
-                messages.add(post.getMessageAt(now));
-            }
-            String[] a = new String[messages.size()];
-            return messages.toArray(a);
-        }
-
         public void addNewPostsBy(String author, Posts postsByAuthor) {
             for (Post post : postsByAuthor.posts) {
-                posts.add(post.getNewPostBy(author));
+                Post newPost = post.createNewPostBy(author);
+                posts.add(newPost);
             }
+        }
+
+        public String[] createMessagesAt(LocalDateTime now) {
+            int index = 0;
+            String[] messages = new String[posts.size()];
+            for (Post post : posts) {
+                messages[index] = post.getMessageAt(now);
+                index++;
+            }
+            return messages;
         }
     }
 }
