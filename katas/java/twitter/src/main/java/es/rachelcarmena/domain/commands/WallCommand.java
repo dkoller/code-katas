@@ -1,43 +1,31 @@
 package es.rachelcarmena.domain.commands;
 
 import es.rachelcarmena.infraestructure.Console;
-import es.rachelcarmena.domain.Post;
+import es.rachelcarmena.domain.Post.Posts;
 import es.rachelcarmena.infraestructure.Repository;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WallCommand extends Command {
-    private String user;
+    private String author;
 
-    public WallCommand(String user) {
-        this.user = user;
+    public WallCommand(String author) {
+        this.author = author;
     }
 
     @Override
     public void execute(LocalDateTime now, Repository repository, Console console) {
-        List<Post> newPosts = new ArrayList<>();
+        Posts allPosts = new Posts();
+        allPosts.addNewPostsBy(author, repository.getPostsFrom(author));
 
-        List<Post> posts = repository.getPostsFrom(user);
-        for (Post post: posts) {
-            newPosts.add(post.getNewPostBy(user));
+        List<String> users = repository.getFollowedBy(author);
+        for(String user: users) {
+            allPosts.addNewPostsBy(user, repository.getPostsFrom(user));
         }
 
-        List<String> users = repository.getFollowedBy(user);
-        for(String anUser: users) {
-            List<Post> postsByUser = repository.getPostsFrom(anUser);
-            for (Post post: postsByUser) {
-                newPosts.add(post.getNewPostBy(anUser));
-            }
-        }
-        newPosts = newPosts.stream().sorted(Comparator.comparing(Post::getDateTime).reversed()).collect(Collectors.toList());
-        for(Post post: newPosts) {
-            String message = post.getMessageAt(now);
-            console.print(message);
-        }
+        allPosts.orderByDate();
+        console.print(allPosts.createMessagesAt(now));
     }
 
     @Override
@@ -47,11 +35,11 @@ public class WallCommand extends Command {
 
         WallCommand that = (WallCommand) o;
 
-        return user != null ? user.equals(that.user) : that.user == null;
+        return author != null ? author.equals(that.author) : that.author == null;
     }
 
     @Override
     public int hashCode() {
-        return user != null ? user.hashCode() : 0;
+        return author != null ? author.hashCode() : 0;
     }
 }

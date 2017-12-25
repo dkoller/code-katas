@@ -1,29 +1,23 @@
 package es.rachelcarmena.domain.commands;
 
+import es.rachelcarmena.domain.Post.Posts;
 import es.rachelcarmena.infraestructure.Console;
-import es.rachelcarmena.domain.Post;
 import es.rachelcarmena.infraestructure.Repository;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReadCommand extends Command {
-    private String user;
+    private String author;
 
-    public ReadCommand(String user) {
-        this.user = user;
+    public ReadCommand(String author) {
+        this.author = author;
     }
 
     @Override
     public void execute(LocalDateTime now, Repository repository, Console console) {
-        List<Post> posts = repository.getPostsFrom(user);
-        posts = posts.stream().sorted(Comparator.comparing(Post::getDateTime).reversed()).collect(Collectors.toList());
-        for(Post post: posts) {
-            String message = post.getMessageAt(now);
-            console.print(message);
-        }
+        Posts posts = repository.getPostsFrom(author);
+        posts.orderByDate();
+        console.print(posts.createMessagesAt(now));
     }
 
     @Override
@@ -33,11 +27,13 @@ public class ReadCommand extends Command {
 
         ReadCommand that = (ReadCommand) o;
 
-        return user != null ? user.equals(that.user) : that.user == null;
+        return author != null ? author.equals(that.author) : that.author == null;
     }
 
     @Override
     public int hashCode() {
-        return user != null ? user.hashCode() : 0;
+        return author != null ? author.hashCode() : 0;
     }
+
+
 }

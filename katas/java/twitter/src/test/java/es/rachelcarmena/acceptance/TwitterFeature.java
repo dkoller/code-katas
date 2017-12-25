@@ -52,37 +52,43 @@ public class TwitterFeature {
 
 		when(console.read()).thenReturn("Alice");
 		twitter.execute();
-		inOrder.verify(console).print("I love the weather today (5 minutes ago)");
+		inOrder.verify(console).print(
+				"I love the weather today (5 minutes ago)");
 
 		when(console.read()).thenReturn("Bob");
 		twitter.execute();
-		inOrder.verify(console).print("Good game though. (1 minute ago)");
-		inOrder.verify(console).print("Damn! We lost! (2 minutes ago)");
+		inOrder.verify(console).print(
+				"Good game though. (1 minute ago)",
+				"Damn! We lost! (2 minutes ago)");
 
 		when(console.read()).thenReturn("Charlie");
 		twitter.execute();
-		inOrder.verify(console).print("I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
+		inOrder.verify(console).print(
+				"I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
 
 		when(console.read()).thenReturn("Charlie wall");
 		twitter.execute();
-		inOrder.verify(console).print("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
+		inOrder.verify(console).print(
+				"Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
 
 		when(console.read()).thenReturn("Charlie follows Alice");
 		twitter.execute();
 
 		when(console.read()).thenReturn("Charlie wall");
 		twitter.execute();
-		inOrder.verify(console).print("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
-		inOrder.verify(console).print("Alice - I love the weather today (5 minutes ago)");
+		inOrder.verify(console).print(
+				"Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)",
+				"Alice - I love the weather today (5 minutes ago)");
 
 		when(console.read()).thenReturn("Charlie follows Bob");
 		twitter.execute();
 
 		when(console.read()).thenReturn("Charlie wall");
 		twitter.execute();
-		inOrder.verify(console).print("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
-		inOrder.verify(console).print("Bob - Good game though. (1 minute ago)");
-		inOrder.verify(console).print("Bob - Damn! We lost! (2 minutes ago)");
-		inOrder.verify(console).print("Alice - I love the weather today (5 minutes ago)");
+		inOrder.verify(console).print(
+				"Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)",
+				"Bob - Good game though. (1 minute ago)",
+				"Bob - Damn! We lost! (2 minutes ago)",
+				"Alice - I love the weather today (5 minutes ago)");
 	}
 }

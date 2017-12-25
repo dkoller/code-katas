@@ -1,11 +1,13 @@
 package es.rachelcarmena.unit;
 
 import es.rachelcarmena.domain.Post;
+import es.rachelcarmena.domain.Post.Posts;
 import es.rachelcarmena.infraestructure.Repository;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,22 +20,19 @@ public class RepositoryShould {
 
     @Test
     public void save_and_get_posts_by_author() {
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post("message1", ANY_DATE));
-        posts.add(new Post("message2", ANY_DATE));
+        List<Post> postsList = Arrays.asList(
+                new Post("message1", ANY_DATE),
+                new Post("message2", ANY_DATE)
+        );
 
         Repository repository = new Repository();
-        for (Post post: posts)
+        for (Post post : postsList)
             repository.savePost(AUTHOR, post);
 
+        Posts posts = new Posts();
+        for (Post post : postsList)
+            posts.add(post);
         assertThat(repository.getPostsFrom(AUTHOR), is(posts));
-    }
-
-    @Test
-    public void return_an_empty_list_when_no_posts_by_author() {
-        Repository repository = new Repository();
-
-        assertThat(repository.getPostsFrom(AUTHOR), is(new ArrayList<>()));
     }
 
     @Test
@@ -48,12 +47,5 @@ public class RepositoryShould {
             repository.saveFollowing(AUTHOR, user);
 
         assertThat(repository.getFollowedBy(AUTHOR), is(followedByAuthor));
-    }
-
-    @Test
-    public void return_an_empty_list_when_no_followed_users_by_author() {
-        Repository repository = new Repository();
-
-        assertThat(repository.getFollowedBy(AUTHOR), is(new ArrayList<>()));
     }
 }

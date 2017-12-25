@@ -6,6 +6,7 @@ import es.rachelcarmena.domain.commands.PostCommand;
 import es.rachelcarmena.domain.commands.ReadCommand;
 import es.rachelcarmena.domain.commands.WallCommand;
 import es.rachelcarmena.domain.Post;
+import es.rachelcarmena.domain.Post.Posts;
 import es.rachelcarmena.infraestructure.Clock;
 import es.rachelcarmena.infraestructure.Console;
 import es.rachelcarmena.infraestructure.Repository;
@@ -20,7 +21,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -51,7 +51,7 @@ public class TwitterShould {
     private static final Post BOB_POST_1 = new Post(BOB_POST_MESSAGE_1, BOB_POST_DATETIME_1);
     private static final Post BOB_POST_2 = new Post(BOB_POST_MESSAGE_2, BOB_POST_DATETIME_2);
     private static final Post CHARLIE_POST = new Post(CHARLIE_POST_MESSAGE, CHARLIE_POST_DATETIME);
-    public static final LocalDateTime NOW = LocalDateTime.of(2018, 2, 3, 10, 5, 0);
+    private static final LocalDateTime NOW = LocalDateTime.of(2018, 2, 3, 10, 5, 0);
 
     @Mock
     Console console;
@@ -91,21 +91,24 @@ public class TwitterShould {
 
     @Test
     public void show_timeline_when_receiving_a_name() {
-        whenReadCommand(Arrays.asList(ALICE_POST), ALICE);
+        whenReadCommand(createPostsFrom(ALICE_POST), ALICE);
         twitter.execute();
         inOrder.verify(repository).getPostsFrom(ALICE);
-        inOrder.verify(console).print("I love the weather today (5 minutes ago)");
+        inOrder.verify(console).print(
+                "I love the weather today (5 minutes ago)");
 
-        whenReadCommand(Arrays.asList(BOB_POST_1, BOB_POST_2), BOB);
+        whenReadCommand(createPostsFrom(BOB_POST_1, BOB_POST_2), BOB);
         twitter.execute();
         inOrder.verify(repository).getPostsFrom(BOB);
-        inOrder.verify(console).print("Good game though. (1 minute ago)");
-        inOrder.verify(console).print("Damn! We lost! (2 minutes ago)");
+        inOrder.verify(console).print(
+                "Good game though. (1 minute ago)",
+                "Damn! We lost! (2 minutes ago)");
 
-        whenReadCommand(Arrays.asList(CHARLIE_POST), CHARLIE);
+        whenReadCommand(createPostsFrom(CHARLIE_POST), CHARLIE);
         twitter.execute();
         inOrder.verify(repository).getPostsFrom(CHARLIE);
-        inOrder.verify(console).print("I'm in New York today! Anyone want to have a coffee? (2 seconds ago)");
+        inOrder.verify(console).print(
+                "I'm in New York today! Anyone want to have a coffee? (2 seconds ago)");
     }
 
     @Test
@@ -124,18 +127,19 @@ public class TwitterShould {
         when(console.read()).thenReturn("Charlie wall");
         when(parser.parse("Charlie wall")).thenReturn(new WallCommand(CHARLIE));
         when(repository.getFollowedBy(CHARLIE)).thenReturn(Arrays.asList(ALICE));
-        when(repository.getPostsFrom(CHARLIE)).thenReturn(Arrays.asList(CHARLIE_POST));
-        when(repository.getPostsFrom(ALICE)).thenReturn(Arrays.asList(ALICE_POST));
+        when(repository.getPostsFrom(CHARLIE)).thenReturn(createPostsFrom(CHARLIE_POST));
+        when(repository.getPostsFrom(ALICE)).thenReturn(createPostsFrom(ALICE_POST));
 
         twitter.execute();
 
         inOrder.verify(repository).getPostsFrom("Charlie");
         inOrder.verify(repository).getPostsFrom("Alice");
-        inOrder.verify(console).print("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)");
-        inOrder.verify(console).print("Alice - I love the weather today (5 minutes ago)");
+        inOrder.verify(console).print(
+                "Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)",
+                "Alice - I love the weather today (5 minutes ago)");
     }
 
-    private void whenReadCommand(List<Post> posts, String user) {
+    private void whenReadCommand(Posts posts, String user) {
         when(clock.now()).thenReturn(NOW);
         when(console.read()).thenReturn(user);
         when(parser.parse(user)).thenReturn(new ReadCommand(user));
@@ -146,5 +150,12 @@ public class TwitterShould {
         when(clock.now()).thenReturn(datetime);
         when(console.read()).thenReturn(commandLine);
         when(parser.parse(commandLine)).thenReturn(new PostCommand(user, message));
+    }
+
+    private Posts createPostsFrom(Post ... posts) {
+        Posts result = new Posts();
+        for (Post post: posts)
+            result.add(post);
+        return result;
     }
 }
