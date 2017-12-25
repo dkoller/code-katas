@@ -1,5 +1,6 @@
-package es.rachelcarmena;
+package es.rachelcarmena.acceptance;
 
+import es.rachelcarmena.Twitter;
 import es.rachelcarmena.infraestructure.Clock;
 import es.rachelcarmena.infraestructure.Console;
 import es.rachelcarmena.infraestructure.Repository;

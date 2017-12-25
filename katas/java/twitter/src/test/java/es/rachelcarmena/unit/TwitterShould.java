@@ -1,5 +1,6 @@
-package es.rachelcarmena;
+package es.rachelcarmena.unit;
 
+import es.rachelcarmena.Twitter;
 import es.rachelcarmena.domain.commands.FollowCommand;
 import es.rachelcarmena.domain.commands.PostCommand;
 import es.rachelcarmena.domain.commands.ReadCommand;

@@ -1,4 +1,4 @@
-package es.rachelcarmena;
+package es.rachelcarmena.unit;
 
 import es.rachelcarmena.domain.commands.Command;
 import es.rachelcarmena.domain.commands.FollowCommand;
