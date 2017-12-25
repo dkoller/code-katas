@@ -12,30 +12,48 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class RepositoryShould {
+
+    private static final String AUTHOR = "rachel";
+    private static final LocalDateTime ANY_DATE = LocalDateTime.now();
+
     @Test
     public void save_and_get_posts_by_author() {
         List<Post> posts = new ArrayList<>();
-        posts.add(new Post("message1", LocalDateTime.now()));
-        posts.add(new Post("message2", LocalDateTime.now()));
+        posts.add(new Post("message1", ANY_DATE));
+        posts.add(new Post("message2", ANY_DATE));
 
         Repository repository = new Repository();
         for (Post post: posts)
-            repository.savePost("rachel", post);
+            repository.savePost(AUTHOR, post);
 
-        assertThat(repository.getPostsFrom("rachel"), is(posts));
+        assertThat(repository.getPostsFrom(AUTHOR), is(posts));
     }
 
     @Test
-    public void save_and_get_followers() {
-        List<String> followedByMainUser = new ArrayList<>();
-        followedByMainUser.add("user1");
-        followedByMainUser.add("user2");
-        followedByMainUser.add("user3");
+    public void return_an_empty_list_when_no_posts_by_author() {
+        Repository repository = new Repository();
+
+        assertThat(repository.getPostsFrom(AUTHOR), is(new ArrayList<>()));
+    }
+
+    @Test
+    public void save_and_get_followed_users_by_author() {
+        List<String> followedByAuthor = new ArrayList<>();
+        followedByAuthor.add("user1");
+        followedByAuthor.add("user2");
+        followedByAuthor.add("user3");
 
         Repository repository = new Repository();
-        for (String user: followedByMainUser)
-            repository.saveFollowing("rachel", user);
+        for (String user: followedByAuthor)
+            repository.saveFollowing(AUTHOR, user);
 
-        assertThat(repository.getFollowedBy("rachel"), is(followedByMainUser));
+        assertThat(repository.getFollowedBy(AUTHOR), is(followedByAuthor));
+    }
+
+    @Test
+    public void return_an_empty_list_when_no_followed_users_by_author() {
+        Repository repository = new Repository();
+
+        assertThat(repository.getFollowedBy(AUTHOR), is(new ArrayList<>()));
     }
 }
