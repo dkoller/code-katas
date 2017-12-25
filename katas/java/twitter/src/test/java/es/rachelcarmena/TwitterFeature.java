@@ -44,7 +44,7 @@ public class TwitterFeature {
 		twitter.execute();
 
 		when(clock.now()).thenReturn(LocalDateTime.of(2018, 2, 3, 10, 4, 58));
-		when(console.read()).thenReturn("Charlie -> I'm in New York today! Anyone want to have a coffee?");
+		when(console.read()).thenReturn("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
 		twitter.execute();
 
 		when(clock.now()).thenReturn(LocalDateTime.of(2018, 2, 3, 10, 5, 0));
@@ -60,18 +60,18 @@ public class TwitterFeature {
 
 		when(console.read()).thenReturn("Charlie");
 		twitter.execute();
-		inOrder.verify(console).print("I'm in New York today! Anyone want to have a coffee? (2 seconds ago)");
+		inOrder.verify(console).print("I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
 
 		when(console.read()).thenReturn("Charlie wall");
 		twitter.execute();
-		inOrder.verify(console).print("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)");
+		inOrder.verify(console).print("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
 
 		when(console.read()).thenReturn("Charlie follows Alice");
 		twitter.execute();
 
 		when(console.read()).thenReturn("Charlie wall");
 		twitter.execute();
-		inOrder.verify(console).print("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)");
+		inOrder.verify(console).print("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
 		inOrder.verify(console).print("Alice - I love the weather today (5 minutes ago)");
 
 		when(console.read()).thenReturn("Charlie follows Bob");
