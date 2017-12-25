@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.apache.commons.lang.builder.EqualsBuilder.reflectionEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertTrue;
 
 public class RepositoryShould {
 
@@ -32,7 +34,7 @@ public class RepositoryShould {
         Posts posts = new Posts();
         for (Post post : postsList)
             posts.add(post);
-        assertThat(repository.getPostsFrom(AUTHOR), is(posts));
+        assertTrue(reflectionEquals(repository.getPostsFrom(AUTHOR), posts));
     }
 
     @Test

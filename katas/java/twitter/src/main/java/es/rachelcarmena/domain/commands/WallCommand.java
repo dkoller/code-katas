@@ -27,19 +27,4 @@ public class WallCommand extends Command {
         allPosts.orderByDate();
         console.print(allPosts.createMessagesAt(now));
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof WallCommand)) return false;
-
-        WallCommand that = (WallCommand) o;
-
-        return author != null ? author.equals(that.author) : that.author == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return author != null ? author.hashCode() : 0;
-    }
 }

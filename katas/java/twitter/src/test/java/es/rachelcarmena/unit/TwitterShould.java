@@ -22,6 +22,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -74,19 +75,19 @@ public class TwitterShould {
     public void save_post_when_publishing() {
         whenPostCommand(ALICE_POST_DATETIME, ALICE_COMMAND_LINE, ALICE, ALICE_POST_MESSAGE);
         twitter.execute();
-        inOrder.verify(repository).savePost(ALICE, ALICE_POST);
+        inOrder.verify(repository).savePost(refEq(ALICE), refEq(ALICE_POST));
 
         whenPostCommand(BOB_POST_DATETIME_1, BOB_COMMAND_LINE_1, BOB, BOB_POST_MESSAGE_1);
         twitter.execute();
-        inOrder.verify(repository).savePost(BOB, BOB_POST_1);
+        inOrder.verify(repository).savePost(refEq(BOB), refEq(BOB_POST_1));
 
         whenPostCommand(BOB_POST_DATETIME_2, BOB_COMMAND_LINE_2, BOB, BOB_POST_MESSAGE_2);
         twitter.execute();
-        inOrder.verify(repository).savePost(BOB, BOB_POST_2);
+        inOrder.verify(repository).savePost(refEq(BOB), refEq(BOB_POST_2));
 
         whenPostCommand(CHARLIE_POST_DATETIME, CHARLIE_COMMAND_LINE, CHARLIE, CHARLIE_POST_MESSAGE);
         twitter.execute();
-        inOrder.verify(repository).savePost(CHARLIE, CHARLIE_POST);
+        inOrder.verify(repository).savePost(refEq(CHARLIE), refEq(CHARLIE_POST));
     }
 
     @Test

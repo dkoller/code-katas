@@ -8,8 +8,10 @@ import es.rachelcarmena.domain.commands.WallCommand;
 import es.rachelcarmena.utils.Parser;
 import org.junit.Test;
 
+import static org.apache.commons.lang.builder.EqualsBuilder.reflectionEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertTrue;
 
 public class ParserShould {
 
@@ -19,7 +21,7 @@ public class ParserShould {
 
         Command command = parser.parse("Alice -> I love the weather today");
 
-        assertThat(command, is(new PostCommand("Alice", "I love the weather today")));
+        assertTrue(reflectionEquals(command, new PostCommand("Alice", "I love the weather today")));
     }
 
     @Test
@@ -28,7 +30,7 @@ public class ParserShould {
 
         Command command = parser.parse("Alice");
 
-        assertThat(command, is(new ReadCommand("Alice")));
+        assertTrue(reflectionEquals(command, new ReadCommand("Alice")));
     }
 
     @Test
@@ -37,7 +39,7 @@ public class ParserShould {
 
         Command command = parser.parse("Charlie follows Alice");
 
-        assertThat(command, is(new FollowCommand("Charlie", "Alice")));
+        assertTrue(reflectionEquals(command, new FollowCommand("Charlie", "Alice")));
     }
 
     @Test
@@ -46,6 +48,6 @@ public class ParserShould {
 
         Command command = parser.parse("Charlie wall");
 
-        assertThat(command, is(new WallCommand("Charlie")));
+        assertTrue(reflectionEquals(command, new WallCommand("Charlie")));
     }
 }

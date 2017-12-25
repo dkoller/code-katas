@@ -19,21 +19,4 @@ public class ReadCommand extends Command {
         posts.orderByDate();
         console.print(posts.createMessagesAt(now));
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ReadCommand)) return false;
-
-        ReadCommand that = (ReadCommand) o;
-
-        return author != null ? author.equals(that.author) : that.author == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return author != null ? author.hashCode() : 0;
-    }
-
-
 }

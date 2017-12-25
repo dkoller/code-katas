@@ -39,24 +39,6 @@ public class Post {
         return String.format(SECONDS_FORMAT, message, seconds, seconds > 1 ? "s" : "");
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Post)) return false;
-
-        Post post = (Post) o;
-
-        if (message != null ? !message.equals(post.message) : post.message != null) return false;
-        return dateTime != null ? dateTime.equals(post.dateTime) : post.dateTime == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = message != null ? message.hashCode() : 0;
-        result = 31 * result + (dateTime != null ? dateTime.hashCode() : 0);
-        return result;
-    }
-
     public static class Posts {
 
         List<Post> posts;
@@ -86,21 +68,6 @@ public class Post {
             for (Post post : postsByAuthor.posts) {
                 posts.add(post.getNewPostBy(author));
             }
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof Posts)) return false;
-
-            Posts posts1 = (Posts) o;
-
-            return posts != null ? posts.equals(posts1.posts) : posts1.posts == null;
-        }
-
-        @Override
-        public int hashCode() {
-            return posts != null ? posts.hashCode() : 0;
         }
     }
 }
