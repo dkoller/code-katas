@@ -1,4 +1,4 @@
-package es.rachelcarmena.infraestructure;
+package es.rachelcarmena.infraestructure.repository;
 
 import es.rachelcarmena.domain.Post;
 import es.rachelcarmena.domain.Post.Posts;

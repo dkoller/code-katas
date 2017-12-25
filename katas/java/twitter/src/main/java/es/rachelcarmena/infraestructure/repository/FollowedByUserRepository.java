@@ -1,4 +1,4 @@
-package es.rachelcarmena.infraestructure;
+package es.rachelcarmena.infraestructure.repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

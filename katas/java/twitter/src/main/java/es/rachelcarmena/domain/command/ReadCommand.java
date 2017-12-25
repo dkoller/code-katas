@@ -1,8 +1,8 @@
-package es.rachelcarmena.domain.commands;
+package es.rachelcarmena.domain.command;
 
 import es.rachelcarmena.domain.Post.Posts;
 import es.rachelcarmena.infraestructure.Console;
-import es.rachelcarmena.infraestructure.Repository;
+import es.rachelcarmena.infraestructure.repository.Repository;
 
 import java.time.LocalDateTime;
 

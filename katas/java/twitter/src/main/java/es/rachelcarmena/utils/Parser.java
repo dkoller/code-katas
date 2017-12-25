@@ -1,10 +1,10 @@
 package es.rachelcarmena.utils;
 
-import es.rachelcarmena.domain.commands.Command;
-import es.rachelcarmena.domain.commands.FollowCommand;
-import es.rachelcarmena.domain.commands.PostCommand;
-import es.rachelcarmena.domain.commands.ReadCommand;
-import es.rachelcarmena.domain.commands.WallCommand;
+import es.rachelcarmena.domain.command.Command;
+import es.rachelcarmena.domain.command.FollowCommand;
+import es.rachelcarmena.domain.command.PostCommand;
+import es.rachelcarmena.domain.command.ReadCommand;
+import es.rachelcarmena.domain.command.WallCommand;
 
 public class Parser {
 

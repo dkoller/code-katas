@@ -1,15 +1,15 @@
 package es.rachelcarmena.unit;
 
 import es.rachelcarmena.Twitter;
-import es.rachelcarmena.domain.commands.FollowCommand;
-import es.rachelcarmena.domain.commands.PostCommand;
-import es.rachelcarmena.domain.commands.ReadCommand;
-import es.rachelcarmena.domain.commands.WallCommand;
+import es.rachelcarmena.domain.command.FollowCommand;
+import es.rachelcarmena.domain.command.PostCommand;
+import es.rachelcarmena.domain.command.ReadCommand;
+import es.rachelcarmena.domain.command.WallCommand;
 import es.rachelcarmena.domain.Post;
 import es.rachelcarmena.domain.Post.Posts;
 import es.rachelcarmena.infraestructure.Clock;
 import es.rachelcarmena.infraestructure.Console;
-import es.rachelcarmena.infraestructure.Repository;
+import es.rachelcarmena.infraestructure.repository.Repository;
 import es.rachelcarmena.utils.Parser;
 import org.junit.Before;
 import org.junit.Test;

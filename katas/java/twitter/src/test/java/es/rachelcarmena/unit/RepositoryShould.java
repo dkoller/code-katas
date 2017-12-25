@@ -2,7 +2,7 @@ package es.rachelcarmena.unit;
 
 import es.rachelcarmena.domain.Post;
 import es.rachelcarmena.domain.Post.Posts;
-import es.rachelcarmena.infraestructure.Repository;
+import es.rachelcarmena.infraestructure.repository.Repository;
 import org.junit.Test;
 
 import java.time.LocalDateTime;

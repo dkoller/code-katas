@@ -1,9 +1,9 @@
 package es.rachelcarmena;
 
-import es.rachelcarmena.domain.commands.Command;
+import es.rachelcarmena.domain.command.Command;
 import es.rachelcarmena.infraestructure.Clock;
 import es.rachelcarmena.infraestructure.Console;
-import es.rachelcarmena.infraestructure.Repository;
+import es.rachelcarmena.infraestructure.repository.Repository;
 import es.rachelcarmena.utils.Parser;
 
 import java.time.LocalDateTime;
