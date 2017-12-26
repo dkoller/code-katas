@@ -28,4 +28,14 @@ public class Twitter {
         Command command = parser.parse(input);
         command.execute(datetime, repository, console);
     }
+
+    public static void main(String... args) {
+        Console console = new Console();
+        Clock clock = new Clock();
+        Repository repository = new Repository();
+        Parser parser = new Parser();
+        Twitter twitter = new Twitter(console, clock, repository, parser);
+        while (true)
+            twitter.execute();
+    }
 }

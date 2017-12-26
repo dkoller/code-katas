@@ -2,7 +2,7 @@
 
 Implement a console-based social networking application (similar to Twitter) satisfying the scenarios below.
 
-### Scenarios
+## Scenarios
 
 **Posting**: Alice can publish messages to a personal timeline
 
@@ -33,3 +33,8 @@ Implement a console-based social networking application (similar to Twitter) sat
 > \> Bob - Damn! We lost! (2 minutes ago)     
 > \> Alice - I love the weather today (5 minutes ago)    
 
+## For executing
+
+```
+java -classpath ./target/classes/ es.rachelcarmena.Twitter
+```
