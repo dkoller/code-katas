@@ -26,14 +26,14 @@ public class PrintStatementFeature {
     @Mock
     Clock clock;
     private AccountService accountService;
-    private InOrder consoleInOrder;
+    private InOrder inOrder;
 
     @Before
     public void setUp() {
         StatementPrinter statementPrinter = new StatementPrinter(console);
         TransactionRepository transactionRepository = new TransactionRepository();
         accountService = new AccountService(transactionRepository, statementPrinter, clock);
-        consoleInOrder = Mockito.inOrder(console);
+        inOrder = Mockito.inOrder(console);
     }
 
     @Test
@@ -48,9 +48,9 @@ public class PrintStatementFeature {
 
         accountService.printStatement();
 
-        consoleInOrder.verify(console).print("DATE       | AMOUNT  | BALANCE");
-        consoleInOrder.verify(console).print("10/04/2014 | 500.00  | 1400.00");
-        consoleInOrder.verify(console).print("02/04/2014 | -100.00 | 900.00 ");
-        consoleInOrder.verify(console).print("01/04/2014 | 1000.00 | 1000.00");
+        inOrder.verify(console).print("DATE       | AMOUNT  | BALANCE");
+        inOrder.verify(console).print("10/04/2014 | 500.00  | 1400.00");
+        inOrder.verify(console).print("02/04/2014 | -100.00 | 900.00 ");
+        inOrder.verify(console).print("01/04/2014 | 1000.00 | 1000.00");
     }
 }
