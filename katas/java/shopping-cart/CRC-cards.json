@@ -1,0 +1,59 @@
+[
+  {
+    "name": "ShoppingCartService",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "addItem(productId, quantity)",
+      "printTicket()"
+    ],
+    "collaborators": [
+      "ShoppingCartRepository",
+      "Clock",
+      "ShoppingCartPrinter",
+      "TicketBuilder"
+    ]
+  },
+  {
+    "name": "ShoppingCartRepository",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "isEmpty()",
+      "initShoppingCart()",
+      "addItem(item)"
+    ],
+    "collaborators": [
+      ""
+    ]
+  },
+  {
+    "name": "ShoppingCartPrinter",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "print(ticket)"
+    ],
+    "collaborators": [
+      "Console"
+    ]
+  },
+  {
+    "name": "TicketBuilder",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "withDate(date)",
+      "withItems(items)",
+      "build()"
+    ],
+    "collaborators": [
+      "ProductRepository",
+      "Calculator"
+    ]
+  }
+]
