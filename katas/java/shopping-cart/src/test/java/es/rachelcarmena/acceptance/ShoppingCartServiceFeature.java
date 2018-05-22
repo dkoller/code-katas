@@ -57,7 +57,7 @@ public class ShoppingCartServiceFeature {
     }
 
     @Test
-    public void should_print_a_ticket_without_multiple_items_and_without_discount() {
+    public void should_print_a_ticket_with_single_items_and_without_discount() {
         given(clock.now()).willReturn(LocalDateTime.of(2018, 1, 10, 14, 0, 0));
         shoppingCartService.addItem(ProductId.of(CHOCOLATE_BAR_ID), 1);
         shoppingCartService.addItem(ProductId.of(BAGUETTE_ID), 1);
@@ -88,7 +88,7 @@ public class ShoppingCartServiceFeature {
     }
 
     @Test
-    public void should_print_a_ticket_with_multiple_items_and_discount() {
+    public void should_print_a_ticket_with_multiple_items_and_discounts() {
         given(clock.now()).willReturn(LocalDateTime.of(2018, 1, 10, 14, 0, 0));
         shoppingCartService.addItem(ProductId.of(CHOCOLATE_BAR_ID), 1);
         shoppingCartService.addItem(ProductId.of(BAGUETTE_ID), 5);
