@@ -15,3 +15,11 @@ Resources:
 * [Starting points by Corey Haines](https://github.com/coreyhaines/coderetreat/tree/master/starting_points)
 * [Kata bootstraps by Software Crafters Berlin](https://github.com/swkBerlin/kata-bootstraps)
 * [Maven archetype for Java project](utils/maven/archetype/README.md)
+
+Katas:
+
+* [Kata-Log](http://kata-log.rocks)
+* [Incremental Katas](https://github.com/Gianfrancoalongi/incremental_katas)
+* [The OCP kata](http://matteo.vaccari.name/blog/archives/293)
+* [The birthday greetings kata](http://matteo.vaccari.name/blog/archives/154)
+* [Refactoring](https://github.com/wlodekkr/tests-refactoring)
