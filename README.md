@@ -23,3 +23,4 @@ Katas:
 * [The OCP kata](http://matteo.vaccari.name/blog/archives/293)
 * [The birthday greetings kata](http://matteo.vaccari.name/blog/archives/154)
 * [Refactoring](https://github.com/wlodekkr/tests-refactoring)
+* [CodeKata](http://codekata.pragprog.com)
